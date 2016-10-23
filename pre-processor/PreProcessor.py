@@ -20,10 +20,8 @@ class PreProcessor:
         logger.debug('createNewProductFolder()')
 
     def moveBandsInNewProductFolder(self):
-        logger.debug('extractSensingTime()')
+        logger.debug('moveBandsInNewProductFolder()')
 
-    def moveBandsInNewProductFolder(self):
-        logger.debug('extractSensingTime()')
 
     def moveNewProductToScientificProcessorInbox(self):
         logger.debug('moveNewProductToScientificProcessorInbox()')
