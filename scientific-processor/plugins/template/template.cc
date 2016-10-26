@@ -4,11 +4,11 @@
 #include <iostream>
 #include "Sample.h"
 
-extern "C" char * process(char * productPath)
+extern "C" char * process(char * productPath, char * destinationPath)
 {
   std::cout <<  productPath  << std::endl;
   Sample * sample = new Sample();
-  std::string result = sample->process(productPath);
+  std::string result = sample->process(productPath, destinationPath);
   delete sample;
 
   return productPath;
