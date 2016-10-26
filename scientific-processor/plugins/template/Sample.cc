@@ -32,8 +32,8 @@ std::string Sample::concatString(const char * s1, const char * s2){
 char * Sample::process(char * productPath, char * destinationPath){
 
   const char * DEST_FORMAT = "GTiff";
-  const char * FIRST_BAND_FILENAME = "BAND_1.jp2";
-  const char * PROCESSED_IMAGE_FILENAME = "BAND_1.tif";
+  const char * FIRST_BAND_FILENAME = "B06.jp2";
+  const char * PROCESSED_IMAGE_FILENAME = "B06.tif";
 
 
   GDALAllRegister();
