@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <string>
+#include <stdlib.h>
 #include "cpl_port.h"
 #include "gdal.h"
 #include "gdal_alg.h"
@@ -11,8 +12,6 @@
 #include "cpl_string.h"
 #include "cpl_conv.h"
 #include "cpl_multiproc.h"
-#include <iostream>
-#include <stdlib.h>
 #include "gdal_frmts.h"
 #include "ogrsf_frmts.h"
 #include "ogr_core.h"
@@ -47,10 +46,10 @@ char * Sample::process(char * productPath, char * destinationPath){
     exit( 1 );
   }
   papszMetadata = poDriver->GetMetadata();
-  if( CSLFetchBoolean( papszMetadata, GDAL_DCAP_CREATE, FALSE ) )
-    printf( "Driver %s supports Create() method.\n", DEST_FORMAT );
-  if( CSLFetchBoolean( papszMetadata, GDAL_DCAP_CREATECOPY, FALSE ) )
-    printf( "Driver %s supports CreateCopy() method.\n", DEST_FORMAT );
+  if( !CSLFetchBoolean( papszMetadata, GDAL_DCAP_CREATE, FALSE ) )
+     printf( "Driver %s NOT supports Create() method!!\n", DEST_FORMAT );
+  if( !CSLFetchBoolean( papszMetadata, GDAL_DCAP_CREATECOPY, FALSE ) )
+     printf( "Driver %s NOT supports CreateCopy() method!!\n", DEST_FORMAT );
 
   std::string absolutePath = this->concatString(productPath, FIRST_BAND_FILENAME);
   const char * absolutePathC =  absolutePath.c_str();
@@ -66,8 +65,4 @@ char * Sample::process(char * productPath, char * destinationPath){
   GDALClose( (GDALDatasetH) poSrcDS );
 
   return productPath;
-}
-int Sample::sum(int a, int b)
-{
-  return a + b;
 }

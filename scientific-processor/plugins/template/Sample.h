@@ -9,7 +9,6 @@ private:
 public:
   Sample();
 
-  int sum(int a, int b);
   char * process(char *  productPath, char * destinationPath);
 };
 
