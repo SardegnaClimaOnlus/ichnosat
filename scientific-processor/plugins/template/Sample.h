@@ -7,6 +7,7 @@ public:
   Sample();
 
   int sum(int a, int b);
+  char * process(char *  productPath);
 };
 
 #endif
