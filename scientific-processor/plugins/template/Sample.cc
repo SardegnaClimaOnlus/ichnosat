@@ -34,32 +34,35 @@ char * Sample::process(char * productPath, char * destinationPath){
   const char * DEST_FORMAT = "GTiff";
   const char * FIRST_BAND_FILENAME = "B06.jp2";
   const char * PROCESSED_IMAGE_FILENAME = "B06.tif";
-
-
-  GDALAllRegister();
-
   GDALDriver *poDriver;
   char **papszMetadata;
+
+  // load drivers
+  GDALAllRegister();
+
+  // load driver for geotiff
   poDriver = GetGDALDriverManager()->GetDriverByName(DEST_FORMAT);
   if( poDriver == NULL ){
     std::cout << "the driver is null" << std::endl;
     exit( 1 );
   }
+  // get metadata
   papszMetadata = poDriver->GetMetadata();
+
+  // todo: manage this exceptions
   if( !CSLFetchBoolean( papszMetadata, GDAL_DCAP_CREATE, FALSE ) )
      printf( "Driver %s NOT supports Create() method!!\n", DEST_FORMAT );
   if( !CSLFetchBoolean( papszMetadata, GDAL_DCAP_CREATECOPY, FALSE ) )
      printf( "Driver %s NOT supports CreateCopy() method!!\n", DEST_FORMAT );
 
   std::string absolutePath = this->concatString(productPath, FIRST_BAND_FILENAME);
-  const char * absolutePathC =  absolutePath.c_str();
-
   std::string destinationAbsolutePath = this->concatString(destinationPath, PROCESSED_IMAGE_FILENAME);
-  const char * destinationAbsolutePathC =  destinationAbsolutePath.c_str();
 
-  GDALDataset *poSrcDS = (GDALDataset *) GDALOpen( absolutePathC, GA_ReadOnly );
+  // open source file
+  GDALDataset *poSrcDS = (GDALDataset *) GDALOpen( absolutePath.c_str(), GA_ReadOnly );
   GDALDataset *poDstDS;
-  poDstDS = poDriver->CreateCopy( destinationAbsolutePathC, poSrcDS, FALSE,NULL, NULL, NULL );
+  // create a copy
+  poDstDS = poDriver->CreateCopy( destinationAbsolutePath.c_str(), poSrcDS, FALSE,NULL, NULL, NULL );
   if( poDstDS != NULL )
     GDALClose( (GDALDatasetH) poDstDS );
   GDALClose( (GDALDatasetH) poSrcDS );
