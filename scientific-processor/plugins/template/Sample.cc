@@ -15,7 +15,6 @@
 #include "gdal_frmts.h"
 #include "ogrsf_frmts.h"
 #include "ogr_core.h"
-
 #include "Sample.h"
 
 Sample::Sample()
@@ -27,6 +26,26 @@ std::string Sample::concatString(const char * s1, const char * s2){
      std::string b(s2);
      std::string concat = a + b;
   return concat.c_str();
+}
+
+void Sample::processRasterData(float * rasterMatrix, int nXSize, int nYSize){
+  for(int x=0;x<nXSize;x++)
+    for(int y=0;y<nYSize;y++)
+      rasterMatrix[x * nXSize + y] /= 150 ;
+}
+
+void Sample::manageRasterIO(GDALRasterBand * band, int nXSize, int nYSize, GDALRWFlag flag, float * rasterMatrix){
+  band->RasterIO( flag, 	    //GDALRWFlag  	eRWFlag
+			      0,       	    // int  	nXOff
+			      0,       	    // int  	nYOff
+			      nXSize,  	    //int  	nXSize
+			      nYSize,       //int  	nYSize
+                  rasterMatrix, //void *  	pData
+			      nXSize, 	    //int  	nBufXSize
+			      nYSize, 	    //int  	nBufYSize
+			      GDT_Float32,  //GDALDataType  	eBufType
+                  0, 		    //GSpacing  	nPixelSpace
+			      0);           //GSpacing  	nLineSpace
 }
 
 char * Sample::process(char * productPath, char * destinationPath){
@@ -58,11 +77,31 @@ char * Sample::process(char * productPath, char * destinationPath){
   std::string absolutePath = this->concatString(productPath, FIRST_BAND_FILENAME);
   std::string destinationAbsolutePath = this->concatString(destinationPath, PROCESSED_IMAGE_FILENAME);
 
-  // open source file
+  // open origin file
   GDALDataset *poSrcDS = (GDALDataset *) GDALOpen( absolutePath.c_str(), GA_ReadOnly );
   GDALDataset *poDstDS;
+
   // create a copy
   poDstDS = poDriver->CreateCopy( destinationAbsolutePath.c_str(), poSrcDS, FALSE,NULL, NULL, NULL );
+
+  // get band
+  GDALRasterBand  *poBand;
+  poBand = poDstDS->GetRasterBand( 1 );
+
+  // get raster data
+  float *rasterMatrix;
+  int   nXSize = poBand->GetXSize();
+  int   nYSize = poBand->GetYSize();
+  rasterMatrix = (float *) CPLMalloc(sizeof(float)*nXSize * sizeof(float)*nYSize);
+  this->manageRasterIO(poBand, nXSize, nYSize,  GF_Read, rasterMatrix);
+
+  // process raster data
+  this->processRasterData(rasterMatrix,nXSize,nYSize);
+
+  // write raster data
+  this->manageRasterIO(poBand, nXSize, nYSize,  GF_Write, rasterMatrix);
+
+  // close file
   if( poDstDS != NULL )
     GDALClose( (GDALDatasetH) poDstDS );
   GDALClose( (GDALDatasetH) poSrcDS );
