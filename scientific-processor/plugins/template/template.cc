@@ -7,12 +7,12 @@
 #include "gdal_priv.h"
 #include "Sample.h"
 
-extern "C" char * process(char * productPath, char * destinationPath)
+extern "C" void process(char * productPath, char * destinationPath)
 {
   Sample * sample = new Sample();
-  std::string result = sample->process(productPath, destinationPath);
+   sample->process(productPath, destinationPath);
   delete sample;
 
-  return productPath;
+  return ;
 
 }

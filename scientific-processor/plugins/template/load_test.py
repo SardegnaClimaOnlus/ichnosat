@@ -9,4 +9,4 @@ productPath = string1.encode('utf-8')
 destinationPath = string2.encode('utf-8')
 libc.process.argtypes = [c_char_p]
 
-print(libc.process(productPath,destinationPath))
+libc.process(productPath,destinationPath)
