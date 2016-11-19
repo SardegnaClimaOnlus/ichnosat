@@ -25,18 +25,32 @@ std::string Sample::ConcatString(const char * s1, const char * s2){
   return concat.c_str();
 }
 
-void Sample::ProcessRasterData(float * band4_raster, float * band8_raster, int nXSize, int nYSize, float * ndvi_raster){
-  // Reflectance 
-  for(int i=0; i< nXSize*nYSize; i++){
-    band4_raster[i]=(float)band4_raster[i] / (float)10000;
-    band8_raster[i]=(float)band8_raster[i] / (float)10000;
-  }
-  // NDVI
-  for(int i=0; i< nXSize*nYSize; i++){
-    ndvi_raster[i] = (band8_raster[i] - band4_raster[i])/(band8_raster[i] + band4_raster[i]);
+void Sample::ProcessRasterData(GDALRasterBand * band4_band01, GDALRasterBand * band8_band01, int nXSize, int nYSize, float * ndvi_raster){
 
+  float * band4_buffer = (float *) CPLMalloc(sizeof(float)*nXSize);
+  float * band8_buffer  = (float *) CPLMalloc(sizeof(float)*nXSize);
+  CPLErr err;
+  // Reflectance
+  for(int i=0; i< nYSize; i++){
+    // read raster data
+    err = band4_band01->RasterIO(GF_Read,0,i,nXSize,1,band4_buffer,nXSize,1,GDT_Float32,0,0);
+
+    if(err > 0)
+        std::cout << "err: " << err << std::endl;
+    err = band8_band01->RasterIO(GF_Read,0,i,nXSize,1,band8_buffer,nXSize,1,GDT_Float32,0,0);
+    if(err > 0)
+        std::cout << "err: " << err << std::endl;
+
+    for(int j = 0;j < nXSize; j++){
+        band4_buffer[j]=(float)band4_buffer[j] / (float)10000;
+        band8_buffer[j]=(float)band8_buffer[j] / (float)10000;
+        //NDVI = (R08-R04)/(R08+R04)
+        ndvi_raster[i*nXSize+j] = (band8_buffer[j] - band4_buffer[j])/(band8_buffer[j] + band4_buffer[j]);
+    }
   }
-  std::cout << "debug => check- band4_raster[100000]: " << band4_raster[100000]<<" , ndvi_raster[100000]: " << ndvi_raster[100000] << std::endl;
+  CPLFree( band4_buffer );
+  CPLFree( band8_buffer );
+
 }
 
 
@@ -77,11 +91,10 @@ void Sample::process(char * productPath, char * ndvi_rasterinationPath){
   band8_band01 = band8_dataset->GetRasterBand( 1 );
 
   // get raster data
-  float * band4_raster;
-  float * band8_raster;
-  float * ndvi_raster;
+
   int   nXSize = band4_band01->GetXSize();
   int   nYSize = band4_band01->GetYSize();
+  float * ndvi_raster = (float *) CPLMalloc(sizeof(float)*nXSize * sizeof(float)*nYSize) ;
 
   //////// BEGIN CREATE PROCESSED FILE ///////
   // create new file
@@ -99,24 +112,13 @@ void Sample::process(char * productPath, char * ndvi_rasterinationPath){
 
   //////// END CREATE PROCESSED FILE ///////
 
-  // allocate memory
-  band4_raster = (float *) CPLMalloc(sizeof(float)*nXSize * sizeof(float)*nYSize);
-  band8_raster = (float *) CPLMalloc(sizeof(float)*nXSize * sizeof(float)*nYSize);
-  ndvi_raster = (float *) CPLMalloc(sizeof(float)*nXSize * sizeof(float)*nYSize);
-
-  // read raster data
-  CPLErr err = band4_band01->RasterIO(GF_Read,0,0,nXSize,nYSize,band4_raster,nXSize,nYSize,GDT_Float32,0,0);
-  std::cout << err << std::endl;
-
-  err = band8_band01->RasterIO(GF_Read,0,0,nXSize,nYSize,band8_raster,nXSize,nYSize,GDT_Float32,0,0);
-  std::cout << err << std::endl;
-
   // process raster data
-  this->ProcessRasterData(band4_raster,band8_raster,nXSize,nYSize,ndvi_raster);
+  this->ProcessRasterData(band4_band01, band8_band01, nXSize,nYSize,ndvi_raster);
 
   // write data
-  err = nvdi_dataset->RasterIO(GF_Write,0,0,nXSize,nYSize,ndvi_raster,nXSize,nYSize,GDT_Float32,1,NULL,0,0,0,NULL);
-  std::cout << err << std::endl;
+  CPLErr err = nvdi_dataset->RasterIO(GF_Write,0,0,nXSize,nYSize,ndvi_raster,nXSize,nYSize,GDT_Float32,1,NULL,0,0,0,NULL);
+  if(err > 0)
+    std::cout << err << std::endl;
 
   // close file
   if( nvdi_dataset != NULL )
@@ -127,8 +129,6 @@ void Sample::process(char * productPath, char * ndvi_rasterinationPath){
     GDALClose( (GDALDatasetH) band8_dataset );
 
   // free allocated memory
-  CPLFree( band4_raster );
-  CPLFree( band8_raster )
   CPLFree( ndvi_raster );
 
   return ;
