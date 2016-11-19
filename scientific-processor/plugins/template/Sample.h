@@ -10,6 +10,7 @@ class Sample
 private:
   std::string concatString(const char *  s1, const char * s2);
   void processRasterData(float * rasterData, int nXSize, int nYSize, float * dest);
+  void ConvertJP2ToGTiff(const char * productPath, const char* destinationPath, const char * jp2_filename, const char * gtiff_filename);
   //void manageRasterIO(GDALRasterBand * band, int nXSize, int nYSize, GDALRWFlag flag, float * rasterMatrix);
 public:
   Sample();
