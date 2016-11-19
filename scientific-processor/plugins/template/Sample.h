@@ -1,22 +1,14 @@
 #ifndef __SAMPLE_CLASS_H__
 #define __SAMPLE_CLASS_H__
 
+class Sample{
+ private:
+  std::string ConcatString(const char *  s1, const char * s2);
+  void ProcessRasterData(float * band4_raster, float * band8_raster, int nXSize, int nYSize, float * ndvi_raster);
 
-
-
-
-class Sample
-{
-private:
-  std::string concatString(const char *  s1, const char * s2);
-  void processRasterData(float * rasterData, int nXSize, int nYSize, float * dest);
-  void ConvertJP2ToGTiff(const char * productPath, const char* destinationPath, const char * jp2_filename, const char * gtiff_filename);
-  //void manageRasterIO(GDALRasterBand * band, int nXSize, int nYSize, GDALRWFlag flag, float * rasterMatrix);
-public:
-  Sample();
-  const char * PROCESSED_IMAGE_FILENAME ;
+ public:
   void process(char *  productPath, char * destinationPath);
-  void translationJP2_GTIFF(char * productPath, char * destinationPath);
+
 };
 
 #endif
