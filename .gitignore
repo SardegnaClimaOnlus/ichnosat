@@ -4,3 +4,5 @@
 */**/*.so
 */**/*.tif*
 */**/*.jp2
+**/env
+scientific-processor/inbox/S*
