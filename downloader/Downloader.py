@@ -5,14 +5,14 @@ class Downloader:
     def __init__(self):
         logger.debug('Created new dowloader')
 
-    def searchNewProducts(self):
+    def search_new_products(self):
         logger.debug('searchNewProduct')
 
-    def downloadProduct(self):
+    def download_product(self):
         logger.debug('downloadProduct')
 
-    def sendProductToInbox(self):
+    def send_product_to_inbox(self):
         logger.debug('sendProduct')
 
-    def notifyDownloadedNewProduct(self):
+    def notify_downloaded_new_product(self):
         logger.debug('notifyDownloadedNewProduct')

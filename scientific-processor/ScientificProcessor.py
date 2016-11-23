@@ -4,19 +4,22 @@ class ScientificProcessor:
     def __init__(self):
         logger.debug('Created new ScientificProcessor')
 
-    def getNewProduct(self):
-        logger.debug('getNewProduct()')
+    def get_new_product(self):
+        logger.debug('start getNewProduct()')
 
-    def runPlugins(self):
-        logger.debug('runPlugins()')
+    def run_plugins(self):
+        logger.debug('start runPlugins()')
 
-    def createNewProductFolder(self):
-        logger.debug('createNewProductFolder()')
+    def create_new_product_folder(self):
+        logger.debug('start createNewProductFolder()')
 
-    def moveNewProductToPostProcessorInbox(self):
-        logger.debug('moveNewProductToPostProcessorInbox()')
+    def move_new_product_to_post_processor_inbox(self):
+        logger.debug('start moveNewProductToPostProcessorInbox()')
 
-    def notifyNewScientificProcessorProducReady(self):
-        logger.debug('notifyNewScientificProcessorProducReady()')
+    def notify_new_scientific_processor_producReady(self):
+        logger.debug('start notifyNewScientificProcessorProducReady()')
+
+    def start_new_product_processing(self):
+        logger.debug('start startNewProductProcessing()')
 
 

@@ -4,27 +4,27 @@ class PreProcessor:
     def __init__(self):
         logger.debug('Created new PreProcessor')
 
-    def getProductFromInbox(self):
+    def get_product_from_inbox(self):
         logger.debug('getProductFromInbox()')
 
-    def unzipProduct(self):
+    def unzip_product(self):
         logger.debug('unzipProduct()')
 
-    def extractSensingTime(self):
+    def extract_sensing_time(self):
         logger.debug('extractSensingTime()')
 
-    def extractTileId(self):
+    def extract_tile_id(self):
         logger.debug('extractTileId()')
 
-    def createNewProductFolder(self):
+    def create_new_product_folder(self):
         logger.debug('createNewProductFolder()')
 
-    def moveBandsInNewProductFolder(self):
+    def move_bands_in_new_product_folder(self):
         logger.debug('moveBandsInNewProductFolder()')
 
 
-    def moveNewProductToScientificProcessorInbox(self):
+    def move_new_product_to_scientific_processor_inbox(self):
         logger.debug('moveNewProductToScientificProcessorInbox()')
 
-    def notifyNewPreProcessorProducReady(self):
+    def notify_new_pre_processor_produc_ready(self):
         logger.debug('notifyNewPreProcessorProductReady()')
