@@ -1,4 +1,4 @@
-#ichnosat 
+#ichnosat
 
 
 ## install rabbitmq
