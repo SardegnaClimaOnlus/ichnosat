@@ -1,10 +1,11 @@
 FROM debian
 
 # Create app directory
-RUN mkdir -p /usr/ichnosat/downloader
-RUN mkdir -p /usr/ichnosat/post-processor
-RUN mkdir -p /usr/ichnosat/pre-processor
-RUN mkdir -p /usr/ichnosat/scientific-processor
+#RUN mkdir -p /usr/ichnosat/downloader
+#RUN mkdir -p /usr/ichnosat/post-processor
+#RUN mkdir -p /usr/ichnosat/pre-processor
+#RUN mkdir -p /usr/ichnosat/scientific-processor
+RUN mkdir -p /usr/ichnosat
 
 
 
@@ -16,10 +17,10 @@ RUN apt-get install -y cmake
 
 
 # Bundle app source
-COPY downloader/ /usr/ichnosat/downloader/
-COPY post-processor/ /usr/ichnosat/post-processor/
-COPY pre-processor/ /usr/ichnosat/pre-processor/
-COPY scientific-processor/ /usr/ichnosat/scientific-processor
+#COPY downloader/ /usr/ichnosat/downloader/
+#COPY post-processor/ /usr/ichnosat/post-processor/
+#COPY pre-processor/ /usr/ichnosat/pre-processor/
+#COPY scientific-processor/ /usr/ichnosat/scientific-processor
 
 #install openjpeg
 WORKDIR /usr
@@ -57,33 +58,32 @@ RUN rm -rf gdal
 
 
 
-#install python and pip ---------
-#CMD ["apt-get", "install", "-y", "python3.4"]
+#install python and pip
 RUN apt-get install -qy python3.4
-# --------
-
-#WORKDIR /usr/pip
+WORKDIR /usr/pip
 RUN mkdir -p /usr/pip
-#RUN apt-get install -y python3.4
-#COPY vendors/get-pip.py /usr/pip
-#CMD ["python", "/usr/pip/get-pip.py"]
-#WORKDIR /usr
-#RUN rm -rf pip
+COPY vendors/get-pip.py /usr/pip
+RUN ls
+RUN python3.4 get-pip.py
+WORKDIR /usr
+RUN rm -rf pip
 
 # install pika
-#CMD ["pip", "install", "pika"]
+RUN pip install pika
+
+
+#install wget
+RUN apt-get install -y wget
 
 
 # install rabbitmq
-#RUN echo 'deb http://www.rabbitmq.com/debian/ testing main' | tee /etc/apt/sources.list.d/rabbitmq.list
-#RUN wget -O- https://www.rabbitmq.com/rabbitmq-release-signing-key.asc | apt-key add -
-#RUN apt-get update
-#RUN apt-get install -y rabbitmq-server
-#RUN service rabbitmq-server start
+RUN echo 'deb http://www.rabbitmq.com/debian/ testing main' | tee /etc/apt/sources.list.d/rabbitmq.list
+RUN wget -O- https://www.rabbitmq.com/rabbitmq-release-signing-key.asc | apt-key add -
+RUN apt-get update
+RUN apt-get install -y rabbitmq-server
+RUN service rabbitmq-server start
 
 
-#RUN pwd
-#RUN ls
 
 
 #copy makefile
