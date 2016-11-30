@@ -13,5 +13,7 @@ start-scientific-processor:
 	python3.4 main.py
 start-rabbitmq:
 	service rabbitmq-server start
+start:
+	python3.4 start.py
 
 

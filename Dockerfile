@@ -71,6 +71,8 @@ RUN rm -rf pip
 # install pika
 RUN pip install pika
 
+#install flask
+RUN pip install Flask
 
 #install wget
 RUN apt-get install -y wget
@@ -81,14 +83,19 @@ RUN echo 'deb http://www.rabbitmq.com/debian/ testing main' | tee /etc/apt/sourc
 RUN wget -O- https://www.rabbitmq.com/rabbitmq-release-signing-key.asc | apt-key add -
 RUN apt-get update
 RUN apt-get install -y rabbitmq-server
-RUN service rabbitmq-server start
+
+
 
 
 
 
 #copy makefile
+RUN mkdir -p /usr/ichnosat/server
 COPY Makefile /usr/ichnosat
+COPY server/start.py /usr/ichnosat/server
 
-WORKDIR /usr/ichnosat
-ENTRYPOINT [ "make" ]
+WORKDIR /usr/ichnosat/server
+
+
+#ENTRYPOINT [ "make" ]
 

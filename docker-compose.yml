@@ -2,6 +2,10 @@ version: '2'
 services:
   app:
     build: .
+    command: python3.4 start.py
     volumes:
     - ./:/usr/ichnosat
+    - ./server:/usr/ichnosat/server
+    ports:
+     - "5000:5000"
 
