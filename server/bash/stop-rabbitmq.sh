@@ -1,0 +1,1 @@
+service rabbitmq-server stop &
