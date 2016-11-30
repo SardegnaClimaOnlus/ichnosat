@@ -1,17 +1,17 @@
 #ichnosat
 
-## build ichnosat
+## build
 ```
 docker-compose build
 ```
 
-## start ichnosat
+## start
 ```
 docker-compose up
 ```
 
 
-## stop ichnosat
+## stop
 ```
 docker-compose down
 ```
