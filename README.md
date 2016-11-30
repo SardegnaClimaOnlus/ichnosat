@@ -5,7 +5,13 @@
 docker-compose build
 ```
 
-## run ichnosat
+## start ichnosat
 ```
 docker-compose up
+```
+
+
+## stop ichnosat
+```
+docker-compose down
 ```
