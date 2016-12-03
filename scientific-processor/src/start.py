@@ -4,8 +4,9 @@ from logger import logger
 from ctypes import *
 import json
 import shutil
-import os, fnmatch
+import fnmatch
 import re
+import os, sys, select
 
 from  ScientificProcessor import ScientificProcessor
 
@@ -17,6 +18,26 @@ def process(source):
     pattern = '*.so'
     fileList = []
     logger.debug("before for")
+    ############-------------
+    sys.stdout.write(' \b')
+    pipe_out, pipe_in = os.pipe()
+    stdout = os.dup(1)
+    os.dup2(pipe_in, 1)
+
+    # check if we have more to read from the pipe
+    def more_data():
+        r, _, _ = select.select([pipe_out], [], [], 0)
+        return bool(r)
+
+    # read the whole pipe
+    def read_pipe():
+        out = ''
+        while more_data():
+            logger.debug(os.read(pipe_out, 1024).decode('utf-8'))
+
+
+
+    ###########-------------
     for dName, sdName, fList in os.walk(inDIR):
         for fileName in fList:
             if fnmatch.fnmatch(fileName, pattern):  # Match search string
@@ -46,6 +67,10 @@ def process(source):
                 destinationPath = destination.encode('utf-8')
                 libc.process.argtypes = [c_char_p]
                 libc.process(productPath, destinationPath)
+                # put stdout back in place
+                os.dup2(stdout, 1)
+                logger.debug('Contents of our stdout pipe:')
+                read_pipe()
                 logger.debug("FINISHED Plugin: " + plugin_path)
 
     # remove file

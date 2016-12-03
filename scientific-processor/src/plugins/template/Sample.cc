@@ -60,6 +60,8 @@ void Sample::process(char * productPath, char * ndvi_rasterinationPath){
   const char * BAND4_FILENAME = "B04.jp2";
   const char * BAND8_FILENAME = "B08.jp2";
   const char * PROCESSED_IMAGE_FILENAME = "NVDI.tif";
+
+  std::cout <<"[scientific-processor][NDVI_plugin]: Start processing" << std::endl;
   GDALDriver * poDriver;
 
   // load drivers

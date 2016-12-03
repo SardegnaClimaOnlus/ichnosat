@@ -3,6 +3,9 @@ app = Flask(__name__)
 import pika
 import subprocess
 import json
+from logger import logger
+import os, sys, select
+import re
 
 @app.route('/')
 def hello_world():
@@ -25,8 +28,47 @@ def notify_scientific_processor():
 
 @app.route('/start-scientific-processor')
 def start_scientific_processor():
+    logger.debug("[ichnosat-manager][]: Start scientific-processor")
     subprocess.Popen(["/bin/bash", "bash/start-scientific-processor.sh", "var=11; ignore all"])
     return "done"
+
+@app.route('/compile-plugins')
+def compile_plugins():
+    logger.debug("(ichnosat-manager): START compile scientific-processor plugins")
+    dirnames = os.listdir('/usr/ichnosat/scientific-processor/src/plugins/')
+
+    r = re.compile('^[^\.]')
+    dirnames = filter(r.match, dirnames)
+
+    for plugin_name in dirnames:
+        try:
+            completed_without_error = True
+            logger.debug("(ichnosat-manager): START compile of scientific-plugin '"+plugin_name+"' plugin")
+            p = subprocess.Popen(["/bin/bash", "bash/compile-plugins.sh", plugin_name, "var=11; ignore all"],
+                                 stdout=subprocess.PIPE,
+                                 stderr=subprocess.PIPE)
+
+            for line in p.stdout.read().decode('utf-8').split("\n"):
+                if (len(line) > 0):
+                    logger.debug("(BASH - compile-plugins.sh): " + line)
+
+            for line in p.stderr.read().decode('utf-8').split("\n"):
+                if (len(line) > 0):
+                    logger.debug("[ERROR] (BASH compile-plugins.sh): " + line)
+                    completed_without_error = False
+
+            if(completed_without_error):
+                logger.debug("(ichnosat-manager): Completed compile " + plugin_name + " plugin")
+            else:
+                logger.debug("[ERROR] (ichnosat-manager): Failed compilation of scientific-processor plugin '" + plugin_name + "'")
+
+        except ValueError:
+            logger.debug(
+                "[ERROR] (ichnosat-manager): Failed compilation of scientific-processor plugin '" + plugin_name + "'")
+
+    logger.debug("(ichnosat-manager): COMPLETED compile scientific-processor plugins")
+
+    return "Done"
 
 @app.route('/start-rabbitmq')
 def start_rabbitmq():
