@@ -1,37 +1,63 @@
 # !/usr/bin/env python
 import pika
 from logger import logger
-import subprocess
+from ctypes import *
+import json
+import shutil
+import os, fnmatch
 
 from  ScientificProcessor import ScientificProcessor
 
-def process():
+def process(source, destination):
+    logger.debug("process method")
+    logger.debug(source)
+    logger.debug(destination)
+    logger.debug("iglob")
 
-    logger.debug('start processing')
-    # get list of inbox folder
-    # get the path of first folder in the list
-    # generate list of .so files present in plugin folder
-    # for each plugins:
-    #     generate a folder in the outbox with name <product_folder_name>_<plugin_name>
-    #     call the plugin passing the path of first folder in inbox and the path of the just created folder
-    # remove the first folder in the list of inbox      
+    inDIR = '/usr/ichnosat/scientific-processor/src/plugins/'
+    pattern = '*.so'
+    fileList = []
+
+    # Walk through directory
+    for dName, sdName, fList in os.walk(inDIR):
+        for fileName in fList:
+            if fnmatch.fnmatch(fileName, pattern):  # Match search string
+                path =os.path.join(dName, fileName)
+                logger.debug("START Plugin: " + path)
+                logger.debug('start processing')
+                cdll.LoadLibrary(path)
+                libc = CDLL(path)
+                productPath = source.encode('utf-8')
+                destinationPath = destination.encode('utf-8')
+                libc.process.argtypes = [c_char_p]
+                libc.process(productPath, destinationPath)
+                print("DONE")
+
+    shutil.rmtree(source)
+
+    #remove file
+
+
 def main():
    # scientificProcessor = ScientificProcessor()
 
     connection = pika.BlockingConnection(pika.ConnectionParameters(
-        host='localhost'))
+        host='localhost', heartbeat_interval=200))
     channel = connection.channel()
 
     channel.queue_declare(queue='hello')
 
     def callback(ch, method, properties, body):
+        #source = "/usr/ichnosat/scientific-processor/inbox/01/"
+        #destination = "/usr/ichnosat/scientific-processor/outbox/01/"
+        #print(" [x] Received %r" % body)
+        data = json.loads(body.decode("utf-8") )
 
-        print(" [x] Received %r" % body)
+
         logger.debug('start processing of new product')
-        p = subprocess.Popen(["/bin/bash", "test.sh", "var=11; ignore all"])
-        p.wait()
-
-        logger.debug('completed processing of new product')
+        #p = subprocess.Popen(["/bin/bash", "test.sh", "var=11; ignore all"])
+        process(data["source"], data["destination"])
+        #logger.debug('completed processing of new product')
 
     channel.basic_consume(callback,
                           queue='hello',
