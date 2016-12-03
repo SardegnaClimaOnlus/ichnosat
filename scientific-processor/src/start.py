@@ -5,37 +5,53 @@ from ctypes import *
 import json
 import shutil
 import os, fnmatch
+import re
 
 from  ScientificProcessor import ScientificProcessor
 
-def process(source, destination):
+def process(source):
     logger.debug("process method")
     logger.debug(source)
-    logger.debug(destination)
-    logger.debug("iglob")
-
     inDIR = '/usr/ichnosat/scientific-processor/src/plugins/'
+    outbox_path = '/usr/ichnosat/scientific-processor/outbox/'
     pattern = '*.so'
     fileList = []
-
-    # Walk through directory
+    logger.debug("before for")
     for dName, sdName, fList in os.walk(inDIR):
         for fileName in fList:
             if fnmatch.fnmatch(fileName, pattern):  # Match search string
-                path =os.path.join(dName, fileName)
-                logger.debug("START Plugin: " + path)
+                logger.debug("FOUND")
+                product_name = source.split('/')[-2]
+                logger.debug("product_name")
+                logger.debug(product_name)
+
+                logger.debug("source")
+                logger.debug(source)
+                plugin_path = os.path.join(dName, fileName)
+                regex_plugin_name = re.escape(dName )+ '\/(.*?)\.so'
+                plugin_name= re.match(regex_plugin_name, plugin_path).group(1)
+
+                destination = outbox_path + product_name + "-" + plugin_name + '/'
+                #create new product
+                if not os.path.exists(destination):
+                    os.makedirs(destination)
+                logger.debug(destination)
+
+
+                logger.debug("START Plugin: " + plugin_path)
                 logger.debug('start processing')
-                cdll.LoadLibrary(path)
-                libc = CDLL(path)
+                cdll.LoadLibrary(plugin_path)
+                libc = CDLL(plugin_path)
                 productPath = source.encode('utf-8')
                 destinationPath = destination.encode('utf-8')
                 libc.process.argtypes = [c_char_p]
                 libc.process(productPath, destinationPath)
-                print("DONE")
+                logger.debug("FINISHED Plugin: " + plugin_path)
 
-    shutil.rmtree(source)
+    # remove file
+    #shutil.rmtree(source)
 
-    #remove file
+
 
 
 def main():
@@ -56,7 +72,11 @@ def main():
 
         logger.debug('start processing of new product')
         #p = subprocess.Popen(["/bin/bash", "test.sh", "var=11; ignore all"])
-        process(data["source"], data["destination"])
+        if(os.path.isdir(data["source"])):
+            process(data["source"])
+            logger.debug('COMPLETED processing for the product with path: ' + data['source'])
+        else:
+            logger.debug("product not found - " + data["source"])
         #logger.debug('completed processing of new product')
 
     channel.basic_consume(callback,

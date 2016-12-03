@@ -15,8 +15,7 @@ def notify_scientific_processor():
     channel = connection.channel()
 
     channel.queue_declare(queue='hello')
-    body_obj = {"source": "/usr/ichnosat/pre-processor/outbox/01/",
-                "destination": "/usr/ichnosat/scientific-processor/outbox/01/"}
+    body_obj = {"source": "/usr/ichnosat/pre-processor/outbox/10SDG20151207_0/"}
     channel.basic_publish(exchange='',
                           routing_key='hello',
                           body=json.dumps(body_obj))
