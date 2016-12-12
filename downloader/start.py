@@ -35,11 +35,20 @@ def extract_date(item):
     return datetime.date(int(year), int(month), int(day))
 
 class GenerateProductsList(threading.Thread):
-    def __init__(self, tile, start_year, start_month, start_day):
+    def __init__(self, tile, start_date, end_date):
+        date_regex = "([0-9]*)/([0-9]*)/([0-9]*)"
+        start_date_match = re.search(date_regex, start_date)
+        if end_date != 'NOW':
+            end_date_match = re.search(date_regex, end_date)
+            self.end_date = datetime.date(int(end_date_match.group(1)),
+                                          int(end_date_match.group(2)),
+                                          int(end_date_match.group(3)))
+        else:
+            self.end_date = datetime.datetime.now().date()
         self.tile = tile
-        self.start_year = start_year
-        self.start_month = start_month
-        self.start_day = start_day
+        self.start_year = start_date_match.group(1)
+        self.start_month = start_date_match.group(2)
+        self.start_day = start_date_match.group(3)
         self.product_list = []
         self.last_item = None
         self.current_year = datetime.datetime.now().year
@@ -97,11 +106,27 @@ class GenerateProductsList(threading.Thread):
         dict = OrderedDict(sorted(dict.items()))
 
         # PRINT DICTIONARY
-        logging.debug("===== print dictionary =====")
-        for x in dict:
-            logging.debug(str(x) + ':' + str(dict[x]))
 
         # TODO: FILTER IN DATE INTERVAL
+        start_date = datetime.date(int(self.start_year), int(self.start_month), int(self.start_day))
+
+        logging.debug("===== print dictionary =====")
+        logging.debug("start_date~~~~~~~~~: " + str(start_date))
+        logging.debug("end_date~~~~~~~~~~~: " + str(self.end_date))
+        pending_products = []
+        for product_date in dict:
+            outcome = ''
+            if product_date < start_date or product_date > self.end_date:
+                outcome = "IGNORE"
+            else:
+                outcome = "TO DOWNLOAD"
+                pending_products.append(dict[product_date])
+            logging.debug(outcome + ' -- ' + str(product_date) + ':' + str(dict[product_date]))
+
+        logging.debug("===== pending products =====")
+        for pending_product in pending_products:
+            logging.debug( str(pending_product))
+
 
 
 
@@ -113,9 +138,8 @@ def start():
     # generate products list
     for tile in config['FILTER']['tiles'].split(','):
         download_task = GenerateProductsList(tile,
-                                             config['FILTER']['start_year'],
-                                             config['FILTER']['start_month'],
-                                             config['FILTER']['start_day'])
+                                             config['FILTER']['start_date'],
+                                             config['FILTER']['end_date'])
         download_task.run()
 
 
