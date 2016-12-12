@@ -18,6 +18,7 @@ def callback():
 
 def generate_url( tile, year):
     logging.debug("(Downloader, generate_url) START")
+    # TODO: move this string to configuration file
     url_template = 'http://sentinel-s2-l1c.s3.amazonaws.com/?list-type=2&prefix=tiles/{tile}/{year}/'
     url = url_template.format(tile=tile, year=year)
     logging.debug('url: ' + url)
@@ -25,14 +26,12 @@ def generate_url( tile, year):
     return url
 
 def extract_date(item):
+    # TODO: move this string to configuration file
     regex = 'tiles/[0-9]2/[A-Z]/[A-Z]{2}/([0-9]{4})/([0-9]*)/([0-9]*)/'
     match = re.search(regex, item)
     year = match.group(1)
     month = match.group(2)
     day = match.group(3)
-    logging.debug('year: ' + year)
-    logging.debug('month: ' + month)
-    logging.debug('day: ' + day)
     return datetime.date(int(year), int(month), int(day))
 
 class GenerateProductsList(threading.Thread):
@@ -67,7 +66,6 @@ class GenerateProductsList(threading.Thread):
                 product_path = re.search(config['AWS']['products_regex'], key)
             except ValueError:
                 logging.error("error parsing")
-
             self.product_list.append(product_path.group(0))
 
         # CHECK IF THE PAGE IS TRUNCATED
@@ -117,14 +115,13 @@ class GenerateProductsList(threading.Thread):
 def start():
     logging.debug("DOWNLOADER: START")
     logging.debug("(Downloader): read configurations")
-    start_day= config['FILTER']['start_day']
-    start_month = config['FILTER']['start_month']
-    start_year  = config['FILTER']['start_year']
-    tiles = config['FILTER']['tiles'].split(',')
 
     # generate products list
-    for tile in tiles:
-        download_task = GenerateProductsList(tile, start_year, start_month, start_day)
+    for tile in config['FILTER']['tiles'].split(','):
+        download_task = GenerateProductsList(tile,
+                                             config['FILTER']['start_year'],
+                                             config['FILTER']['start_month'],
+                                             config['FILTER']['start_day'])
         download_task.run()
 
 
