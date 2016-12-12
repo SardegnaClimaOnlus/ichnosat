@@ -41,6 +41,7 @@ class GenerateProductsList(threading.Thread):
         self.start_month = start_month
         self.start_day = start_day
         self.product_list = []
+        self.last_item = None
         self.current_year = datetime.datetime.now().year
         logging.debug("CURRENT YEAR: " + str(self.current_year))
 
@@ -50,13 +51,10 @@ class GenerateProductsList(threading.Thread):
         # APPEND TO URL START_FROM ATTRIBUTE IF IT IS PAGINATED
         if paginated:
             url = url + "&start-after=" + self.last_item
-        logging.debug(">>>>>>>> REQUEST <<<<<<<<<<")
-        logging.debug(url)
 
         # HTTP REQUEST
         response = urllib.request.urlopen(url)
-        data1 = response.read()
-        root = ET.fromstring(data1.decode('utf-8'))
+        root = ET.fromstring(response.read().decode('utf-8'))
         # EXTRACT THE DATA FROM XML
         contents = root.findall('{'+config['AWS']['xmlns']+'}Contents')
         for item in contents:
@@ -69,24 +67,20 @@ class GenerateProductsList(threading.Thread):
             self.product_list.append(product_path.group(0))
 
         # CHECK IF THE PAGE IS TRUNCATED
-        isTruncated = root.find('{' + config['AWS']['xmlns'] + '}IsTruncated').text
-        if isTruncated == 'true':
+        if root.find('{' + config['AWS']['xmlns'] + '}IsTruncated').text == 'true':
             self.last_item = contents[-1].find('{' + config['AWS']['xmlns'] + '}Key').text
             return True
         else:
             return False
 
-
     def run(self):
         year = int(self.start_year)
 
-        # EXTRACT WHOLE LIST OF PRODUCT FROM AMAZON
-        # FROM START_YEAR to TODAY
+        # EXTRACT WHOLE LIST OF PRODUCT VIA AMAZON, FROM START_YEAR to TODAY
         while year <= self.current_year:
             logging.debug("year: " + str(year))
             isTruncated = self.load_products(year, False)
             while isTruncated:
-                time.sleep(2)
                 isTruncated = self.load_products(year, True)
             year += 1
 
