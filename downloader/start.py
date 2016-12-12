@@ -46,19 +46,21 @@ class GenerateProductsList(threading.Thread):
         logging.debug("CURRENT YEAR: " + str(self.current_year))
 
     def load_products(self, year, paginated=False):
+        # GENERATE URL FOR YEAR
         url = generate_url(self.tile, year)
-
+        # APPEND TO URL START_FROM ATTRIBUTE IF IT IS PAGINATED
         if paginated:
             url = url + "&start-after=" + self.last_item
-
         logging.debug(">>>>>>>> REQUEST <<<<<<<<<<")
         logging.debug(url)
+
+        # HTTP REQUEST
         response = urllib.request.urlopen(url)
         data1 = response.read()
         root = ET.fromstring(data1.decode('utf-8'))
+        # EXTRACT THE DATA FROM XML
         contents = root.findall('{'+config['AWS']['xmlns']+'}Contents')
         for item in contents:
-
             key = item.find('{' + config['AWS']['xmlns'] + '}Key').text
             product_path = ''
             try:
@@ -68,8 +70,8 @@ class GenerateProductsList(threading.Thread):
 
             self.product_list.append(product_path.group(0))
 
+        # CHECK IF THE PAGE IS TRUNCATED
         isTruncated = root.find('{' + config['AWS']['xmlns'] + '}IsTruncated').text
-
         if isTruncated == 'true':
             self.last_item = contents[-1].find('{' + config['AWS']['xmlns'] + '}Key').text
             return True
@@ -112,20 +114,12 @@ class GenerateProductsList(threading.Thread):
 
 
 
-
-
-
-
-
-
 def start():
     logging.debug("DOWNLOADER: START")
     logging.debug("(Downloader): read configurations")
     start_day= config['FILTER']['start_day']
     start_month = config['FILTER']['start_month']
     start_year  = config['FILTER']['start_year']
-    logging.debug("####### start_year ##########")
-    logging.debug(start_year)
     tiles = config['FILTER']['tiles'].split(',')
 
     # generate products list
