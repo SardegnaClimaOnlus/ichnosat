@@ -92,9 +92,8 @@ RUN apt-get install -y rabbitmq-server
 #copy makefile
 RUN mkdir -p /usr/ichnosat/server
 COPY Makefile /usr/ichnosat
-COPY server/start.py /usr/ichnosat/server
-
-WORKDIR /usr/ichnosat/server
+RUN export PYTHONPATH=${PYTHONPATH}:/usr/ichnosat
+WORKDIR /usr/ichnosat/
 
 
 #ENTRYPOINT [ "make" ]

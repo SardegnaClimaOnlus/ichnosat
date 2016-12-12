@@ -5,7 +5,9 @@ services:
     command: python3.4 start.py
     volumes:
     - ./:/usr/ichnosat
-    - ./server:/usr/ichnosat/server
     ports:
      - "5000:5000"
+     - "80:80"
+
+
 

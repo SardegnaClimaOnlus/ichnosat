@@ -32,4 +32,7 @@ http://sentinel-s2-l1c.s3.amazonaws.com/?list-type=2&prefix=tiles/32/T/ML/2016/7
 - sqlite database
 - pull of threads
 - start and stop features
+- cron features
+
+http://docs.celeryproject.org/en/latest/userguide/periodic-tasks.html
 

@@ -1,6 +1,6 @@
 # !/usr/bin/env python
 import pika
-from logger import logger
+import logging
 from ctypes import *
 import json
 import shutil
@@ -11,13 +11,13 @@ import os, sys, select
 from  ScientificProcessor import ScientificProcessor
 
 def process(source):
-    logger.debug("process method")
-    logger.debug(source)
+    logging.debug("process method")
+    logging.debug(source)
     inDIR = '/usr/ichnosat/scientific-processor/src/plugins/'
     outbox_path = '/usr/ichnosat/scientific-processor/outbox/'
     pattern = '*.so'
     fileList = []
-    logger.debug("before for")
+    logging.debug("before for")
     ############-------------
     sys.stdout.write(' \b')
     pipe_out, pipe_in = os.pipe()
@@ -33,7 +33,7 @@ def process(source):
     def read_pipe():
         out = ''
         while more_data():
-            logger.debug(os.read(pipe_out, 1024).decode('utf-8'))
+            logging.debug(os.read(pipe_out, 1024).decode('utf-8'))
 
 
 
@@ -41,13 +41,13 @@ def process(source):
     for dName, sdName, fList in os.walk(inDIR):
         for fileName in fList:
             if fnmatch.fnmatch(fileName, pattern):  # Match search string
-                logger.debug("FOUND")
+                logging.debug("FOUND")
                 product_name = source.split('/')[-2]
-                logger.debug("product_name")
-                logger.debug(product_name)
+                logging.debug("product_name")
+                logging.debug(product_name)
 
-                logger.debug("source")
-                logger.debug(source)
+                logging.debug("source")
+                logging.debug(source)
                 plugin_path = os.path.join(dName, fileName)
                 regex_plugin_name = re.escape(dName )+ '\/(.*?)\.so'
                 plugin_name= re.match(regex_plugin_name, plugin_path).group(1)
@@ -56,11 +56,11 @@ def process(source):
                 #create new product
                 if not os.path.exists(destination):
                     os.makedirs(destination)
-                logger.debug(destination)
+                logging.debug(destination)
 
 
-                logger.debug("START Plugin: " + plugin_path)
-                logger.debug('start processing')
+                logging.debug("START Plugin: " + plugin_path)
+                logging.debug('start processing')
                 cdll.LoadLibrary(plugin_path)
                 libc = CDLL(plugin_path)
                 productPath = source.encode('utf-8')
@@ -69,9 +69,9 @@ def process(source):
                 libc.process(productPath, destinationPath)
                 # put stdout back in place
                 os.dup2(stdout, 1)
-                logger.debug('Contents of our stdout pipe:')
+                logging.debug('Contents of our stdout pipe:')
                 read_pipe()
-                logger.debug("FINISHED Plugin: " + plugin_path)
+                logging.debug("FINISHED Plugin: " + plugin_path)
 
     # remove file
     #shutil.rmtree(source)
@@ -95,14 +95,14 @@ def main():
         data = json.loads(body.decode("utf-8") )
 
 
-        logger.debug('start processing of new product')
+        logging.debug('start processing of new product')
         #p = subprocess.Popen(["/bin/bash", "test.sh", "var=11; ignore all"])
         if(os.path.isdir(data["source"])):
             process(data["source"])
-            logger.debug('COMPLETED processing for the product with path: ' + data['source'])
+            logging.debug('COMPLETED processing for the product with path: ' + data['source'])
         else:
-            logger.debug("product not found - " + data["source"])
-        #logger.debug('completed processing of new product')
+            logging.debug("product not found - " + data["source"])
+        #logging.debug('completed processing of new product')
 
     channel.basic_consume(callback,
                           queue='hello',
@@ -111,7 +111,7 @@ def main():
 
     print(' scientific-processor::: To exit press CTRL+C')
     #channel.start_consuming()
-    logger.debug('STARTED SCIENTIFIC-PROCESSOR!!!!')
+    logging.debug('STARTED SCIENTIFIC-PROCESSOR!!!!')
 
 
     try:

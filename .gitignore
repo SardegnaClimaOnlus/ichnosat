@@ -7,3 +7,6 @@
 **/env
 scientific-processor/inbox/S*
 data-sample
+**/__pycache__
+__pycache__
+pre-processor/outbox/!README.md
