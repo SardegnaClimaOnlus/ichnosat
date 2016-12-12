@@ -16,6 +16,13 @@ config.read("downloader/config/config.cfg")
 def callback():
     logging.debug("hello from scheduler")
 
+def generate_url( tile, year):
+    logging.debug("(Downloader, generate_url) START")
+    url_template = 'http://sentinel-s2-l1c.s3.amazonaws.com/?list-type=2&prefix=tiles/{tile}/{year}/'
+    url = url_template.format(tile=tile, year=year)
+    logging.debug('url: ' + url)
+    logging.debug("(Downloader, generate_url) END")
+    return url
 
 def extract_date(item):
     regex = 'tiles/[0-9]2/[A-Z]/[A-Z]{2}/([0-9]{4})/([0-9]*)/([0-9]*)/'
@@ -29,16 +36,21 @@ def extract_date(item):
     return datetime.date(int(year), int(month), int(day))
 
 class GenerateProductsList(threading.Thread):
-    def __init__(self, url):
-        self.url = url
+    def __init__(self, tile, start_year, start_month, start_day):
+        self.tile = tile
+        self.start_year = start_year
+        self.start_month = start_month
+        self.start_day = start_day
         self.product_list = []
+        self.current_year = datetime.datetime.now().year
+        logging.debug("CURRENT YEAR: " + str(self.current_year))
 
-    def load_products(self, paginated=False):
-        url = ''
+    def load_products(self, year, paginated=False):
+        url = generate_url(self.tile, year)
+
         if paginated:
-            url = self.url + "&start-after=" + self.last_item
-        else:
-            url = self.url
+            url = url + "&start-after=" + self.last_item
+
         logging.debug(">>>>>>>> REQUEST <<<<<<<<<<")
         logging.debug(url)
         response = urllib.request.urlopen(url)
@@ -66,57 +78,59 @@ class GenerateProductsList(threading.Thread):
 
 
     def run(self):
-        logging.debug("(Downloader DownloadTask run)  url:" + self.url);
-        # get the products list
+        year = int(self.start_year)
 
-        isTruncated = self.load_products()
-        while isTruncated:
-            time.sleep(2)
-            isTruncated = self.load_products(True)
+        # EXTRACT WHOLE LIST OF PRODUCT FROM AMAZON
+        # FROM START_YEAR to TODAY
+        while year <= self.current_year:
+            logging.debug("year: " + str(year))
+            isTruncated = self.load_products(year, False)
+            while isTruncated:
+                time.sleep(2)
+                isTruncated = self.load_products(year, True)
+            year += 1
 
-        # get IsTruncated
-        logging.debug("----- products_list -----")
+        # CLEAN LIST OF PRODUCTS
         self.product_list = set(self.product_list)
+        # GENERATE DICTIONARY
         dict = {}
         for product in self.product_list:
             date = extract_date(str(product))
             product_string = str(product)
-            logging.debug(date)
             dict[date] = product_string
-            logging.debug(product_string)
 
-        logging.debug("===== print dictionary =====")
-
-
+        # ORDER DICTIONARY
         dict = OrderedDict(sorted(dict.items()))
+
+        # PRINT DICTIONARY
+        logging.debug("===== print dictionary =====")
         for x in dict:
             logging.debug(str(x) + ':' + str(dict[x]))
 
+        # TODO: FILTER IN DATE INTERVAL
 
 
 
 
 
-def generate_urls(url_template, tiles, start_year, start_month):
-    urls = []
-    for tile in tiles:
-        url =url_template.format(tile=tile, year=start_year, month=start_month)
-        logging.debug('url: '+ url)
-        urls.append(url)
-    logging.debug("(Downloader, generate_urls) END")
-    return urls
+
+
+
+
 
 def start():
     logging.debug("DOWNLOADER: START")
     logging.debug("(Downloader): read configurations")
+    start_day= config['FILTER']['start_day']
     start_month = config['FILTER']['start_month']
     start_year  = config['FILTER']['start_year']
-    url_template = config['FILTER']['url_template']
+    logging.debug("####### start_year ##########")
+    logging.debug(start_year)
     tiles = config['FILTER']['tiles'].split(',')
-    urls = generate_urls(url_template, tiles, start_year, start_month)
+
     # generate products list
-    for url in urls:
-        download_task = GenerateProductsList(url)
+    for tile in tiles:
+        download_task = GenerateProductsList(tile, start_year, start_month, start_day)
         download_task.run()
 
 
