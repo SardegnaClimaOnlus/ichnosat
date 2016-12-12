@@ -8,10 +8,11 @@ import time
 import datetime
 from collections import OrderedDict
 
-
-
 config = configparser.ConfigParser()
 config.read("downloader/config/config.cfg")
+
+# TODO: to move this variable into class property
+pending_products = []
 
 def callback():
     logging.debug("hello from scheduler")
@@ -53,6 +54,7 @@ class GenerateProductsList(threading.Thread):
         self.last_item = None
         self.current_year = datetime.datetime.now().year
         logging.debug("CURRENT YEAR: " + str(self.current_year))
+        super(GenerateProductsList, self).__init__()
 
     def load_products(self, year, paginated=False):
         # GENERATE URL FOR YEAR
@@ -95,6 +97,7 @@ class GenerateProductsList(threading.Thread):
 
         # CLEAN LIST OF PRODUCTS
         self.product_list = set(self.product_list)
+
         # GENERATE DICTIONARY
         dict = {}
         for product in self.product_list:
@@ -105,48 +108,43 @@ class GenerateProductsList(threading.Thread):
         # ORDER DICTIONARY
         dict = OrderedDict(sorted(dict.items()))
 
-        # PRINT DICTIONARY
-
-        # TODO: FILTER IN DATE INTERVAL
+        # FILTER BY DATE INTERVAL
         start_date = datetime.date(int(self.start_year), int(self.start_month), int(self.start_day))
-
-        logging.debug("===== print dictionary =====")
-        logging.debug("start_date~~~~~~~~~: " + str(start_date))
-        logging.debug("end_date~~~~~~~~~~~: " + str(self.end_date))
-        pending_products = []
         for product_date in dict:
-            outcome = ''
-            if product_date < start_date or product_date > self.end_date:
-                outcome = "IGNORE"
-            else:
-                outcome = "TO DOWNLOAD"
+            if product_date >= start_date and product_date <= self.end_date:
                 pending_products.append(dict[product_date])
-            logging.debug(outcome + ' -- ' + str(product_date) + ':' + str(dict[product_date]))
-
-        logging.debug("===== pending products =====")
-        for pending_product in pending_products:
-            logging.debug( str(pending_product))
-
-
-
-
 
 def start():
     logging.debug("DOWNLOADER: START")
     logging.debug("(Downloader): read configurations")
 
-    # generate products list
+    # GENERATE PRODUCT LIST
+    threads = []
     for tile in config['FILTER']['tiles'].split(','):
-        download_task = GenerateProductsList(tile,
-                                             config['FILTER']['start_date'],
-                                             config['FILTER']['end_date'])
-        download_task.run()
+        task = GenerateProductsList(tile,
+                                    config['FILTER']['start_date'],
+                                    config['FILTER']['end_date'])
+        threads.append(task)
+        task.start()
 
+    # WAIT ALL THREADS
+    for thread in threads:
+        thread.join()
 
+    logging.debug("===== pending products =====")
+    for pending_product in pending_products:
+        logging.debug(str(pending_product))
 
-
-
-
+    # CHECK IN DATA BASE
+    # POPULATE DATABASE
+    # READ UNDOWNLOADED PRODUCT LIST FROM DATABASE
+    # START DOWNLOAD QUEUE FROM DATABASE LIST
+        # DOWNLOADER
+            # GENERATE NEW FOLDER INTO INBOX WITH PRODUCT NAME
+            # START DOWNLOAD OF FILES FOR THAT PRODUCT
+            # WHEN THE DOWNLOAD IS FINISHED
+                # UPDATE THE DATABASE ROW WITH DOWNLOADED
+                # NOTIFY TO PROCESSOR PASSING THE PRODUCT PATH
 
 
 if __name__ == '__main__':
