@@ -133,6 +133,15 @@ def add_database():
     session.commit()
     return "done"
 
+@app.route('/read-database', methods=['GET','POST'])
+def read_database():
+    engine = create_engine('sqlite:///ichnosat.sqlite', echo=True)
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    for instance in session.query(User).order_by(User.id):
+        logging.debug(instance.name +": "+ instance.fullname)
+    return "done"
+
 @app.route('/database', methods=['GET','POST'])
 def create_database():
     logging.debug("(Ichnosat Manager) Create database")
