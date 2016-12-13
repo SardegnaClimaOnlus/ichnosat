@@ -7,6 +7,11 @@ import logging
 import logger
 import os
 import downloader.start
+from sqlalchemy import *
+from sqlalchemy.orm import *
+from sqlalchemy.ext.declarative import declarative_base
+
+
 
 
 
@@ -102,6 +107,51 @@ def start_downloader():
     logging.debug("start-downloder")
     downloader.start.start()
     return "started-download"
+
+Base = declarative_base()
+
+class User(Base):
+    __tablename__ = 'users'
+    id = Column(Integer, Sequence('user_id_seq'), primary_key=True)
+    name = Column(String(50))
+    fullname = Column(String(50))
+    password = Column(String(12))
+
+    def __repr__(self):
+        return "<User(name='%s', fullname='%s', password='%s')>" % (
+            self.name, self.fullname, self.password)
+
+@app.route('/write-database', methods=['GET','POST'])
+def add_database():
+    engine = create_engine('sqlite:///ichnosat.sqlite', echo=True)
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    ed_user = User(name='ed', fullname='Ed Jones', password='edspassword')
+    session.add(ed_user)
+    our_user = session.query(User).filter_by(name='ed').first()
+    logging.debug("our_user.name: " + our_user.name)
+    session.commit()
+    return "done"
+
+@app.route('/database', methods=['GET','POST'])
+def create_database():
+    logging.debug("(Ichnosat Manager) Create database")
+
+    engine = create_engine('sqlite:///ichnosat.sqlite', echo=True)
+    Base.metadata.create_all(engine)
+
+
+
+
+    logging.debug("User.__table__ : " + str(User.__table__ ))
+
+
+    logging.debug("@@@@@@@ print select @@@@@@@@")
+
+
+
+
+    return "created_database"
 
 
 if __name__ == '__main__':

@@ -84,6 +84,8 @@ RUN wget -O- https://www.rabbitmq.com/rabbitmq-release-signing-key.asc | apt-key
 RUN apt-get update
 RUN apt-get install -y rabbitmq-server
 
+# install sqlalchemy
+RUN pip install sqlalchemy
 
 
 
