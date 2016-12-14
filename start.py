@@ -10,16 +10,10 @@ import downloader.start
 from sqlalchemy import *
 from sqlalchemy.orm import *
 from sqlalchemy.ext.declarative import declarative_base
+import database.db as db
+from database.services.products_service import ProductsService
+from database.entities.product import *
 
-
-
-
-
-
-@app.route('/')
-def hello_world():
-
-    return 'Hello from flask'
 
 
 
@@ -108,59 +102,36 @@ def start_downloader():
     downloader.start.start()
     return "started-download"
 
-Base = declarative_base()
 
-class User(Base):
-    __tablename__ = 'users'
-    id = Column(Integer, Sequence('user_id_seq'), primary_key=True)
-    name = Column(String(50))
-    fullname = Column(String(50))
-    password = Column(String(12))
-
-    def __repr__(self):
-        return "<User(name='%s', fullname='%s', password='%s')>" % (
-            self.name, self.fullname, self.password)
 
 @app.route('/write-database', methods=['GET','POST'])
 def add_database():
-    engine = create_engine('sqlite:///ichnosat.sqlite', echo=True)
-    Session = sessionmaker(bind=engine)
-    session = Session()
-    ed_user = User(name='ed', fullname='Ed Jones', password='edspassword')
-    session.add(ed_user)
-    our_user = session.query(User).filter_by(name='ed').first()
-    logging.debug("our_user.name: " + our_user.name)
-    session.commit()
-    return "done"
+    ps = ProductsService()
+    ps.add_new_product()
+    return "added?"
 
 @app.route('/read-database', methods=['GET','POST'])
 def read_database():
-    engine = create_engine('sqlite:///ichnosat.sqlite', echo=True)
-    Session = sessionmaker(bind=engine)
-    session = Session()
-    for instance in session.query(User).order_by(User.id):
-        logging.debug(instance.name +": "+ instance.fullname)
+    ps = ProductsService()
+    logging.debug("|||||| show list of pending products ||||")
+    for product in ps.get_pending_products():
+        logging.debug(product)
+
     return "done"
 
 @app.route('/database', methods=['GET','POST'])
 def create_database():
-    logging.debug("(Ichnosat Manager) Create database")
-
-    engine = create_engine('sqlite:///ichnosat.sqlite', echo=True)
-    Base.metadata.create_all(engine)
-
+    dd = db.DB()
+    dd.create_db()
+    return "Done"
 
 
+@app.route('/update-database', methods=['GET','POST'])
+def update_database():
+    ps = ProductsService()
+    ps.update_product_status("tiles/32/T/NL/2016/10/9/0/",ProductStatus.downloaded)
 
-    logging.debug("User.__table__ : " + str(User.__table__ ))
-
-
-    logging.debug("@@@@@@@ print select @@@@@@@@")
-
-
-
-
-    return "created_database"
+    return "done"
 
 
 if __name__ == '__main__':

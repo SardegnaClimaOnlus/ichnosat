@@ -7,6 +7,9 @@ import re
 import time
 import datetime
 from collections import OrderedDict
+from database.services.products_service import ProductsService
+from database.entities.product import *
+import os
 
 config = configparser.ConfigParser()
 config.read("downloader/config/config.cfg")
@@ -114,6 +117,16 @@ class GenerateProductsList(threading.Thread):
             if product_date >= start_date and product_date <= self.end_date:
                 pending_products.append(dict[product_date])
 
+def downloadProduct(product_name):
+    new_product_path = config['DOWNLOADER']['inbox_path'] + product_name.replace("/","-")
+    if not os.path.exists(new_product_path):
+        os.makedirs(new_product_path)
+    # generate new folder in inbox
+    # get list of subfiles from configurations
+    # for each subfiles to download
+       # download the file and put in the new folder
+    return
+
 def start():
     logging.debug("DOWNLOADER: START")
     logging.debug("(Downloader): read configurations")
@@ -133,10 +146,15 @@ def start():
 
     logging.debug("===== pending products =====")
     for pending_product in pending_products:
-        logging.debug(str(pending_product))
+        ps = ProductsService()
+        ps.add_new_product(Product(name=str(pending_product),
+                                   status=ProductStatus.pending))
 
-    # CHECK IN DATA BASE
-    # POPULATE DATABASE
+
+    for product in ps.get_pending_products():
+        logging.debug(product.name)
+        downloadProduct(product.name)
+
     # READ UNDOWNLOADED PRODUCT LIST FROM DATABASE
     # START DOWNLOAD QUEUE FROM DATABASE LIST
         # DOWNLOADER
