@@ -1,1 +1,1 @@
-cd /usr/ichnosat/scientific-processor/src/; python3.4 start.py
+cd /usr/ichnosat/scientific_processor/src/; python3.4 start.py

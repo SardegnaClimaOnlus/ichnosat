@@ -1,5 +1,6 @@
 # !/usr/bin/env python
 import pika
+import logger
 import logging
 from ctypes import *
 import json
@@ -8,13 +9,13 @@ import fnmatch
 import re
 import os, sys, select
 
-from  ScientificProcessor import ScientificProcessor
+
 
 def process(source):
     logging.debug("process method")
     logging.debug(source)
-    inDIR = '/usr/ichnosat/scientific-processor/src/plugins/'
-    outbox_path = '/usr/ichnosat/scientific-processor/outbox/'
+    inDIR = '/usr/ichnosat/scientific_processor/src/plugins/'
+    outbox_path = '/usr/ichnosat/scientific_processor/outbox/'
     pattern = '*.so'
     fileList = []
     logging.debug("before for")
@@ -80,6 +81,7 @@ def process(source):
 
 
 def main():
+    logging.debug("><><><><$%&%$&%$%$&&%$ START SCIENTIFIC PROCESSOR!!!")
    # scientificProcessor = ScientificProcessor()
 
     connection = pika.BlockingConnection(pika.ConnectionParameters(
@@ -89,27 +91,23 @@ def main():
     channel.queue_declare(queue='hello')
 
     def callback(ch, method, properties, body):
-        #source = "/usr/ichnosat/scientific-processor/inbox/01/"
-        #destination = "/usr/ichnosat/scientific-processor/outbox/01/"
-        #print(" [x] Received %r" % body)
         data = json.loads(body.decode("utf-8") )
 
+        logging.debug('>>>>>>>>>>>>start processing of new product')
 
-        logging.debug('start processing of new product')
-        #p = subprocess.Popen(["/bin/bash", "test.sh", "var=11; ignore all"])
         if(os.path.isdir(data["source"])):
             process(data["source"])
             logging.debug('COMPLETED processing for the product with path: ' + data['source'])
         else:
             logging.debug("product not found - " + data["source"])
-        #logging.debug('completed processing of new product')
+        logging.debug('completed processing of new product')
 
     channel.basic_consume(callback,
                           queue='hello',
                           no_ack=True)
 
 
-    print(' scientific-processor::: To exit press CTRL+C')
+    print(' scientific_processor::: To exit press CTRL+C')
     #channel.start_consuming()
     logging.debug('STARTED SCIENTIFIC-PROCESSOR!!!!')
 
@@ -121,7 +119,9 @@ def main():
     connection.close()
 
 
-
+def start_scientific_processor():
+    logging.debug("HELLO FROM SCIENTIFIC-PROCESSOR MAIN")
+    main()
 
 if __name__ == '__main__':
     main()

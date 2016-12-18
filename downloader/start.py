@@ -10,6 +10,10 @@ from collections import OrderedDict
 from database.services.products_service import ProductsService
 from database.entities.product import *
 import os
+import json
+import pika
+import shutil
+
 
 config = configparser.ConfigParser()
 config.read("downloader/config/config.cfg")
@@ -117,14 +121,38 @@ class GenerateProductsList(threading.Thread):
             if product_date >= start_date and product_date <= self.end_date:
                 pending_products.append(dict[product_date])
 
+
+def notify_to_scientific_processor(file_path):
+    logging.debug("notify to scientific processor the processing of " + file_path)
+    connection = pika.BlockingConnection(pika.ConnectionParameters(
+        host='localhost'))
+    channel = connection.channel()
+
+    channel.queue_declare(queue='hello')
+    body_obj = {"source": file_path}
+    channel.basic_publish(exchange='',
+                          routing_key='hello',
+                          body=json.dumps(body_obj))
+    connection.close()
+
+
 def downloadProduct(product_name):
-    new_product_path = config['DOWNLOADER']['inbox_path'] + product_name.replace("/","-")
+    new_product_path = config['DOWNLOADER']['inbox_path'] + product_name.replace("/","-")[:-1]
     if not os.path.exists(new_product_path):
         os.makedirs(new_product_path)
-    # generate new folder in inbox
-    # get list of subfiles from configurations
-    # for each subfiles to download
-       # download the file and put in the new folder
+
+    files_to_download=config['DOWNLOADER']['files_to_download'].split(',')
+    for file_name in files_to_download:
+        # TODO: move this key into config file
+        url = "http://sentinel-s2-l1c.s3.amazonaws.com/" + product_name + file_name
+        new_file_path = new_product_path + '/' +file_name
+        urllib.request.urlretrieve(url, new_file_path)
+        logging.debug("DOWNLOADED FILE WITH PATH ********>>>>> " + new_file_path)
+    ps = ProductsService()
+    ps.update_product_status(product_name,ProductStatus.downloaded)
+    notify_to_scientific_processor(new_product_path+'/')
+
+
     return
 
 def start():

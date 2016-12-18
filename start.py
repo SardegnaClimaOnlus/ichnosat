@@ -13,11 +13,12 @@ from sqlalchemy.ext.declarative import declarative_base
 import database.db as db
 from database.services.products_service import ProductsService
 from database.entities.product import *
+from scientific_processor.src.start import *
 
 
 
 
-@app.route('/notify-scientific-processor')
+@app.route('/notify-scientific_processor')
 def notify_scientific_processor():
     connection = pika.BlockingConnection(pika.ConnectionParameters(
         host='localhost'))
@@ -32,16 +33,27 @@ def notify_scientific_processor():
     connection.close()
     return "done"
 
-@app.route('/start-scientific-processor')
-def start_scientific_processor():
-    logging.debug("[ichnosat-manager][]: Start scientific-processor")
+@app.route('/start-scientific_processor')
+def start_scientific_xs():
+    logging.debug("[ichnosat-manager][]: Start scientific_processor")
+    #start_scientific_processor()
     subprocess.Popen(["/bin/bash", "bash/start-scientific-processor.sh", "var=11; ignore all"])
     return "done"
 
+
+@app.route('/processor')
+def startproce_scientific_xs():
+    logging.debug("[ichnosat-manager][]: Start scientific_processor")
+    start_scientific_processor()
+    logging.debug("")
+    #subprocess.Popen(["/bin/bash", "bash/start_scientific-processor.sh", "var=11; ignore all"])
+    return "done"
+
+
 @app.route('/compile-plugins')
 def compile_plugins():
-    logging.debug("(ichnosat-manager): START compile scientific-processor plugins")
-    dirnames = os.listdir('/usr/ichnosat/scientific-processor/src/plugins/')
+    logging.debug("(ichnosat-manager): START compile scientific_processor plugins")
+    dirnames = os.listdir('/usr/ichnosat/scientific_processor/src/plugins/')
     r = re.compile('^[^\.]')
     dirnames = filter(r.match, dirnames)
 
@@ -65,13 +77,13 @@ def compile_plugins():
             if(completed_without_error):
                 logging.debug("(ichnosat-manager): Completed compile " + plugin_name + " plugin")
             else:
-                logging.debug("[ERROR] (ichnosat-manager): Failed compilation of scientific-processor plugin '" + plugin_name + "'")
+                logging.debug("[ERROR] (ichnosat-manager): Failed compilation of scientific_processor plugin '" + plugin_name + "'")
 
         except ValueError:
             logging.debug(
-                "[ERROR] (ichnosat-manager): Failed compilation of scientific-processor plugin '" + plugin_name + "'")
+                "[ERROR] (ichnosat-manager): Failed compilation of scientific_processor plugin '" + plugin_name + "'")
 
-    logging.debug("(ichnosat-manager): COMPLETED compile scientific-processor plugins")
+    logging.debug("(ichnosat-manager): COMPLETED compile scientific_processor plugins")
 
     return "Done"
 
@@ -135,5 +147,10 @@ def update_database():
 
 
 if __name__ == '__main__':
-    subprocess.Popen(["/bin/bash", "bash/start-rabbitmq.sh", "var=11; ignore all"])
+    logging.debug("START ")
+    logging.debug("START RABBITMQ")
+    #subprocess.Popen(["/bin/bash", "bash/start-rabbitmq.sh", "var=11; ignore all"])
+    #logging.debug("START SCIENTIFIC PROCESSOR")
+    #start_scientific_processor()
+
     app.run(debug=True,host='0.0.0.0')
