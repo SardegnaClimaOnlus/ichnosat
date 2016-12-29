@@ -66,23 +66,24 @@ COPY vendors/get-pip.py /usr/pip
 RUN ls
 RUN python3.4 get-pip.py
 WORKDIR /usr
-RUN rm -rf pip
+#RUN rm -rf pip
 
 # install pika
 RUN pip install pika
 
 #install flask
 RUN pip install Flask
+RUN pip install -U flask-cors
 
 #install wget
 RUN apt-get install -y wget
 
 
 # install rabbitmq
-RUN echo 'deb http://www.rabbitmq.com/debian/ testing main' | tee /etc/apt/sources.list.d/rabbitmq.list
-RUN wget -O- https://www.rabbitmq.com/rabbitmq-release-signing-key.asc | apt-key add -
-RUN apt-get update
-RUN apt-get install -y rabbitmq-server
+#RUN echo 'deb http://www.rabbitmq.com/debian/ testing main' | tee /etc/apt/sources.list.d/rabbitmq.list
+#RUN wget -O- https://www.rabbitmq.com/rabbitmq-release-signing-key.asc | apt-key add -
+#RUN apt-get update
+#RUN apt-get install -y rabbitmq-server
 
 # install sqlalchemy
 RUN pip install sqlalchemy
@@ -94,9 +95,20 @@ RUN pip install sqlalchemy
 #copy makefile
 RUN mkdir -p /usr/ichnosat/server
 COPY Makefile /usr/ichnosat
+COPY supervisord.conf /usr/ichnosat
 RUN export PYTHONPATH=${PYTHONPATH}:/usr/ichnosat
 WORKDIR /usr/ichnosat/
+RUN apt-get install -qy python2.7
+WORKDIR /usr/pip
+RUN python2.7 get-pip.py
+RUN python2.7 -m pip install supervisor
 
+#RUN supervisord -c /usr/ichnosat/supervisord.conf
+
+
+
+
+WORKDIR /usr/ichnosat/
 
 #ENTRYPOINT [ "make" ]
 

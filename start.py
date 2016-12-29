@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, current_app
 app = Flask(__name__)
 import pika
 import subprocess
@@ -14,8 +14,8 @@ import database.db as db
 from database.services.products_service import ProductsService
 from database.entities.product import *
 from scientific_processor.src.start import *
-
-
+from flask_cors import CORS, cross_origin
+CORS(app)
 
 
 @app.route('/notify-scientific_processor')
@@ -142,14 +142,16 @@ def create_database():
 def update_database():
     ps = ProductsService()
     ps.update_product_status("tiles/32/T/NL/2016/10/9/0/",ProductStatus.downloaded)
-
     return "done"
+
+
+
 
 
 if __name__ == '__main__':
     logging.debug("START ")
     logging.debug("START RABBITMQ")
-    #subprocess.Popen(["/bin/bash", "bash/start-rabbitmq.sh", "var=11; ignore all"])
+    subprocess.Popen(["/bin/bash", "bash/init.sh", "var=11; ignore all"])
     #logging.debug("START SCIENTIFIC PROCESSOR")
     #start_scientific_processor()
 

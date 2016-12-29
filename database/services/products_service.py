@@ -21,7 +21,9 @@ class ProductsService():
     def get_pending_products(self):
         return self.session.query(Product).\
             filter(Product.status == ProductStatus.pending).all()
-
+    def get_products_to_process(self):
+        return self.session.query(Product). \
+            filter(Product.status == ProductStatus.downloaded ).all()
 
     def update_product_status(self,product_name,status):
         product =self.session.query(Product). \

@@ -124,20 +124,28 @@ class GenerateProductsList(threading.Thread):
 
 def notify_to_scientific_processor(file_path):
     logging.debug("notify to scientific processor the processing of " + file_path)
-    connection = pika.BlockingConnection(pika.ConnectionParameters(
-        host='localhost'))
-    channel = connection.channel()
+    body = {"path": file_path}
+    params = json.dumps(body).encode('utf8')
+    req = urllib.request.Request("http://localhost:5002/process",
+                                 data=params,
+                                 headers={'content-type': 'application/json'})
+    response = urllib.request.urlopen(req)
 
-    channel.queue_declare(queue='hello')
-    body_obj = {"source": file_path}
-    channel.basic_publish(exchange='',
-                          routing_key='hello',
-                          body=json.dumps(body_obj))
-    connection.close()
+
+    # connection = pika.BlockingConnection(pika.ConnectionParameters(
+    #     host='localhost'))
+    # channel = connection.channel()
+    #
+    # channel.queue_declare(queue='hello')
+    # body_obj = {"source": file_path}
+    # channel.basic_publish(exchange='',
+    #                       routing_key='hello',
+    #                       body=json.dumps(body_obj))
+    # connection.close()
 
 
 def downloadProduct(product_name):
-    new_product_path = config['DOWNLOADER']['inbox_path'] + product_name.replace("/","-")[:-1]
+    new_product_path = config['DOWNLOADER']['inbox_path'] + product_name.replace("/", "-")[:-1]
     if not os.path.exists(new_product_path):
         os.makedirs(new_product_path)
 
@@ -149,48 +157,55 @@ def downloadProduct(product_name):
         urllib.request.urlretrieve(url, new_file_path)
         logging.debug("DOWNLOADED FILE WITH PATH ********>>>>> " + new_file_path)
     ps = ProductsService()
-    ps.update_product_status(product_name,ProductStatus.downloaded)
-    notify_to_scientific_processor(new_product_path+'/')
+    ps.update_product_status(product_name, ProductStatus.downloaded)
+    #notify_to_scientific_processor(new_product_path+'/')
+    return
 
-
+def process_product(product_name):
+    product_path = config['DOWNLOADER']['inbox_path'] + product_name.replace("/", "-")[:-1]
+    notify_to_scientific_processor(product_path + '/')
     return
 
 def start():
     logging.debug("DOWNLOADER: START")
     logging.debug("(Downloader): read configurations")
+    ps = ProductsService()
 
-    # GENERATE PRODUCT LIST
-    threads = []
-    for tile in config['FILTER']['tiles'].split(','):
-        task = GenerateProductsList(tile,
-                                    config['FILTER']['start_date'],
-                                    config['FILTER']['end_date'])
-        threads.append(task)
-        task.start()
+    # # GENERATE PRODUCT LIST
+    # threads = []
+    # for tile in config['FILTER']['tiles'].split(','):
+    #     task = GenerateProductsList(tile,
+    #                                 config['FILTER']['start_date'],
+    #                                 config['FILTER']['end_date'])
+    #     threads.append(task)
+    #     task.start()
+    #
+    # # WAIT ALL THREADS
+    # for thread in threads:
+    #     thread.join()
+    #
+    # logging.debug("===== pending products =====")
+    # for pending_product in pending_products:
+    #
+    #     ps.add_new_product(Product(name=str(pending_product),
+    #                                status=ProductStatus.pending))
+    #
+    # logging.debug("XXXXXXXXXXXXXX++++++XXXXXXXXXXXXXXXXXOOOOOOO00000000000")
+    #
+    # # DOWNLOAD PRODUCTS
+    # for product in ps.get_pending_products():
+    #     logging.debug("+++++++++++++++++++++++++++")
+    #     logging.debug(product.name)
+    #     downloadProduct(product.name)
 
-    # WAIT ALL THREADS
-    for thread in threads:
-        thread.join()
-
-    logging.debug("===== pending products =====")
-    for pending_product in pending_products:
-        ps = ProductsService()
-        ps.add_new_product(Product(name=str(pending_product),
-                                   status=ProductStatus.pending))
+    # PROCESS PRODUCTS
+    for product in ps.get_products_to_process():
+        logging.debug("^^^^^^^^ PROCESS ^^^^^^^")
+        logging.debug("send message to process: " + product.name)
+        process_product(product.name)
 
 
-    for product in ps.get_pending_products():
-        logging.debug(product.name)
-        downloadProduct(product.name)
 
-    # READ UNDOWNLOADED PRODUCT LIST FROM DATABASE
-    # START DOWNLOAD QUEUE FROM DATABASE LIST
-        # DOWNLOADER
-            # GENERATE NEW FOLDER INTO INBOX WITH PRODUCT NAME
-            # START DOWNLOAD OF FILES FOR THAT PRODUCT
-            # WHEN THE DOWNLOAD IS FINISHED
-                # UPDATE THE DATABASE ROW WITH DOWNLOADED
-                # NOTIFY TO PROCESSOR PASSING THE PRODUCT PATH
 
 
 if __name__ == '__main__':
