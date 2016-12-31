@@ -11,3 +11,4 @@ data-sample
 __pycache__
 pre-processor/outbox/!README.md
 *.sqlite
+supervisord.pid
