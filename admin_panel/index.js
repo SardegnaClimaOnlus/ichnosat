@@ -8,7 +8,7 @@ $(function () {
             { type: 'main', style: 'background-color: white;' }
         ]
     });
-    w2ui['main_layout'].content('top', '<div style="padding: 12px 20px; font-size: 18px;">Ichnosat - Admin Panel </div>');
+    w2ui['main_layout'].content('top', '<div style="padding: 12px 20px; font-size: 18px;">Ichnosat - Control Panel </div>');
 
     w2ui['main_layout'].content('left', $().w2sidebar({
         name: 'demo-sidebar',
