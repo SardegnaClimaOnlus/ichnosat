@@ -1,26 +1,13 @@
 FROM debian
 
 # Create app directory
-#RUN mkdir -p /usr/ichnosat/downloader
-#RUN mkdir -p /usr/ichnosat/post-processor
-#RUN mkdir -p /usr/ichnosat/pre-processor
-#RUN mkdir -p /usr/ichnosat/scientific-processor
 RUN mkdir -p /usr/ichnosat
-
-
 
 # install depenpendencies
 RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
 RUN apt-get install -y build-essential
 RUN apt-get install -y unzip
 RUN apt-get install -y cmake
-
-
-# Bundle app source
-#COPY downloader/ /usr/ichnosat/downloader/
-#COPY post-processor/ /usr/ichnosat/post-processor/
-#COPY pre-processor/ /usr/ichnosat/pre-processor/
-#COPY scientific-processor/ /usr/ichnosat/scientific-processor
 
 #install openjpeg
 WORKDIR /usr
@@ -39,8 +26,6 @@ RUN ln -s /usr/local/lib/libopenjp2.so.7 /usr/lib/
 WORKDIR /usr
 RUN rm -rf /usr/openjpeg
 
-
-
 #install gdal
 WORKDIR /usr
 RUN mkdir -p /usr/gdal
@@ -53,10 +38,6 @@ RUN make
 RUN make install
 WORKDIR /usr
 RUN rm -rf gdal
-
-
-
-
 
 #install python and pip
 RUN apt-get install -qy python3.4
@@ -78,23 +59,11 @@ RUN pip install -U flask-cors
 #install wget
 RUN apt-get install -y wget
 
-
-# install rabbitmq
-#RUN echo 'deb http://www.rabbitmq.com/debian/ testing main' | tee /etc/apt/sources.list.d/rabbitmq.list
-#RUN wget -O- https://www.rabbitmq.com/rabbitmq-release-signing-key.asc | apt-key add -
-#RUN apt-get update
-#RUN apt-get install -y rabbitmq-server
-
 # install sqlalchemy
 RUN pip install sqlalchemy
 
 
-
-
-
-#copy makefile
 RUN mkdir -p /usr/ichnosat/server
-COPY Makefile /usr/ichnosat
 COPY supervisord.conf /usr/ichnosat
 RUN export PYTHONPATH=${PYTHONPATH}:/usr/ichnosat
 WORKDIR /usr/ichnosat/
@@ -103,12 +72,6 @@ WORKDIR /usr/pip
 RUN python2.7 get-pip.py
 RUN python2.7 -m pip install supervisor
 
-#RUN supervisord -c /usr/ichnosat/supervisord.conf
-
-
-
-
 WORKDIR /usr/ichnosat/
-
 #ENTRYPOINT [ "make" ]
 
