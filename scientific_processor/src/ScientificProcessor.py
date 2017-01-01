@@ -10,7 +10,6 @@ import re
 
 class ScientificProcessor(threading.Thread):
     def __init__(self):
-        print("XXXXHHHHHHHHHHHHHHHHHHH")
         threading.Thread.__init__(self)
         logging.debug('Created new ScientificProcessor')
         self.queue = []
@@ -110,14 +109,13 @@ class ScientificProcessor(threading.Thread):
         logging.debug("len(self.queue ) KKKKKKKK")
         logging.debug(len(self.queue ))
         while len(self.queue ) > 0:
-            logging.debug("UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU")
+
 
             # get a product from queue
             product = self.queue.pop()
             # process product
             logging.debug("88888888 --) product: " + product)
             self.process_product(product)
-            #sleep(5)
 
         self.lock.acquire()
 
