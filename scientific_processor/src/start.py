@@ -89,14 +89,8 @@ def process_req():
     obj = request.get_json()
     logging.debug("obj['path']--------------------------------------")
     logging.debug(obj['path'])
-    #logging.debug("queue:")
-    #logging.debug("app.pippo|||||||||||||||||||||||||||||||||||||||||XXX: " )
-    #app.queue.append(obj['path'])
-    #logging.debug(app.queue)
     app.scientific_processor.push_product(obj['path'])
-    #process(request.get_json()["path"])
-    return obj['path'] #obj["this"]
-
+    return obj['path']
 
 
 def main():
