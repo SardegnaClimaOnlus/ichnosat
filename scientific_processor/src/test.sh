@@ -1,1 +1,0 @@
-cd /usr/ichnosat/scientific-processor/src/plugins/template/; python3.4 load_test.py

@@ -1,1 +1,0 @@
-cd /usr/ichnosat/scientific_processor/src/; python3.4 start.py
