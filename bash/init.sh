@@ -1,2 +1,2 @@
 export PYTHONPATH=/usr/ichnosat/
-supervisord -c /usr/ichnosat/supervisord.conf
+supervisord -c /usr/ichnosat/config/supervisord.conf

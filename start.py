@@ -1,6 +1,6 @@
 from flask import Flask, current_app
 app = Flask(__name__)
-import pika
+
 import subprocess
 import json
 import logging
@@ -16,38 +16,6 @@ from database.entities.product import *
 from scientific_processor.src.start import *
 from flask_cors import CORS, cross_origin
 CORS(app)
-
-
-@app.route('/notify-scientific_processor')
-def notify_scientific_processor():
-    connection = pika.BlockingConnection(pika.ConnectionParameters(
-        host='localhost'))
-    channel = connection.channel()
-
-    channel.queue_declare(queue='hello')
-    body_obj = {"source": "/usr/ichnosat/pre-processor/outbox/10SDG20151207_0/"}
-    channel.basic_publish(exchange='',
-                          routing_key='hello',
-                          body=json.dumps(body_obj))
-    print(" [x] Sent 'Hello World!'")
-    connection.close()
-    return "done"
-
-@app.route('/start-scientific_processor')
-def start_scientific_xs():
-    logging.debug("[ichnosat-manager][]: Start scientific_processor")
-    #start_scientific_processor()
-    subprocess.Popen(["/bin/bash", "bash/start-scientific-processor.sh", "var=11; ignore all"])
-    return "done"
-
-
-@app.route('/processor')
-def startproce_scientific_xs():
-    logging.debug("[ichnosat-manager][]: Start scientific_processor")
-    start_scientific_processor()
-    logging.debug("")
-    #subprocess.Popen(["/bin/bash", "bash/start_scientific-processor.sh", "var=11; ignore all"])
-    return "done"
 
 
 @app.route('/compile-plugins')
@@ -87,26 +55,7 @@ def compile_plugins():
 
     return "Done"
 
-@app.route('/start-rabbitmq')
-def start_rabbitmq():
-    subprocess.Popen(["/bin/bash", "bash/start-rabbitmq.sh", "var=11; ignore all"])
-    return "done"
 
-@app.route('/stop-rabbitmq')
-def stop_rabbitmq():
-    subprocess.Popen(["/bin/bash", "bash/stop-rabbitmq.sh", "var=11; ignore all"])
-    return "done"
-
-@app.route('/rabbitmq-version')
-def version_rabbitmq():
-    subprocess.Popen(["/bin/bash", "bash/rabbitmq-version.sh", "var=11; ignore all"])
-    return "done"
-
-
-@app.route('/network-test')
-def network_test():
-    subprocess.Popen(["/bin/bash", "bash/network-test.sh", "var=11; ignore all"])
-    return "done"
 
 @app.route('/start-downloader')
 def start_downloader():
@@ -116,20 +65,7 @@ def start_downloader():
 
 
 
-@app.route('/write-database', methods=['GET','POST'])
-def add_database():
-    ps = ProductsService()
-    ps.add_new_product()
-    return "added?"
 
-@app.route('/read-database', methods=['GET','POST'])
-def read_database():
-    ps = ProductsService()
-    logging.debug("|||||| show list of pending products ||||")
-    for product in ps.get_pending_products():
-        logging.debug(product)
-
-    return "done"
 
 @app.route('/database', methods=['GET','POST'])
 def create_database():
@@ -137,12 +73,6 @@ def create_database():
     dd.create_db()
     return "Done"
 
-
-@app.route('/update-database', methods=['GET','POST'])
-def update_database():
-    ps = ProductsService()
-    ps.update_product_status("tiles/32/T/NL/2016/10/9/0/",ProductStatus.downloaded)
-    return "done"
 
 
 
@@ -152,7 +82,6 @@ if __name__ == '__main__':
     logging.debug("START ")
     logging.debug("START RABBITMQ")
     subprocess.Popen(["/bin/bash", "bash/init.sh", "var=11; ignore all"])
-    #logging.debug("START SCIENTIFIC PROCESSOR")
-    #start_scientific_processor()
+
 
     app.run(debug=True,host='0.0.0.0')
