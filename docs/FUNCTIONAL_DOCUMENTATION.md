@@ -20,9 +20,8 @@ Ichnosat - Functional documentation
 # Workflow
 
 
-
 # Software modules
-![](software_layer_architecture.png)
+![dd](software_layer_architecture.png)
 
 ##### GUI
 The GUI is Web-client to monitor and to manage ichnosat activities.
@@ -32,6 +31,7 @@ This module downloads sentinel-2 products from s3 sentinel-2.
 
 ##### Processing pipe
 The processing pipe module manages steps of processing, making sure the parallelism between sub modules.
+
 ![](ProcessingPipePluginDiagramClass.png)
 
 ##### Ichnosat manager
@@ -45,3 +45,5 @@ Module to manage the database of ichnosat.
 
 ##### Archive
 This module contains the processed data.
+
+##### Networking

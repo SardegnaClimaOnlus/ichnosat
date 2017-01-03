@@ -29,8 +29,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.98994949"
-     inkscape:cx="371.27625"
-     inkscape:cy="460.08491"
+     inkscape:cx="450.28468"
+     inkscape:cy="462.68336"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -63,7 +63,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -71,29 +71,18 @@
      id="layer1"
      inkscape:groupmode="layer"
      inkscape:label="Layer 1">
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.35277778;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4230"
+       width="214.48889"
+       height="141.11111"
+       x="16.933332"
+       y="6.7999997" />
     <image
        y="57.599998"
        x="25.4"
        id="image5703"
-       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA38AAACSCAYAAAD1hXNOAAAABHNCSVQICAgIfAhkiAAAA4RJREFU
-eJzt17Ftw1AUBMH3TQXO1R3rcKS23JpCwnTgGggC3pnk0kt3zcw5AAAA/Fvbts1jZuZ9vu/+AgAA
-wAWO45jn53M+7j4CAADA9cQfAABAgPgDAAAIEH8AAAAB4g8AACBA/AEAAASIPwAAgADxBwAAECD+
-AAAAAsQfAABAgPgDAAAIEH8AAAAB4g8AACBA/AEAAASIPwAAgADxBwAAECD+AAAAAsQfAABAgPgD
-AAAIEH8AAAAB4g8AACBA/AEAAASIPwAAgADxBwAAECD+AAAAAsQfAABAgPgDAAAIEH8AAAAB4g8A
-ACBA/AEAAASIPwAAgADxBwAAECD+AAAAAsQfAABAgPgDAAAIEH8AAAAB4g8AACBA/AEAAASIPwAA
-gADxBwAAECD+AAAAAsQfAABAgPgDAAAIEH8AAAAB4g8AACBA/AEAAASIPwAAgADxBwAAECD+AAAA
-AsQfAABAgPgDAAAIEH8AAAAB4g8AACBA/AEAAASIPwAAgADxBwAAECD+AAAAAsQfAABAgPgDAAAI
-EH8AAAAB4g8AACBA/AEAAASIPwAAgADxBwAAECD+AAAAAsQfAABAgPgDAAAIEH8AAAAB4g8AACBA
-/AEAAASIPwAAgADxBwAAECD+AAAAAsQfAABAgPgDAAAIEH8AAAAB4g8AACBA/AEAAASIPwAAgADx
-BwAAECD+AAAAAsQfAABAgPgDAAAIEH8AAAAB4g8AACBA/AEAAASIPwAAgADxBwAAECD+AAAAAsQf
-AABAgPgDAAAIEH8AAAAB4g8AACBA/AEAAASIPwAAgADxBwAAECD+AAAAAsQfAABAgPgDAAAIEH8A
-AAAB4g8AACBA/AEAAASIPwAAgADxBwAAECD+AAAAAsQfAABAgPgDAAAIEH8AAAAB4g8AACBA/AEA
-AASIPwAAgADxBwAAECD+AAAAAsQfAABAgPgDAAAIEH8AAAAB4g8AACBA/AEAAASIPwAAgADxBwAA
-ECD+AAAAAsQfAABAgPgDAAAIEH8AAAAB4g8AACBA/AEAAASIPwAAgADxBwAAECD+AAAAAsQfAABA
-gPgDAAAIEH8AAAAB4g8AACBA/AEAAASIPwAAgADxBwAAECD+AAAAAsQfAABAgPgDAAAIEH8AAAAB
-4g8AACBA/AEAAAQ8ZmZeX6+7fwAAAHCF82/Wvu/f9z4BAADgSmutn1/95A1hOKauVwAAAABJRU5E
-rkJggg==
-"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA38AAACSCAYAAAD1hXNOAAAABHNCSVQICAgIfAhkiAAAA4RJREFU eJzt17Ftw1AUBMH3TQXO1R3rcKS23JpCwnTgGggC3pnk0kt3zcw5AAAA/Fvbts1jZuZ9vu/+AgAA wAWO45jn53M+7j4CAADA9cQfAABAgPgDAAAIEH8AAAAB4g8AACBA/AEAAASIPwAAgADxBwAAECD+ AAAAAsQfAABAgPgDAAAIEH8AAAAB4g8AACBA/AEAAASIPwAAgADxBwAAECD+AAAAAsQfAABAgPgD AAAIEH8AAAAB4g8AACBA/AEAAASIPwAAgADxBwAAECD+AAAAAsQfAABAgPgDAAAIEH8AAAAB4g8A ACBA/AEAAASIPwAAgADxBwAAECD+AAAAAsQfAABAgPgDAAAIEH8AAAAB4g8AACBA/AEAAASIPwAA gADxBwAAECD+AAAAAsQfAABAgPgDAAAIEH8AAAAB4g8AACBA/AEAAASIPwAAgADxBwAAECD+AAAA AsQfAABAgPgDAAAIEH8AAAAB4g8AACBA/AEAAASIPwAAgADxBwAAECD+AAAAAsQfAABAgPgDAAAI EH8AAAAB4g8AACBA/AEAAASIPwAAgADxBwAAECD+AAAAAsQfAABAgPgDAAAIEH8AAAAB4g8AACBA /AEAAASIPwAAgADxBwAAECD+AAAAAsQfAABAgPgDAAAIEH8AAAAB4g8AACBA/AEAAASIPwAAgADx BwAAECD+AAAAAsQfAABAgPgDAAAIEH8AAAAB4g8AACBA/AEAAASIPwAAgADxBwAAECD+AAAAAsQf AABAgPgDAAAIEH8AAAAB4g8AACBA/AEAAASIPwAAgADxBwAAECD+AAAAAsQfAABAgPgDAAAIEH8A AAAB4g8AACBA/AEAAASIPwAAgADxBwAAECD+AAAAAsQfAABAgPgDAAAIEH8AAAAB4g8AACBA/AEA AASIPwAAgADxBwAAECD+AAAAAsQfAABAgPgDAAAIEH8AAAAB4g8AACBA/AEAAASIPwAAgADxBwAA ECD+AAAAAsQfAABAgPgDAAAIEH8AAAAB4g8AACBA/AEAAASIPwAAgADxBwAAECD+AAAAAsQfAABA gPgDAAAIEH8AAAAB4g8AACBA/AEAAASIPwAAgADxBwAAECD+AAAAAsQfAABAgPgDAAAIEH8AAAAB 4g8AACBA/AEAAAQ8ZmZeX6+7fwAAAHCF82/Wvu/f9z4BAADgSmutn1/95A1hOKauVwAAAABJRU5E rkJggg== "
        style="image-rendering:optimizeSpeed"
        preserveAspectRatio="none"
        height="41.204445"
@@ -102,25 +91,7 @@ rkJggg==
        y="12.444443"
        x="25.4"
        id="image5727"
-       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA4AAAACSCAYAAAAUwqRaAAAABHNCSVQICAgIfAhkiAAAA41JREFU
-eJzt1yFWwwAQRdFJWoHvUoPqFrLdyvQEiUKWHnj3qhEjvn3LzJwDAADAv3W5XOb5fC7XmZnH+Xj3
-HgAAAF7gOI65fdxmZmZ98xYAAAB+iQAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEA
-AQAAIgQgAABAhAAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEAAQAAIgQgAABAhAAE
-AACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEAAQAAIgQgAABAhAAEAACIEIAAAAARAhAA
-ACBCAAIAAEQIQAAAgAgBCAAAECEAAQAAIgQgAABAhAAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAA
-gAgBCAAAECEAAQAAIgQgAABAhAAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEAAQAA
-IgQgAABAhAAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEAAQAAIgQgAABAhAAEAACI
-EIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEAAQAAIgQgAABAhAAEAACIEIAAAAARAhAAACBC
-AAIAAEQIQAAAgAgBCAAAECEAAQAAIgQgAABAhAAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgB
-CAAAECEAAQAAIgQgAABAhAAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEAAQAAIgQg
-AABAhAAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEAAQAAIgQgAABAhAAEAACIEIAA
-AAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEAAQAAIgQgAABAhAAEAACIEIAAAAARAhAAACBCAAIA
-AEQIQAAAgAgBCAAAECEAAQAAIgQgAABAhAAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAA
-ECEAAQAAIgQgAABAhAAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEAAQAAIgQgAABA
-hAAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEAAQAAIgQgAABAhAAEAACIEIAAAAAR
-AhAAACBCAAIAAEQIQAAAgIjrzMz98/7uHQAAALzC+X0u+76fP38CAADw163rOtu2LV9Q2hGX7WF4
-rwAAAABJRU5ErkJggg==
-"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA4AAAACSCAYAAAAUwqRaAAAABHNCSVQICAgIfAhkiAAAA41JREFU eJzt1yFWwwAQRdFJWoHvUoPqFrLdyvQEiUKWHnj3qhEjvn3LzJwDAADAv3W5XOb5fC7XmZnH+Xj3 HgAAAF7gOI65fdxmZmZ98xYAAAB+iQAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEA AQAAIgQgAABAhAAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEAAQAAIgQgAABAhAAE AACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEAAQAAIgQgAABAhAAEAACIEIAAAAARAhAA ACBCAAIAAEQIQAAAgAgBCAAAECEAAQAAIgQgAABAhAAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAA gAgBCAAAECEAAQAAIgQgAABAhAAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEAAQAA IgQgAABAhAAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEAAQAAIgQgAABAhAAEAACI EIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEAAQAAIgQgAABAhAAEAACIEIAAAAARAhAAACBC AAIAAEQIQAAAgAgBCAAAECEAAQAAIgQgAABAhAAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgB CAAAECEAAQAAIgQgAABAhAAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEAAQAAIgQg AABAhAAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEAAQAAIgQgAABAhAAEAACIEIAA AAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEAAQAAIgQgAABAhAAEAACIEIAAAAARAhAAACBCAAIA AEQIQAAAgAgBCAAAECEAAQAAIgQgAABAhAAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAA ECEAAQAAIgQgAABAhAAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEAAQAAIgQgAABA hAAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEAAQAAIgQgAABAhAAEAACIEIAAAAAR AhAAACBCAAIAAEQIQAAAgIjrzMz98/7uHQAAALzC+X0u+76fP38CAADw163rOtu2LV9Q2hGX7WF4 rwAAAABJRU5ErkJggg== "
        style="image-rendering:optimizeSpeed"
        preserveAspectRatio="none"
        height="41.204445"
@@ -175,7 +146,7 @@ rwAAAABJRU5ErkJggg==
            height="100"
            x="520"
            y="94.094482" /></flowRegion><flowPara
-         id="flowPara5805"></flowPara></flowRoot>    <text
+         id="flowPara5805" /></flowRoot>    <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.58611107px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="92.361153"
@@ -190,46 +161,21 @@ rwAAAABJRU5ErkJggg==
        style="fill:#126cb2;fill-opacity:0.26114652;stroke:#000000;stroke-width:0.35277778;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect5927"
        width="84.893005"
-       height="11.288889"
+       height="27.823963"
        x="31.044445"
        y="66.066666" />
     <rect
        style="fill:#126cb2;fill-opacity:0.26114652;stroke:#000000;stroke-width:0.35277781;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect5929"
        width="84.03775"
-       height="11.288889"
+       height="27.538876"
        x="119.04476"
        y="66.351753" />
-    <rect
-       style="fill:#126cb2;fill-opacity:0.26114652;stroke:#000000;stroke-width:0.35277778;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="rect5931"
-       width="172.03806"
-       height="11.288889"
-       x="31.044445"
-       y="80.17778" />
     <image
        y="102.75555"
        x="25.4"
        id="image5975"
-       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA4AAAACSCAYAAAAUwqRaAAAABHNCSVQICAgIfAhkiAAAA41JREFU
-eJzt1yFWwwAQRdFJWoHvUoPqFrLdyvQEiUKWHnj3qhEjvn3LzJwDAADAv3W5XOb5fC7XmZnH+Xj3
-HgAAAF7gOI65fdxmZmZ98xYAAAB+iQAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEA
-AQAAIgQgAABAhAAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEAAQAAIgQgAABAhAAE
-AACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEAAQAAIgQgAABAhAAEAACIEIAAAAARAhAA
-ACBCAAIAAEQIQAAAgAgBCAAAECEAAQAAIgQgAABAhAAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAA
-gAgBCAAAECEAAQAAIgQgAABAhAAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEAAQAA
-IgQgAABAhAAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEAAQAAIgQgAABAhAAEAACI
-EIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEAAQAAIgQgAABAhAAEAACIEIAAAAARAhAAACBC
-AAIAAEQIQAAAgAgBCAAAECEAAQAAIgQgAABAhAAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgB
-CAAAECEAAQAAIgQgAABAhAAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEAAQAAIgQg
-AABAhAAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEAAQAAIgQgAABAhAAEAACIEIAA
-AAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEAAQAAIgQgAABAhAAEAACIEIAAAAARAhAAACBCAAIA
-AEQIQAAAgAgBCAAAECEAAQAAIgQgAABAhAAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAA
-ECEAAQAAIgQgAABAhAAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEAAQAAIgQgAABA
-hAAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEAAQAAIgQgAABAhAAEAACIEIAAAAAR
-AhAAACBCAAIAAEQIQAAAgIjrzMz98/7uHQAAALzC+X0u+76fP38CAADw163rOtu2LV9Q2hGX7WF4
-rwAAAABJRU5ErkJggg==
-"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA4AAAACSCAYAAAAUwqRaAAAABHNCSVQICAgIfAhkiAAAA41JREFU eJzt1yFWwwAQRdFJWoHvUoPqFrLdyvQEiUKWHnj3qhEjvn3LzJwDAADAv3W5XOb5fC7XmZnH+Xj3 HgAAAF7gOI65fdxmZmZ98xYAAAB+iQAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEA AQAAIgQgAABAhAAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEAAQAAIgQgAABAhAAE AACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEAAQAAIgQgAABAhAAEAACIEIAAAAARAhAA ACBCAAIAAEQIQAAAgAgBCAAAECEAAQAAIgQgAABAhAAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAA gAgBCAAAECEAAQAAIgQgAABAhAAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEAAQAA IgQgAABAhAAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEAAQAAIgQgAABAhAAEAACI EIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEAAQAAIgQgAABAhAAEAACIEIAAAAARAhAAACBC AAIAAEQIQAAAgAgBCAAAECEAAQAAIgQgAABAhAAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgB CAAAECEAAQAAIgQgAABAhAAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEAAQAAIgQg AABAhAAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEAAQAAIgQgAABAhAAEAACIEIAA AAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEAAQAAIgQgAABAhAAEAACIEIAAAAARAhAAACBCAAIA AEQIQAAAgAgBCAAAECEAAQAAIgQgAABAhAAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAA ECEAAQAAIgQgAABAhAAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEAAQAAIgQgAABA hAAEAACIEIAAAAARAhAAACBCAAIAAEQIQAAAgAgBCAAAECEAAQAAIgQgAABAhAAEAACIEIAAAAAR AhAAACBCAAIAAEQIQAAAgIjrzMz98/7uHQAAALzC+X0u+76fP38CAADw163rOtu2LV9Q2hGX7WF4 rwAAAABJRU5ErkJggg== "
        style="image-rendering:optimizeSpeed"
        preserveAspectRatio="none"
        height="41.204445"
@@ -237,36 +183,25 @@ rwAAAABJRU5ErkJggg==
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.58611107px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="96.239197"
-       y="87.504097"
-       id="text5978"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan5980"
-         x="96.239197"
-         y="87.504097">Ichnosat manager</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:4.58611107px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="59.77953"
-       y="73.107895"
+       x="58.924267"
+       y="81.660522"
        id="text5982"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan5984"
-         x="59.77953"
-         y="73.107895">Downloader</tspan></text>
+         x="58.924267"
+         y="81.660522">Downloader</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.58611107px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="143.33307"
-       y="73.392982"
+       x="143.61815"
+       y="81.94561"
        id="text5986"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan5988"
-         x="143.33307"
-         y="73.392982">Processing pipe</tspan></text>
+         x="143.61815"
+         y="81.94561">Processing pipe</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.58611107px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -280,57 +215,57 @@ rwAAAABJRU5ErkJggg==
          y="108.40001">Data layer</tspan></text>
     <rect
        style="fill:#126cb2;fill-opacity:0.26114652;stroke:#000000;stroke-width:0.35277778;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="rect6280"
-       width="53.622223"
+       id="rect4218"
+       width="39.511112"
        height="25.4"
        x="31.044445"
-       y="111.22221" />
+       y="111.22222" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.58611107px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="50.17252"
-       y="124.76315"
+       x="42.760242"
+       y="124.47807"
        id="text6120"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan6122"
-         x="50.17252"
-         y="124.76315">Logger</tspan></text>
+         x="42.760242"
+         y="124.47807">Logger</tspan></text>
     <rect
        style="fill:#126cb2;fill-opacity:0.26114652;stroke:#000000;stroke-width:0.35277778;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="rect6276"
-       width="53.622223"
+       id="rect4220"
+       width="39.511112"
        height="25.4"
-       x="90.311111"
-       y="111.22221" />
+       x="76.199997"
+       y="111.22222" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.58611107px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="106.33044"
-       y="125.04825"
+       x="85.519051"
+       y="124.76317"
        id="text6124"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan6126"
-         x="106.33044"
-         y="125.04825">Database</tspan></text>
+         x="85.519051"
+         y="124.76317">Database</tspan></text>
     <rect
        style="fill:#126cb2;fill-opacity:0.26114652;stroke:#000000;stroke-width:0.35277778;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="rect6278"
-       width="53.622223"
+       id="rect4222"
+       width="39.511112"
        height="25.4"
-       x="149.57777"
-       y="111.22221" />
+       x="118.53333"
+       y="111.22222" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.58611107px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="168.27606"
+       x="129.78926"
        y="124.76315"
        id="text6128"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan6130"
-         x="168.27606"
+         x="129.78926"
          y="124.76315">Archive</tspan></text>
     <rect
        style="fill:#126cb2;fill-opacity:0.26114652;stroke:#000000;stroke-width:0.35277778;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -349,8 +284,8 @@ rwAAAABJRU5ErkJggg==
        transform="scale(1.0091142,0.99096811)"><tspan
          sodipodi:role="line"
          id="tspan6286"
-         x="59.948177"
-         y="216.50163">Ichnosat manager</tspan></text>
+         x="59.943005"
+         y="216.50681">System manager</tspan></text>
     <rect
        style="fill:#126cb2;fill-opacity:0.26114652;stroke:#000000;stroke-width:0.35277778;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect6290"
@@ -358,5 +293,23 @@ rwAAAABJRU5ErkJggg==
        height="11.288889"
        x="31.044445"
        y="35.022221" />
+    <rect
+       style="fill:#126cb2;fill-opacity:0.26114652;stroke:#000000;stroke-width:0.35277778;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4224"
+       width="39.511112"
+       height="25.4"
+       x="163.68889"
+       y="111.22222" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.58611107px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="170.1313"
+       y="124.76316"
+       id="text4226"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4228"
+         x="170.1313"
+         y="124.76316">Networking</tspan></text>
   </g>
 </svg>
