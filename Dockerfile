@@ -64,9 +64,10 @@ RUN pip install sqlalchemy
 
 
 RUN mkdir -p /usr/ichnosat/server
-COPY config/supervisord.conf /usr/ichnosat/conf/
+#COPY config/supervisord.conf /usr/ichnosat/conf/
 RUN export PYTHONPATH=${PYTHONPATH}:/usr/ichnosat
 WORKDIR /usr/ichnosat/
+RUN apt-get update
 RUN apt-get install -qy python2.7
 WORKDIR /usr/pip
 RUN python2.7 get-pip.py

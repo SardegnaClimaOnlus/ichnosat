@@ -5,7 +5,7 @@ from src.data.logger.logger import *
 import logging
 import configparser
 
-from z_old.database.entities.product import Product
+
 from src.data.database.entities.product import Product
 from src.data.database.entities.product import ProductStatus
 
@@ -30,6 +30,7 @@ class ProductsService():
         return self.session.query(Product).\
             filter(Product.status == ProductStatus.pending).all()
     def get_products_to_process(self):
+        logger.debug(">>> get products to process")
         return self.session.query(Product). \
             filter(Product.status == ProductStatus.downloaded ).all()
 

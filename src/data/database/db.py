@@ -1,7 +1,9 @@
-from src.data.logger.logger import *
-import logging
+from src.data.logger.logger import logger
 
-from database.base import Base
+from src.data.database.base import Base
+import configparser
+
+
 from sqlalchemy import *
 from sqlalchemy.orm import *
 
@@ -13,6 +15,6 @@ class DB:
         self.engine = create_engine(self.config['database']['connection_string'], echo=True)
 
     def create_db(self):
-        logging.debug("(DB) Create database")
+        logger.debug("(DB) Create database")
         Base.metadata.create_all(self.engine)
         return "created_database"

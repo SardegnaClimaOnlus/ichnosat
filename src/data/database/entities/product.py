@@ -2,10 +2,7 @@ import datetime
 import enum
 from sqlalchemy import *
 from sqlalchemy.orm import *
-from src.data.logger.logger import *
-import logging
-
-from z_old.database import Base
+from src.data.logger.logger import logger
 from src.data.database.base import Base
 
 class ProductStatus(enum.Enum):

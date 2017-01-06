@@ -2,8 +2,8 @@ from flask import Flask
 app = Flask(__name__)
 from flask_cors import CORS
 
-from src.data.logger.logger import *
-import logging
+from src.data.logger.logger import logger
+
 
 from src.core.processing_pipe.scientific_processor.src.PluginManager import PluginManager
 from src.core.downloader.start import start_downloader
@@ -18,7 +18,8 @@ def compile_plugins():
   return "done"
 
 @app.route('/start-downloader')
-def start_downloader():
+def start_downloader_interface():
+    logger.debug("start downloader")
     start_downloader()
     return "done"
 
@@ -29,4 +30,5 @@ def create_database():
     return "done"
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    logger.debug("(external_interface) Start")
+    app.run(debug=True, host='0.0.0.0', port=5000)

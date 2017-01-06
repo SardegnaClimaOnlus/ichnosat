@@ -2,7 +2,7 @@ version: '2'
 services:
   app:
     build: .
-    command: sh /usr/ichnosat/src/system_manager/bash/init.sh
+    command: nohup sh /usr/ichnosat/src/core/system_manager/bash/init.sh &
     volumes:
     - ./:/usr/ichnosat
     ports:

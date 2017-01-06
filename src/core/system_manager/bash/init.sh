@@ -1,2 +1,3 @@
 export PYTHONPATH=/usr/ichnosat/
-supervisord -c /usr/ichnosat/src/system_manager/config/supervisord.conf
+nohup supervisord -c /usr/ichnosat/src/core/system_manager/config/supervisord.conf &
+sleep infinity

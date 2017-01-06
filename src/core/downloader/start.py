@@ -1,6 +1,6 @@
 import datetime
 import json
-from src.data.logger.logger import *
+from src.data.logger.logger import logger
 import logging
 import os
 import re
@@ -12,6 +12,7 @@ import urllib.request
 from src.data.database.entities.product import *
 from src.data.database.services.products_service import ProductsService
 
+print("XXXXX DOWNLOADER")
 
 config = configparser.ConfigParser()
 config.read("downloader/config/logger.cfg")
@@ -153,8 +154,9 @@ def process_product(product_name):
     return
 
 def start_downloader():
-    logging.debug("DOWNLOADER: START")
-    logging.debug("(Downloader): read configurations")
+    logger.debug("super test!!!!!")
+    logger.debug("DOWNLOADER: START")
+    logger.debug("(Downloader): read configurations")
     ps = ProductsService()
 
     # # GENERATE PRODUCT LIST
@@ -185,9 +187,10 @@ def start_downloader():
     #     downloadProduct(product.name)
 
     # PROCESS PRODUCTS
+    logger.debug("here")
     for product in ps.get_products_to_process():
-        logging.debug("^^^^^^^^ PROCESS ^^^^^^^")
-        logging.debug("send message to process: " + product.name)
+        logger.debug("^^^^^^^^ PROCESS ^^^^^^^")
+        logger.debug("send message to process: " + product.name)
         process_product(product.name)
 
 
