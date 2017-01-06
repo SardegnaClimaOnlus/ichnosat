@@ -2,7 +2,7 @@ version: '2'
 services:
   app:
     build: .
-    command: python3.4 start.py
+    command: sh /usr/ichnosat/src/system_manager/bash/init.sh
     volumes:
     - ./:/usr/ichnosat
     ports:

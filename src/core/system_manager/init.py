@@ -1,0 +1,1 @@
+subprocess.Popen(["/bin/bash", "src/core/system_manager/bash/init.sh", "var=11; ignore all"])
