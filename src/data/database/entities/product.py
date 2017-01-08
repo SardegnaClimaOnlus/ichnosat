@@ -11,8 +11,8 @@ class ProductStatus(enum.Enum):
     downloaded = "downloaded"
 
 class Product(Base):
-    __tablename__ = 'users'
-    id = Column(Integer, Sequence('user_id_seq'), primary_key=True)
+    __tablename__ = 'products'
+    id = Column(Integer, Sequence('products_id_seq'), primary_key=True)
     name = Column(String(50))
     status = Column(Enum(ProductStatus))
     last_modify = Column(DateTime, default=datetime.datetime.utcnow)
