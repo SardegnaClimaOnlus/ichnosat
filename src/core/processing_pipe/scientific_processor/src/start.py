@@ -6,7 +6,7 @@ from flask_cors import CORS
 from src.data.logger.logger import *
 import logging
 
-from src.core.processing_pipe.scientific_processor.src.ScientificProcessor import ScientificProcessor
+from src.core.processing_pipe.scientific_processor.src.ScientificProcessor_copy import ScientificProcessor
 CORS(app)
 
 

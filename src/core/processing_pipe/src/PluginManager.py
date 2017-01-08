@@ -6,14 +6,13 @@ import os
 
 class PluginManager():
     def compile_plugins(self):
-        dirnames = os.listdir('/usr/ichnosat/src/core/processing_pipe/9scientific_processor/src/plugins/')
+        dirnames = os.listdir('/usr/ichnosat/src/core/processing_pipe/scientific_processor/src/plugins/')
         r = re.compile('^[^\.]')
         dirnames = filter(r.match, dirnames)
 
         for plugin_name in dirnames:
             try:
                 completed_without_error = True
-                logging.debug("(ichnosat-manager): START compile of scientific-plugin '" + plugin_name + "' plugin")
                 p = subprocess.Popen(["/bin/bash", "bash/compile-plugins.sh", plugin_name, "var=11; ignore all"],
                                      stdout=subprocess.PIPE,
                                      stderr=subprocess.PIPE)

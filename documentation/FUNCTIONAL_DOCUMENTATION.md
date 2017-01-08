@@ -34,6 +34,28 @@ The processing pipe module manages steps of processing, making sure the parallel
 
 ![](ProcessingPipePluginDiagramClass.png)
 
+###### JobDispatcher
+- remove inheritance from threading
+- contains the queue
+- create and run 2 threads
+- when a thread has finished run another one
+- until the queue is empty
+
+###### Job
+
+- call plugin manager to execute plugins
+
+###### PluginManager
+
+- run all plugins with the input from job
+- build all plugins
+
+###### Plugin
+- Wrapper of C++ plugin
+- initialisation with .so file location
+- run .so processing method
+
+
 ##### Ichnosat manager
 This module orchestrates the other modules.
 
@@ -45,5 +67,3 @@ Module to manage the database of ichnosat.
 
 ##### Archive
 This module contains the processed data.
-
-##### Networking
