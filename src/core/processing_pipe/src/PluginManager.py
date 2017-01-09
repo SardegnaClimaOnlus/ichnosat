@@ -39,3 +39,16 @@ class PluginManager():
         logging.debug("(ichnosat-manager): COMPLETED compile scientific_processor plugins")
 
         return "Done"
+
+
+    def get_plugins(self):
+        inDIR = '/usr/ichnosat/src/core/processing_pipe/scientific_processor/src/plugins/'
+        pattern = '*.so'
+        plugins = {}
+        for dName, sdName, fList in os.walk(inDIR):
+            for fileName in fList:
+                if fnmatch.fnmatch(fileName, pattern):  # Match search string
+                    regex_plugin_name = re.escape(dName) + '\/(.*?)\.so'
+                    plugin_name = re.match(regex_plugin_name, plugin_path).group(1)
+
+                    plugins[plugin_name ] = os.path.join(dName, fileName)
