@@ -1,24 +1,20 @@
-
 from flask import Flask, request
 app = Flask(__name__)
 from flask_cors import CORS
-
-from src.data.logger.logger import *
-import logging
-
-from src.core.processing_pipe.scientific_processor.src.ScientificProcessor_copy import ScientificProcessor
 CORS(app)
+
+from src.core.processing_pipe.src.JobDispatcher import JobDispatcher
 
 
 @app.route('/process', methods=['POST'])
 def process_req():
-    obj = request.get_json()
-    logging.debug("process product with path: " + obj['path'])
-    app.scientific_processor.push_product(obj['path'])
-    return obj['path']
+    app.job_dispatcher.publish_new_job(request.get_json()['path'])
+    return "done"
 
 def main():
-    app.scientific_processor = ScientificProcessor()
+    outbox_path = '/usr/ichnosat/data_local/outbox/'
+    plugins_path = '/usr/ichnosat/src/core/processing_pipe/scientific_processor/plugins'
+    app.job_dispatcher = JobDispatcher(outbox_path, plugins_path)
     app.run(debug=True, host='0.0.0.0', port=5002)
 
     return
@@ -26,3 +22,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
