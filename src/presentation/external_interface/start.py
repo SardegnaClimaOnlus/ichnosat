@@ -5,7 +5,7 @@ from flask_cors import CORS
 from src.data.logger.logger import logger
 
 
-from src.core.processing_pipe.scientific_processor.src.PluginManager import PluginManager
+from src.core.processing_pipe.src.PluginManager import PluginManager
 from src.core.downloader.start import start_downloader
 from src.data.database.db import DB
 CORS(app)

@@ -166,37 +166,37 @@ def start_downloader():
     logger.debug("(Downloader): read configurations")
     ps = ProductsService()
 
-    # GENERATE PRODUCT LIST
-    threads = []
-    logger.debug("here 1")
-    logger.debug("---->config['FILTER']['tiles']")
-    logger.debug(config['FILTER']['tiles'])
+    # # GENERATE PRODUCT LIST
+    # threads = []
+    # logger.debug("here 1")
+    # logger.debug("---->config['FILTER']['tiles']")
+    # logger.debug(config['FILTER']['tiles'])
+    #
+    # for tile in config['FILTER']['tiles'].split(','):
+    #     logger.debug("here 2")
+    #     task = GenerateProductsList(tile,
+    #                                 config['FILTER']['start_date'],
+    #                                 config['FILTER']['end_date'])
+    #     threads.append(task)
+    #     task.start()
+    #
+    # # WAIT ALL THREADS
+    # for thread in threads:
+    #     thread.join()
+    #
+    # logger.debug("===== pending products =====")
+    # for pending_product in pending_products:
+    #
+    #     ps.add_new_product(Product(name=str(pending_product),
+    #                                status=ProductStatus.pending))
+    #
+    # logger.debug("XXXXXXXXXXXXXX++++++XXXXXXXXXXXXXXXXXOOOOOOO00000000000")
 
-    for tile in config['FILTER']['tiles'].split(','):
-        logger.debug("here 2")
-        task = GenerateProductsList(tile,
-                                    config['FILTER']['start_date'],
-                                    config['FILTER']['end_date'])
-        threads.append(task)
-        task.start()
-
-    # WAIT ALL THREADS
-    for thread in threads:
-        thread.join()
-
-    logger.debug("===== pending products =====")
-    for pending_product in pending_products:
-
-        ps.add_new_product(Product(name=str(pending_product),
-                                   status=ProductStatus.pending))
-
-    logger.debug("XXXXXXXXXXXXXX++++++XXXXXXXXXXXXXXXXXOOOOOOO00000000000")
-
-    # DOWNLOAD PRODUCTS
-    for product in ps.get_pending_products():
-        logger.debug("+++++++++++++++++++++++++++")
-        logger.debug(product.name)
-        downloadProduct(product.name)
+    # # DOWNLOAD PRODUCTS
+    # for product in ps.get_pending_products():
+    #     logger.debug("+++++++++++++++++++++++++++")
+    #     logger.debug(product.name)
+    #     downloadProduct(product.name)
 
     # PROCESS PRODUCTS
     logger.debug("here")

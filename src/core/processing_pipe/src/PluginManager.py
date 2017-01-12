@@ -4,13 +4,17 @@ import re
 import os
 import fnmatch
 from src.core.processing_pipe.src.Plugin import Plugin
-
+from src.data.logger.logger import logger
 
 class PluginManager():
     def __init__(self, plugins_path):
         self.plugins_path = plugins_path
+        logger.debug("<><><><>><><><> Plugin manager ___init")
+        logger.debug("self.plugins_path: " + self.plugins_path )
+
 
     def get_plugins(self):
+        logger.debug("<><><><>><><><> Plugin manager :::: get_plugins")
         pattern = '*.so'
         plugins = []
         for dName, sdName, fList in os.walk(self.plugins_path):
