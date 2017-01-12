@@ -1,1 +1,0 @@
-# Ichnosat - Technical documentation

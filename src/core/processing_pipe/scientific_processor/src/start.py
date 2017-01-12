@@ -1,10 +1,11 @@
 from flask import Flask, request
-app = Flask(__name__)
-from flask_cors import CORS
-CORS(app)
-
 from src.core.processing_pipe.src.JobDispatcher import JobDispatcher
 from src.data.logger.logger import logger
+from flask_cors import CORS
+
+
+app = Flask(__name__)
+CORS(app)
 
 
 @app.route('/process', methods=['POST'])
