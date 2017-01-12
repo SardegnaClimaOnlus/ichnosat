@@ -1,34 +1,28 @@
 from flask import Flask
-app = Flask(__name__)
 from flask_cors import CORS
-
 from src.data.logger.logger import logger
 
-
-from src.core.processing_pipe.src.PluginManager import PluginManager
-from src.core.downloader.start import start_downloader
-from src.data.database.db import DB
+app = Flask(__name__)
 CORS(app)
 
 
+from src.core.system_manager.system_manager import SystemManager
+
 @app.route('/compile-plugins')
 def compile_plugins():
-  pm = PluginManager()
-  pm.compile_plugins()
+  app.system_manager.compile_plugins()
   return "done"
 
 @app.route('/start-downloader')
 def start_downloader_interface():
-    logger.debug("start downloader")
-    start_downloader()
+    app.system_manager.trigger_downloader()
     return "done"
 
 @app.route('/database', methods=['GET','POST'])
 def create_database():
-    db = DB()
-    db.create_db()
+    app.system_manager.create_database()
     return "done"
 
 if __name__ == '__main__':
-    logger.debug("(external_interface) Start")
+    app.system_manager = SystemManager()
     app.run(debug=True, host='0.0.0.0', port=5000)

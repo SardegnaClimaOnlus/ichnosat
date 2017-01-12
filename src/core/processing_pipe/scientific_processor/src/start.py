@@ -9,7 +9,6 @@ from src.data.logger.logger import logger
 
 @app.route('/process', methods=['POST'])
 def process_req():
-    logger.debug(">>>> /process api handler")
     app.job_dispatcher.publish_new_job(request.get_json()['path'])
     return "done"
 

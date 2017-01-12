@@ -35,4 +35,4 @@ class Plugin():
             os.dup2(self.stdout, 1)
             self.read_pipe()
         except ValueError:
-            logger.debug("Failed scientific-processor plugin with name: " + self.plugin_name)
+            logger.warn("Failed scientific-processor plugin with name: " + self.plugin_name)
