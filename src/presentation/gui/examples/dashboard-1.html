@@ -62,6 +62,12 @@
     <div id="tab2" class="tab">
         <h2>Actions</h2>
         <button id="build-plugins" class="w2ui-btn"  >Build Plugins</button>
+        <div class="build-plugins-message">
+            <div class="build-plugins-request-in-progress">
+                <div class="message">Request in progress</div>
+                <div class="spinner"><img class="spinner-image" src="images/spinner_small.gif"></div>
+            </div>
+        </div>
         <hr class="vertical-separator"/>
     </div>
 
@@ -116,11 +122,26 @@ $(function () {
         });
     });
 
+
     $('#build-plugins').click(function(){
-       alert("Build Plugins - sent message")
-       $.ajax({url: "http://localhost:5000/start-downloader", success: function(result){
-            alert("Build Plugins - completed");
-        }});
+       alert("Build plugins- sent message");
+       $(".build-plugins-request-in-progress").css("display","block");
+       $("#build-plugins").disable(true);
+       $.ajax({url: "http://localhost:5000/compile-plugins",
+       success: function(result){
+            alert("Build plugins - completed");
+            $(".build-plugins-request-in-progress").css("display","none");
+            $("#build-plugins").disable(false);
+       },
+       error: function(result){
+            alert("Build plugins - failed");
+            $(".build-plugins-request-in-progress").css("display","none");
+            $("#build-plugins").disable(false);
+        }
+
+        });
     });
+
+
 });
 </script>

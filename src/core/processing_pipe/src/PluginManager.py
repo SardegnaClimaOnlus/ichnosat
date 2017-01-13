@@ -23,8 +23,9 @@ class PluginManager():
                     plugins.append(new_plugin)
         return plugins
 
-    def compile_plugins(self, plugins_path):
-        dirnames = os.listdir(plugins_path)
+    def compile_plugins(self):
+        logger.debug("(PluginManager:compile_plugins) start")
+        dirnames = os.listdir(self.plugins_path)
         r = re.compile('^[^\.]')
         dirnames = filter(r.match, dirnames)
         for plugin_name in dirnames:
@@ -32,6 +33,7 @@ class PluginManager():
                 completed_without_error = True
                 p = subprocess.Popen(["/bin/bash",
                                       "src/core/system_manager/bash/compile-plugins.sh",
+                                      self.plugins_path,
                                       plugin_name,
                                       "var=11; ignore all"],
                                      stdout=subprocess.PIPE,
