@@ -5,13 +5,13 @@
 #include "gdal.h"
 #include "gdal_alg.h"
 #include "gdal_priv.h"
-#include "Sample.h"
+#include "NDVI.h"
 
 extern "C" void process(char * productPath, char * destinationPath)
 {
-  Sample * sample = new Sample();
-   sample->process(productPath, destinationPath);
-  delete sample;
+  NDVI * ndvi = new NDVI();
+   ndvi->process(productPath, destinationPath);
+  delete ndvi;
 
   return ;
 

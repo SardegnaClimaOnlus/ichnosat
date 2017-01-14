@@ -1,9 +1,9 @@
-#ifndef __SAMPLE_CLASS_H__
-#define __SAMPLE_CLASS_H__
+#ifndef __NDVI_CLASS_H__
+#define __NDVI_CLASS_H__
 
-class Sample{
+class NDVI{
  private:
-  std::string ConcatString(const char *  s1, const char * s2);
+  const char *  ConcatString(const char *  s1, const char * s2);
   void ProcessRasterData(GDALRasterBand * band4_buffer, GDALRasterBand * band8_buffer, int nXSize, int nYSize, float * ndvi_raster);
 
  public:
