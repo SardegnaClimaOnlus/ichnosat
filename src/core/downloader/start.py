@@ -11,6 +11,8 @@ import configparser
 import urllib.request
 from src.data.database.entities.product import *
 from src.data.database.services.products_service import ProductsService
+from src.core.downloader.Configuration import Configuration
+from src.core.downloader.ConfigurationManager import ConfigurationManager
 
 
 
@@ -38,20 +40,11 @@ def extract_date(item):
     return datetime.date(int(year), int(month), int(day))
 
 class GenerateProductsList(threading.Thread):
-    def __init__(self, tile, start_date, end_date):
-        date_regex = "([0-9]*)/([0-9]*)/([0-9]*)"
-        start_date_match = re.search(date_regex, start_date)
-        if end_date != 'NOW':
-            end_date_match = re.search(date_regex, end_date)
-            self.end_date = datetime.date(int(end_date_match.group(1)),
-                                          int(end_date_match.group(2)),
-                                          int(end_date_match.group(3)))
-        else:
-            self.end_date = datetime.datetime.now().date()
+    def __init__(self,tile):
         self.tile = tile
-        self.start_year = start_date_match.group(1)
-        self.start_month = start_date_match.group(2)
-        self.start_day = start_date_match.group(3)
+        cf = ConfigurationManager()
+        self.configuration = cf.configuration
+
         self.product_list = []
         self.last_item = None
         self.current_year = datetime.datetime.now().year
@@ -87,7 +80,7 @@ class GenerateProductsList(threading.Thread):
             return False
 
     def run(self):
-        year = int(self.start_year)
+        year = int(self.configuration.start_date.year)
 
         # EXTRACT WHOLE LIST OF PRODUCT VIA AMAZON, FROM START_YEAR to TODAY
         while year <= self.current_year:
@@ -111,20 +104,9 @@ class GenerateProductsList(threading.Thread):
         dict = OrderedDict(sorted(dict.items()))
 
         # FILTER BY DATE INTERVAL
-        start_date = datetime.date(int(self.start_year), int(self.start_month), int(self.start_day))
         for product_date in dict:
-            if product_date >= start_date and product_date <= self.end_date:
+            if product_date >= self.configuration.start_date and product_date <= self.configuration.end_date:
                 pending_products.append(dict[product_date])
-
-
-# def notify_to_scientific_processor(file_path):
-#     body = {"path": file_path}
-#     params = json.dumps(body).encode('utf8')
-#     req = urllib.request.Request("http://localhost:5002/process",
-#                                  data=params,
-#                                  headers={'content-type': 'application/json'})
-#     response = urllib.request.urlopen(req)
-#
 
 
 def downloadProduct(product_name):
@@ -142,10 +124,6 @@ def downloadProduct(product_name):
     ps.update_product_status(product_name, ProductStatus.downloaded)
     return
 
-# def process_product(product_name):
-#     product_path = config['DOWNLOADER']['inbox_path'] + product_name.replace("/", "-")[:-1]
-#     notify_to_scientific_processor(product_path + '/')
-#     return
 
 def start_downloader():
     ps = ProductsService()
@@ -154,9 +132,7 @@ def start_downloader():
     threads = []
 
     for tile in config['FILTER']['tiles'].split(','):
-        task = GenerateProductsList(tile,
-                                    config['FILTER']['start_date'],
-                                    config['FILTER']['end_date'])
+        task = GenerateProductsList(tile)
         threads.append(task)
         task.start()
 
@@ -171,13 +147,6 @@ def start_downloader():
     # DOWNLOAD PRODUCTS
     for product in ps.get_pending_products():
         downloadProduct(product.name)
-
-    # # PROCESS PRODUCTS
-    # for product in ps.get_products_to_process():
-    #     process_product(product.name)
-    # ppm = ProcessingPipeManager()
-    # ppm.start_processing()
-
 
 
 
