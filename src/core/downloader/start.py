@@ -12,31 +12,24 @@ import urllib.request
 from src.data.database.entities.product import *
 from src.data.database.services.products_service import ProductsService
 
-print("XXXXX DOWNLOADER")
+
+
 
 config = configparser.ConfigParser()
 config.read("/usr/ichnosat/src/core/downloader/config/config.cfg")
-logger.debug("00000 test config 0000")
-logger.debug(config)
 
 
-# TODO: to move this variable into class property
+
 pending_products = []
 
-def callback():
-    logger.debug("hello from scheduler")
+
 
 def generate_url( tile, year):
-    logger.debug("(Downloader, generate_url) START")
-    # TODO: move this string to configuration file
     url_template = 'http://sentinel-s2-l1c.s3.amazonaws.com/?list-type=2&prefix=tiles/{tile}/{year}/'
     url = url_template.format(tile=tile, year=year)
-    logger.debug('url: ' + url)
-    logger.debug("(Downloader, generate_url) END")
     return url
 
 def extract_date(item):
-    # TODO: move this string to configuration file
     regex = 'tiles/[0-9]2/[A-Z]/[A-Z]{2}/([0-9]{4})/([0-9]*)/([0-9]*)/'
     match = re.search(regex, item)
     year = match.group(1)
@@ -46,7 +39,6 @@ def extract_date(item):
 
 class GenerateProductsList(threading.Thread):
     def __init__(self, tile, start_date, end_date):
-        logger.debug(">>>>>>>> GenerateProductList")
         date_regex = "([0-9]*)/([0-9]*)/([0-9]*)"
         start_date_match = re.search(date_regex, start_date)
         if end_date != 'NOW':
@@ -63,15 +55,12 @@ class GenerateProductsList(threading.Thread):
         self.product_list = []
         self.last_item = None
         self.current_year = datetime.datetime.now().year
-        logger.debug("CURRENT YEAR: " + str(self.current_year))
         super(GenerateProductsList, self).__init__()
 
     def load_products(self, year, paginated=False):
 
         # GENERATE URL FOR YEAR
         url = generate_url(self.tile, year)
-        logger.debug(">>>>> load_products :::::: url:")
-        logger.debug(url)
         # APPEND TO URL START_FROM ATTRIBUTE IF IT IS PAGINATED
         if paginated:
             url = url + "&start-after=" + self.last_item
@@ -128,15 +117,14 @@ class GenerateProductsList(threading.Thread):
                 pending_products.append(dict[product_date])
 
 
-def notify_to_scientific_processor(file_path):
-    logger.debug("notify to scientific processor the processing of " + file_path)
-    body = {"path": file_path}
-    params = json.dumps(body).encode('utf8')
-    req = urllib.request.Request("http://localhost:5002/process",
-                                 data=params,
-                                 headers={'content-type': 'application/json'})
-    response = urllib.request.urlopen(req)
-
+# def notify_to_scientific_processor(file_path):
+#     body = {"path": file_path}
+#     params = json.dumps(body).encode('utf8')
+#     req = urllib.request.Request("http://localhost:5002/process",
+#                                  data=params,
+#                                  headers={'content-type': 'application/json'})
+#     response = urllib.request.urlopen(req)
+#
 
 
 def downloadProduct(product_name):
@@ -146,7 +134,6 @@ def downloadProduct(product_name):
 
     files_to_download=config['DOWNLOADER']['files_to_download'].split(',')
     for file_name in files_to_download:
-        # TODO: move this key into config file
         url = "http://sentinel-s2-l1c.s3.amazonaws.com/" + product_name + file_name
         new_file_path = new_product_path + '/' +file_name
         urllib.request.urlretrieve(url, new_file_path)
@@ -155,25 +142,18 @@ def downloadProduct(product_name):
     ps.update_product_status(product_name, ProductStatus.downloaded)
     return
 
-def process_product(product_name):
-    product_path = config['DOWNLOADER']['inbox_path'] + product_name.replace("/", "-")[:-1]
-    notify_to_scientific_processor(product_path + '/')
-    return
+# def process_product(product_name):
+#     product_path = config['DOWNLOADER']['inbox_path'] + product_name.replace("/", "-")[:-1]
+#     notify_to_scientific_processor(product_path + '/')
+#     return
 
 def start_downloader():
-    logger.debug("super test!!!!!")
-    logger.debug("DOWNLOADER: START")
-    logger.debug("(Downloader): read configurations")
     ps = ProductsService()
 
     # GENERATE PRODUCT LIST
     threads = []
-    logger.debug("here 1")
-    logger.debug("---->config['FILTER']['tiles']")
-    logger.debug(config['FILTER']['tiles'])
 
     for tile in config['FILTER']['tiles'].split(','):
-        logger.debug("here 2")
         task = GenerateProductsList(tile,
                                     config['FILTER']['start_date'],
                                     config['FILTER']['end_date'])
@@ -184,26 +164,19 @@ def start_downloader():
     for thread in threads:
         thread.join()
 
-    logger.debug("===== pending products =====")
     for pending_product in pending_products:
-
         ps.add_new_product(Product(name=str(pending_product),
                                    status=ProductStatus.pending))
 
-    logger.debug("XXXXXXXXXXXXXX++++++XXXXXXXXXXXXXXXXXOOOOOOO00000000000")
-
     # DOWNLOAD PRODUCTS
     for product in ps.get_pending_products():
-        logger.debug("+++++++++++++++++++++++++++")
-        logger.debug(product.name)
         downloadProduct(product.name)
 
-    # PROCESS PRODUCTS
-    logger.debug("here")
-    for product in ps.get_products_to_process():
-        logger.debug("^^^^^^^^ PROCESS ^^^^^^^")
-        logger.debug("send message to process: " + product.name)
-        process_product(product.name)
+    # # PROCESS PRODUCTS
+    # for product in ps.get_products_to_process():
+    #     process_product(product.name)
+    # ppm = ProcessingPipeManager()
+    # ppm.start_processing()
 
 
 
