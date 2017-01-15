@@ -28,16 +28,29 @@ class ConfigurationManager:
         return self.datetime_from_string(start_date)
 
     def load_tiles(self):
-        return self.config['FILTER']['tiles']
+        return self.config['FILTER']['tiles'].split(',')
 
     def load_files_to_download(self):
-        return self.config['FILTER']['files_to_download']
+        return self.config['FILTER']['files_to_download'].split(',')
+
+    def load_aws_config(self):
+        aws = {}
+        aws.xmlns = self.config['AWS']['xmlns']
+        aws.products_regex = self.config['AWS']['products_regex']
+        aws.domain = self.config['AWS']['domain']
+        return aws
+
+    def load_inbox_path(self):
+        return self.config['DOWNLOADER']['inbox_path']
 
     def load_configuration(self):
         self.configuration.start_date = self.load_start_date()
         self.configuration.end_date = self.load_end_date()
         self.configuration.tiles = self.load_tiles()
         self.configuration.files = self.load_files_to_download()
+        self.configuration.aws = self.load_aws_config()
+        self.configuration.inbox_path = self.load_inbox_path()
+
 
 
 

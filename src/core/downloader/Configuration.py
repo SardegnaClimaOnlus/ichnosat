@@ -6,4 +6,6 @@ class Configuration:
         self.end_date = None
         self.tiles = []
         self.files = []
+        self.inbox_path = None
+        self.files_to_download = None
 
