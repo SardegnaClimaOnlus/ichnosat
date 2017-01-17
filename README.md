@@ -1,5 +1,5 @@
 #ichnosat
-<img src="https://raw.githubusercontent.com/SardegnaClimaOnlus/ichnosat/master/logo.svg" alt="logo" style="width:150px;height:150px;">
+![](https://raw.githubusercontent.com/SardegnaClimaOnlus/ichnosat/master/logo.png)
 
 =========================
 ## build
