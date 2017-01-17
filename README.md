@@ -1,5 +1,7 @@
 #ichnosat
-![](https://raw.githubusercontent.com/SardegnaClimaOnlus/ichnosat/master/logo.png)
+
+
+<img src="https://raw.githubusercontent.com/SardegnaClimaOnlus/ichnosat/master/logo.png" alt="alt text" width="200" height="200">
 
 =========================
 ## build
