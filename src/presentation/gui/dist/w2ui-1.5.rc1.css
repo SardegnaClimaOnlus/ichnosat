@@ -694,7 +694,7 @@ button.w2ui-btn:disabled {
 }
 button.w2ui-btn:focus:before {
   content: "";
-  border: 1px dashed #aaa;
+
   border-radius: 3px;
   position: absolute;
   top: 2px;
@@ -741,7 +741,7 @@ button.w2ui-btn-blue.clicked {
   text-shadow: 0px 0px 1px #111111;
 }
 button.w2ui-btn-blue:focus:before {
-  border: 1px dashed #e8e8e8;
+
 }
 button.w2ui-btn-green {
   color: white;
@@ -778,7 +778,6 @@ button.w2ui-btn-green.clicked {
   text-shadow: 0px 0px 1px #111111;
 }
 button.w2ui-btn-green:focus:before {
-  border: 1px dashed #e8e8e8;
 }
 button.w2ui-btn-orange {
   color: white;
@@ -815,7 +814,7 @@ button.w2ui-btn-orange.clicked {
   text-shadow: 0px 0px 1px #111111;
 }
 button.w2ui-btn-orange:focus:before {
-  border: 1px dashed #f9f9f9;
+
 }
 button.w2ui-btn-red {
   color: white;
@@ -852,7 +851,7 @@ button.w2ui-btn-red.clicked {
   text-shadow: 0px 0px 1px #111111;
 }
 button.w2ui-btn-red:focus:before {
-  border: 1px dashed #ddd;
+
 }
 button.w2ui-btn-small {
   padding: 5px !important;
@@ -2697,7 +2696,7 @@ button.w2ui-btn-small:focus:before {
 }
 .w2ui-sidebar .w2ui-sidebar-div .w2ui-selected:before {
   content: "";
-  border: 1px dashed #eee;
+
   border-radius: 3px;
   position: absolute;
   top: 2px;
@@ -2707,7 +2706,7 @@ button.w2ui-btn-small:focus:before {
   pointer-events: none;
 }
 .w2ui-sidebar .w2ui-sidebar-div .w2ui-selected.w2ui-inactive:before {
-  border: 1px dashed transparent !important;
+
 }
 .w2ui-sidebar .w2ui-sidebar-div .w2ui-disabled,
 .w2ui-sidebar .w2ui-sidebar-div .w2ui-disabled:hover {

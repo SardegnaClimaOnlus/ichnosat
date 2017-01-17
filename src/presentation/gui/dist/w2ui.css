@@ -65,7 +65,7 @@
   -ms-box-sizing: border-box;
   -o-box-sizing: border-box;
   box-sizing: border-box;
-  font-family: Verdana, Arial, sans-serif;
+  font-family: "Courier New", Courier, monospace;
   font-size: 11px;
 }
 .w2ui-reset * {
@@ -88,7 +88,7 @@
 }
 .w2ui-reset table tr th,
 .w2ui-reset table tr td {
-  font-family: Verdana, Arial, sans-serif;
+  font-family: "Courier New", Courier, monospace;
   font-size: 11px;
 }
 .w2ui-reset input:not([type=button]):not([type=submit]):not([type=checkbox]):not([type=radio]),
@@ -140,7 +140,7 @@
   -o-box-sizing: border-box;
   box-sizing: border-box;
   border-top: 0px;
-  border-radius: 0px 0px 6px 6px;
+
   overflow: auto;
 }
 .w2ui-message .w2ui-message-body {
@@ -173,7 +173,7 @@ input:not([type=button]):not([type=submit]).w2ui-input,
 textarea.w2ui-input {
   padding: 4px;
   border: 1px solid #cacaca;
-  border-radius: 3px;
+
   color: #000000;
   background-color: #ffffff;
   line-height: normal;
@@ -201,7 +201,8 @@ select.w2ui-input {
   color: #000000;
   padding: 0px 15px 0px 7px;
   line-height: 1.8;
-  border-radius: 3px;
+
+
   border: 1px solid #cacaca;
   -webkit-appearance: none;
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAALCAQAAACnzwd+AAAAcklEQVR4AcXMsQFBQQDG4P9tAgC0gJYRQJZgKQMwCqCku6vVAAAA+NJHP4KHOk0aV2pRw61n4BBmyOxKQ8I4ehZeuhd3HTx6DQEGZ7sBfr2OOOOj3Yi43kMKs9sZknofOexqZ8npMygwWZTX51CipP+YA1OiZJbYYg9lAAAAAElFTkSuQmCC'), -webkit-linear-gradient(top, #ffffff 20%, #f6f6f6 50%, #eeeeee 52%, #f4f4f4 100%);
@@ -249,7 +250,7 @@ input[type="checkbox"].w2ui-toggle + div {
   width: 46px;
   height: 22px;
   border: 1px solid #bbb;
-  border-radius: 30px;
+
   background-color: #eee;
   -webkit-transition-duration: .3s;
   -webkit-transition-property: background-color, box-shadow;
@@ -266,7 +267,7 @@ input[type="checkbox"].w2ui-toggle + div > div {
   float: left;
   width: 22px;
   height: 22px;
-  border-radius: inherit;
+
   background: #f5f5f5;
   -webkit-transition-duration: 0.3s;
   -webkit-transition-property: transform, background-color, box-shadow;
@@ -312,11 +313,11 @@ input[type=checkbox].w2ui-toggle:focus {
   background-color: #fbfbfb;
   border-color: #fbfbfb;
   box-shadow: 0px 2px 10px #999999;
-  border-radius: 4px;
+
   text-align: left;
 }
 .w2ui-overlay > div {
-  border-radius: 4px;
+
   position: relative;
   border: 3px solid #777777;
 }
@@ -390,14 +391,14 @@ input[type=checkbox].w2ui-toggle:focus {
   box-sizing: border-box;
   display: inline-block;
   position: absolute;
-  border-radius: 3px;
+
   padding: 6px 10px;
   margin-left: 10px;
   margin-top: 0px;
   background-color: rgba(60, 60, 60, 0.9);
   color: #ffffff !important;
   font-size: 11px;
-  font-family: verdana;
+  font-family: "Courier New", Courier, monospace;
   text-shadow: 1px 1px 3px #000;
   line-height: 1.4;
   letter-spacing: 0.1px;
@@ -491,7 +492,7 @@ input[type=checkbox].w2ui-toggle:focus {
 }
 .w2ui-overlay table.w2ui-drop-menu td.menu-count > span {
   border: 1px solid #f6fcf4;
-  border-radius: 20px;
+
   width: auto;
   height: 18px;
   padding: 2px 7px;
@@ -503,7 +504,7 @@ input[type=checkbox].w2ui-toggle:focus {
 }
 .w2ui-overlay table.w2ui-drop-menu td.menu-count > span.hotkey {
   border: none;
-  border-radius: 0px;
+
   background-color: transparent !important;
   color: #888;
   box-shadow: none;
@@ -596,13 +597,13 @@ input[type=checkbox].w2ui-toggle:focus {
   text-overflow: ellipsis;
   overflow: hidden;
   font-size: 13px;
-  font-family: Verdana, Arial, sans-serif;
+  font-family: "Courier New", Courier, monospace;
   opacity: 0.8;
   filter: alpha(opacity=80);
   background-color: #555555;
   color: #ffffff;
   text-align: center;
-  border-radius: 5px;
+
   border: 2px solid #444444;
 }
 .w2ui-lock-msg .w2ui-spinner {
@@ -646,17 +647,14 @@ input[type=checkbox].w2ui-toggle:focus {
 button.w2ui-btn {
   position: relative;
   display: inline-block;
-  border-radius: 4px;
+  font-family: "Courier New", Courier, monospace;
+
   margin: 0px 5px;
   padding: 6px 12px;
   color: #666;
   font-size: 12px;
   border: 1px solid #B6B6B6;
-  background-image: -webkit-linear-gradient(#ffffff 0%, #e7e7e7 100%);
-  background-image: -moz-linear-gradient(#ffffff 0%, #e7e7e7 100%);
-  background-image: -ms-linear-gradient(#ffffff 0%, #e7e7e7 100%);
-  background-image: -o-linear-gradient(#ffffff 0%, #e7e7e7 100%);
-  background-image: linear-gradient(#ffffff 0%, #e7e7e7 100%);
+
   filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ffe7e7e7', endColorstr='#ffffffff', GradientType=0);
   outline: none;
   box-shadow: 0px 1px 0px white;
@@ -673,11 +671,7 @@ button.w2ui-btn {
 button.w2ui-btn:hover {
   text-decoration: none;
   border: 1px solid #bbb;
-  background-image: -webkit-linear-gradient(#f7f7f7 0%, #dddddd 100%);
-  background-image: -moz-linear-gradient(#f7f7f7 0%, #dddddd 100%);
-  background-image: -ms-linear-gradient(#f7f7f7 0%, #dddddd 100%);
-  background-image: -o-linear-gradient(#f7f7f7 0%, #dddddd 100%);
-  background-image: linear-gradient(#f7f7f7 0%, #dddddd 100%);
+
   filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ffdddddd', endColorstr='#fff7f7f7', GradientType=0);
   color: #333;
 }
@@ -700,8 +694,7 @@ button.w2ui-btn:disabled {
 }
 button.w2ui-btn:focus:before {
   content: "";
-  border: 1px dashed #aaa;
-  border-radius: 3px;
+
   position: absolute;
   top: 2px;
   bottom: 2px;
@@ -747,7 +740,7 @@ button.w2ui-btn-blue.clicked {
   text-shadow: 0px 0px 1px #111111;
 }
 button.w2ui-btn-blue:focus:before {
-  border: 1px dashed #e8e8e8;
+  /*border: 1px dashed #e8e8e8;*/
 }
 button.w2ui-btn-green {
   color: white;
@@ -784,7 +777,7 @@ button.w2ui-btn-green.clicked {
   text-shadow: 0px 0px 1px #111111;
 }
 button.w2ui-btn-green:focus:before {
-  border: 1px dashed #e8e8e8;
+  /* border: 1px dashed #e8e8e8; */
 }
 button.w2ui-btn-orange {
   color: white;
@@ -821,7 +814,7 @@ button.w2ui-btn-orange.clicked {
   text-shadow: 0px 0px 1px #111111;
 }
 button.w2ui-btn-orange:focus:before {
-  border: 1px dashed #f9f9f9;
+  /* border: 1px dashed #f9f9f9; */
 }
 button.w2ui-btn-red {
   color: white;
@@ -858,7 +851,7 @@ button.w2ui-btn-red.clicked {
   text-shadow: 0px 0px 1px #111111;
 }
 button.w2ui-btn-red:focus:before {
-  border: 1px dashed #ddd;
+  /*border: 1px dashed #ddd;*/
 }
 button.w2ui-btn-small {
   padding: 5px !important;
@@ -866,7 +859,7 @@ button.w2ui-btn-small {
   min-width: 0px;
 }
 button.w2ui-btn-small:focus:before {
-  border-radius: 2px;
+
   top: 2px;
   bottom: 2px;
   left: 2px;
@@ -880,7 +873,7 @@ button.w2ui-btn-small:focus:before {
   color: #000000;
   background-color: #f2f2f2;
   border: 1px solid #c0c0c0;
-  border-radius: 3px;
+
   padding: 0px;
   overflow: hidden !important;
 }
@@ -904,8 +897,7 @@ button.w2ui-btn-small:focus:before {
   background-image: -o-linear-gradient(#dae6f3, #c2d5ed);
   background-image: linear-gradient(#dae6f3, #c2d5ed);
   filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ffdae6f3', endColorstr='#ffc2d5ed', GradientType=0);
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
+
 }
 .w2ui-form .w2ui-form-toolbar {
   position: absolute;
@@ -923,8 +915,7 @@ button.w2ui-btn-small:focus:before {
   position: absolute;
   left: 0;
   right: 0;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
+
   padding-top: 5px !important;
   background-color: #fafafa;
 }
@@ -940,7 +931,7 @@ button.w2ui-btn-small:focus:before {
   border-left: 1px solid inherit;
   border-right: 1px solid inherit;
   background-color: inherit;
-  border-radius: 3px;
+
 }
 .w2ui-form .w2ui-buttons {
   position: absolute;
@@ -952,8 +943,7 @@ button.w2ui-btn-small:focus:before {
   border-bottom: 0px solid #d5d8d8;
   background-color: #fafafa;
   padding: 15px 0px !important;
-  border-bottom-left-radius: 3px;
-  border-bottom-right-radius: 3px;
+
 }
 .w2ui-form .w2ui-buttons input[type="button"],
 .w2ui-form .w2ui-buttons button {
@@ -1085,7 +1075,7 @@ button.w2ui-btn-small:focus:before {
 }
 .w2field {
   padding: 3px;
-  border-radius: 3px;
+
   border: 1px solid silver;
 }
 .w2ui-field-helper {
@@ -1173,7 +1163,7 @@ button.w2ui-btn-small:focus:before {
 .w2ui-color {
   padding: 8px 5px 0px 5px;
   background-color: white;
-  border-radius: 3px;
+
 }
 .w2ui-color input:focus {
   outline: none;
@@ -1253,7 +1243,7 @@ button.w2ui-btn-small:focus:before {
   display: inline-block;
   width: 8px;
   height: 8px;
-  border-radius: 10px;
+
   border: 1px solid #999;
   background-color: transparent;
   box-shadow: 0px 0px 1px white;
@@ -1266,7 +1256,7 @@ button.w2ui-btn-small:focus:before {
   display: inline-block;
   width: 8px;
   height: 16px;
-  border-radius: 2px;
+
   border: 1px solid #696969;
   background-color: #ffffff;
   box-shadow: 0px 0px 1px white;
@@ -1304,7 +1294,7 @@ button.w2ui-btn-small:focus:before {
 }
 .w2ui-color .w2ui-color-advanced .color-info .color-part input {
   font-size: 10px!important;
-  border-radius: 2px;
+
   border: 1px solid #ccc;
   width: 26px !important;
   padding: 2px !important;
@@ -1322,7 +1312,7 @@ button.w2ui-btn-small:focus:before {
   width: 34px;
   height: 25px;
   border: 1px solid transparent;
-  border-radius: 1px;
+
   margin: -1px -3px 0px 8px;
   text-align: center;
   font-size: 15px;
@@ -1334,8 +1324,7 @@ button.w2ui-btn-small:focus:before {
   background-color: white;
   border: 1px solid #e0e0e0;
   border-top: 1px solid transparent;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+
 }
 /*
 *    DATE overlay
@@ -1399,7 +1388,7 @@ button.w2ui-btn-small:focus:before {
   width: 50px;
   cursor: default;
   border: 1px solid transparent;
-  border-radius: 2px;
+
 }
 .w2ui-calendar .w2ui-calendar-jump .w2ui-jump-year {
   float: none;
@@ -1423,7 +1412,7 @@ button.w2ui-btn-small:focus:before {
   height: 20px;
   color: #666666;
   border: 1px solid transparent;
-  border-radius: 3px;
+
   padding: 2px 3px 1px 2px;
   margin: -4px 0px 0px 0px;
   cursor: default;
@@ -1591,7 +1580,7 @@ button.w2ui-btn-small:focus:before {
   min-height: 25px;
   overflow: auto;
   border: 1px solid #c0c0c0;
-  border-radius: 3px;
+
   font-size: 6px;
   line-height: 100%;
   -webkit-box-sizing: border-box;
@@ -1617,14 +1606,14 @@ button.w2ui-btn-small:focus:before {
 .w2ui-list ul li {
   float: left;
   margin: 2px 1px 0px 2px;
-  border-radius: 3px;
+
   width: auto;
   padding: 3px 10px 1px 7px;
   border: 1px solid #88b0d6;
   background-color: #eff3f5;
   white-space: nowrap;
   cursor: default;
-  font-family: verdana;
+  font-family: "Courier New", Courier, monospace;
   font-size: 11px;
   line-height: 100%;
   height: 20px;
@@ -1640,7 +1629,7 @@ button.w2ui-btn-small:focus:before {
   background-color: #d0dbe1;
 }
 .w2ui-list ul li:last-child {
-  border-radius: 0px;
+
   border: 1px solid transparent;
   background-color: transparent;
 }
@@ -1661,7 +1650,7 @@ button.w2ui-btn-small:focus:before {
   width: 15px;
   height: 14px;
   margin: -1px -9px 0px 3px;
-  border-radius: 15px;
+
 }
 .w2ui-list ul li .w2ui-list-remove:hover {
   background-color: #D77F7F;
@@ -1785,7 +1774,7 @@ button.w2ui-btn-small:focus:before {
   bottom: 0px;
   z-index: 1;
   color: inherit;
-  background-color: #f2f2f2;
+
 }
 .w2ui-layout > div .w2ui-resizer {
   display: none;
@@ -1803,7 +1792,8 @@ button.w2ui-btn-small:focus:before {
 .w2ui-grid {
   position: relative;
   border: 1px solid #c0c0c0;
-  border-radius: 2px;
+
+
   overflow: hidden !important;
 }
 .w2ui-grid > div {
@@ -1825,8 +1815,7 @@ button.w2ui-btn-small:focus:before {
   background-image: -o-linear-gradient(#dae6f3, #c2d5ed);
   background-image: linear-gradient(#dae6f3, #c2d5ed);
   filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ffdae6f3', endColorstr='#ffc2d5ed', GradientType=0);
-  border-top-left-radius: 2px;
-  border-top-right-radius: 2px;
+
 }
 .w2ui-grid .w2ui-grid-toolbar {
   position: absolute;
@@ -1845,7 +1834,7 @@ button.w2ui-btn-small:focus:before {
 .w2ui-grid .w2ui-toolbar-search .w2ui-search-all {
   outline: none !important;
   width: 160px !important;
-  border-radius: 3px !important;
+
   line-height: normal !important;
   height: 23px !important;
   border: 1px solid #b9b9b9 !important;
@@ -1866,7 +1855,7 @@ button.w2ui-btn-small:focus:before {
   height: 16px;
   margin-top: -8px;
   margin-left: -20px;
-  border-radius: 15px;
+
   cursor: default;
 }
 .w2ui-grid .w2ui-toolbar-search .w2ui-search-clear:hover {
@@ -2014,7 +2003,7 @@ button.w2ui-btn-small:focus:before {
 .w2ui-grid .w2ui-grid-body .w2ui-grid-records .w2ui-expanded2,
 .w2ui-grid .w2ui-grid-body .w2ui-grid-frecords .w2ui-expanded2 {
   height: 0px;
-  border-radius: 0px;
+
   border-bottom: 1px solid #b2bac0;
 }
 .w2ui-grid .w2ui-grid-body .w2ui-grid-records .w2ui-expanded2 > div,
@@ -2257,7 +2246,8 @@ button.w2ui-btn-small:focus:before {
 }
 .w2ui-grid .w2ui-editable input {
   border: 0px;
-  border-radius: 0px;
+
+
   margin: 0px;
   padding: 4px 3px;
   width: 100%;
@@ -2296,8 +2286,7 @@ button.w2ui-btn-small:focus:before {
   color: #444444;
   background-color: #f8f8f8;
   border-top: 1px solid #dddddd;
-  border-bottom-left-radius: 2px;
-  border-bottom-right-radius: 2px;
+
 }
 .w2ui-grid .w2ui-grid-footer .w2ui-footer-left {
   float: left;
@@ -2321,13 +2310,13 @@ button.w2ui-btn-small:focus:before {
 }
 .w2ui-grid .w2ui-grid-footer .w2ui-footer-center .w2ui-footer-nav input[type=text] {
   padding: 1px 2px 2px 2px;
-  border-radius: 3px;
+
   width: 40px;
   text-align: center;
 }
 .w2ui-grid .w2ui-grid-footer .w2ui-footer-center .w2ui-footer-nav a.w2ui-footer-btn {
   display: inline-block;
-  border-radius: 3px;
+
   cursor: pointer;
   font-size: 11px;
   line-height: 16px;
@@ -2436,7 +2425,7 @@ button.w2ui-btn-small:focus:before {
 }
 .w2ui-info-bubble table {
   font-size: 11px;
-  font-family: Verdana, Arial, sans-serif;
+  font-family: "Courier New", Courier, monospace;
   color: white;
   text-shadow: 1px 1px solid #999;
 }
@@ -2457,7 +2446,7 @@ button.w2ui-btn-small:focus:before {
 }
 .w2ui-overlay .w2ui-select-field table {
   font-size: 11px;
-  font-family: Verdana, Arial, sans-serif;
+  font-family: "Courier New", Courier, monospace;
   border-spacing: 0px;
   border-collapse: border-collapse;
 }
@@ -2548,7 +2537,7 @@ button.w2ui-btn-small:focus:before {
   padding-left: 5px;
 }
 .w2ui-overlay .w2ui-grid-searches table td.value input[type=text] {
-  border-radius: 3px;
+
   padding: 3px;
   margin-right: 3px;
   height: 23px;
@@ -2576,8 +2565,9 @@ button.w2ui-btn-small:focus:before {
   position: fixed;
   z-index: 1600;
   overflow: hidden;
-  font-family: Verdana, Arial, sans-serif;
-  border-radius: 6px;
+  
+  font-family: "Courier New", Courier, monospace;
+
   padding: 0px;
   margin: 0px;
   border: 1px solid #777777;
@@ -2594,7 +2584,7 @@ button.w2ui-btn-small:focus:before {
 }
 .w2ui-popup .w2ui-popup-title {
   padding: 6px;
-  border-radius: 6px 6px 0px 0px;
+
   background-image: -webkit-linear-gradient(#ececec, #dfdfdf);
   background-image: -moz-linear-gradient(#ececec, #dfdfdf);
   background-image: -ms-linear-gradient(#ececec, #dfdfdf);
@@ -2631,7 +2621,7 @@ button.w2ui-btn-small:focus:before {
   background: url(data:image/png;base64,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) no-repeat center left;
   background-position: 0px 0px;
   color: transparent !important;
-  border-radius: 3px;
+
   border: 1px solid transparent;
 }
 .w2ui-popup .w2ui-popup-close {
@@ -2671,7 +2661,7 @@ button.w2ui-btn-small:focus:before {
 }
 .w2ui-popup .w2ui-popup-buttons {
   padding: 12px;
-  border-radius: 0px 0px 6px 6px;
+
   border-top: 1px solid #d5d8d8;
   background-color: #f1f1f1;
   text-align: center;
@@ -2684,13 +2674,11 @@ button.w2ui-btn-small:focus:before {
   z-index: 200;
 }
 .w2ui-popup .w2ui-popup-no-title {
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
+
   top: 0px !important;
 }
 .w2ui-popup .w2ui-popup-no-buttons {
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
+
   bottom: 0px !important;
 }
 .w2ui-popup .w2ui-alert-msg,
@@ -2710,7 +2698,7 @@ button.w2ui-btn-small:focus:before {
   position: relative;
   cursor: default;
   overflow: hidden !important;
-  background-color: #edf1f6 !important;
+
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
@@ -2742,7 +2730,7 @@ button.w2ui-btn-small:focus:before {
   top: 2px;
   height: 24px;
   padding: 5px;
-  border-radius: 2px;
+
   background-size: 16px 12px;
   background-position: center center;
   background-repeat: no-repeat;
@@ -2831,11 +2819,7 @@ button.w2ui-btn-small:focus:before {
 .w2ui-sidebar .w2ui-sidebar-div .w2ui-selected,
 .w2ui-sidebar .w2ui-sidebar-div .w2ui-selected:hover {
   position: relative;
-  background-image: -webkit-linear-gradient(#69b1e0, #4a96d3);
-  background-image: -moz-linear-gradient(#69b1e0, #4a96d3);
-  background-image: -ms-linear-gradient(#69b1e0, #4a96d3);
-  background-image: -o-linear-gradient(#69b1e0, #4a96d3);
-  background-image: linear-gradient(#69b1e0, #4a96d3);
+  background-color: #133DAD;
   filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ff69b1e0', endColorstr='#ff4a96d3', GradientType=0);
   border-top: 1px solid #5295cd;
   border-bottom: 1px solid #2661a6;
@@ -2853,8 +2837,8 @@ button.w2ui-btn-small:focus:before {
 }
 .w2ui-sidebar .w2ui-sidebar-div .w2ui-selected:before {
   content: "";
-  border: 1px dashed #eee;
-  border-radius: 3px;
+  /*border: 1px dashed #eee;*/
+
   position: absolute;
   top: 2px;
   bottom: 2px;
@@ -2863,7 +2847,7 @@ button.w2ui-btn-small:focus:before {
   pointer-events: none;
 }
 .w2ui-sidebar .w2ui-sidebar-div .w2ui-selected.w2ui-inactive:before {
-  border: 1px dashed transparent !important;
+  /*border: 1px dashed transparent !important;*/
 }
 .w2ui-sidebar .w2ui-sidebar-div .w2ui-disabled,
 .w2ui-sidebar .w2ui-sidebar-div .w2ui-disabled:hover {
@@ -2959,7 +2943,7 @@ button.w2ui-btn-small:focus:before {
 .w2ui-sidebar .w2ui-sidebar-div td.w2ui-node-data .w2ui-node-count {
   float: right;
   border: 1px solid #6f9dc7;
-  border-radius: 20px;
+
   width: auto;
   height: 18px;
   padding: 2px 7px;
@@ -2978,7 +2962,7 @@ button.w2ui-btn-small:focus:before {
   cursor: default;
   overflow: hidden !important;
   position: relative;
-  background-color: #fafafa;
+
   padding: 3px 0px;
 }
 .w2ui-tabs:not(.w2ui-tabs-up) {
@@ -3000,8 +2984,7 @@ button.w2ui-btn-small:focus:before {
   border-bottom: 1px solid silver;
   white-space: nowrap;
   margin: 1px 1px -1px 0px;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
+
   cursor: default;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -3029,7 +3012,7 @@ button.w2ui-btn-small:focus:before {
   opacity: 0.9;
   border: 0px;
   border-top: 3px solid transparent;
-  border-radius: 9px;
+
 }
 .w2ui-tabs .w2ui-tab-close:hover {
   background-color: #D77F7F;
@@ -3051,9 +3034,8 @@ button.w2ui-btn-small:focus:before {
 .w2ui-tabs.w2ui-tabs-up .w2ui-tab {
   border-top: 1px solid #C0C0C0;
   margin: -1px 1px 0px 0px;
-  border-radius: 0px;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
+
+
 }
 .w2ui-tabs.w2ui-tabs-up .w2ui-tab.active {
   border: 1px solid #c0c0c0;
@@ -3090,7 +3072,7 @@ button.w2ui-btn-small:focus:before {
 }
 .w2ui-toolbar table.w2ui-button {
   margin: 0 1px 0 0;
-  border-radius: 4px;
+
   height: 24px;
   min-width: 24px;
   border: 1px solid transparent;
@@ -3121,7 +3103,8 @@ button.w2ui-btn-small:focus:before {
 }
 .w2ui-toolbar table.w2ui-button .w2ui-tb-count > span {
   border: 1px solid #f6fcf4;
-  border-radius: 11px;
+
+
   width: auto;
   height: 18px;
   padding: 0px 6px 1px 6px;
@@ -3161,7 +3144,7 @@ button.w2ui-btn-small:focus:before {
 }
 .w2ui-toolbar table.w2ui-button table {
   height: 17px;
-  border-radius: 4px;
+
   cursor: default;
 }
 .w2ui-toolbar .w2ui-break {
@@ -3207,7 +3190,7 @@ button.w2ui-btn-small:focus:before {
   -o-user-select: none;
   user-select: none;
   border: 1px solid transparent;
-  border-radius: 4px;
+
 }
 .w2ui-listview > ul > li.w2ui-focused {
   border: 1px solid #2661a6;
@@ -3345,7 +3328,7 @@ button.w2ui-btn-small:focus:before {
 .w2ui-table > ul > li {
   width: 100%;
   padding: 2px;
-  border-radius: 0px;
+
   border-bottom: 1px dotted lightgray;
 }
 .w2ui-table > ul > li > div {
