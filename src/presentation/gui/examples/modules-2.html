@@ -14,29 +14,14 @@
     overflow: auto;
 }
 
-.build-plugins-request-in-progress{
-    display: none;
-    padding: 5px;
-    background-color: #3498db;
-    color:white;
-}
 
-.build-plugins-request-in-progress .message{
-    display:inline-block;
-}
-
-.build-plugins-request-in-progress .spinner{
-    display:inline-block;
-}
 
 .spinner-image{
     width: 15px;
     vertical-align: middle;
 }
 
-.start-downloader-message{
-    margin-top:15px;
-}
+
 
 .vertical-separator{
     margin-top:15px;
@@ -51,12 +36,7 @@
 
         <br/>
         <button id="build-plugins" class="w2ui-btn"  >Build Plugins</button>
-        <div class="build-plugins-message">
-            <div class="build-plugins-request-in-progress">
-                <div class="message">Request in progress</div>
-                <div class="spinner"><img class="spinner-image" src="images/spinner_small.gif"></div>
-            </div>
-        </div>
+
         <hr class="vertical-separator"/>
     </div>
 
@@ -80,13 +60,7 @@ var config = {
 
 $(function () {
 
-    jQuery.fn.extend({
-        disable: function(state) {
-            return this.each(function() {
-                this.disabled = state;
-            });
-        }
-    });
+
 
     $('#tabs').w2tabs(config.tabs);
     $('#tab1').show();
@@ -94,19 +68,25 @@ $(function () {
 
 
     $('#build-plugins').click(function(){
-       alert("Build plugins- sent message");
-       $(".build-plugins-request-in-progress").css("display","block");
-       $("#build-plugins").disable(true);
+
+       w2alert('Started Build Processor plugins process.')
+            .ok(function () {
+
+             });
        $.ajax({url: "http://localhost:5000/compile-plugins",
        success: function(result){
-            alert("Build plugins - completed");
-            $(".build-plugins-request-in-progress").css("display","none");
-            $("#build-plugins").disable(false);
+            w2alert('COMPLETED Build Processor plugins process.')
+            .ok(function () {
+
+             });
+
        },
        error: function(result){
-            alert("Build plugins - failed");
-            $(".build-plugins-request-in-progress").css("display","none");
-            $("#build-plugins").disable(false);
+            w2alert('Failed Build Processor plugins process!')
+            .ok(function () {
+
+             });
+
         }
 
         });

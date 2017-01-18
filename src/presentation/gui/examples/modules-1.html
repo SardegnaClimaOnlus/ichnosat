@@ -89,23 +89,31 @@ $(function () {
         }
     });
 
+
+
+
     $('#tabs').w2tabs(config.tabs);
     $('#tab1').show();
 
     $('#start-downloader').click(function(){
-       alert("Start Downloader - sent message");
-       $(".start-downloader-request-in-progress").css("display","block");
-       $("#start-downloader").disable(true);
+        w2alert('Started Downloader and Processor processes. Check please the ichnosat.log'+
+        ' file and Products lists to follow the progress. ')
+            .ok(function () {
+
+             });
+
+
        $.ajax({url: "http://localhost:5000/start-downloader",
        success: function(result){
-            alert("Start Downloader - completed");
-            $(".start-downloader-request-in-progress").css("display","none");
-            $("#start-downloader").disable(false);
+
+
        },
        error: function(result){
-            alert("Start Downloader - failed");
-            $(".start-downloader-request-in-progress").css("display","none");
-            $("#start-downloader").disable(false);
+            w2alert('Failed downloader start. Please check log files.')
+            .ok(function () {
+
+             });
+
         }
 
         });
