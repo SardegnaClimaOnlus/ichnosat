@@ -14,11 +14,11 @@ $(function () {
         name: 'demo-sidebar',
         img: null,
         nodes: [
-             { id: 'dashboard', text: 'Status', icon: '',  group1: true,
-                nodes: [
-                    { id: 'dashboard-1', text: 'General', icon: '' }
-                ]
-            },
+//             { id: 'dashboard', text: 'Status', icon: '',  group1: true,
+//                nodes: [
+//                    { id: 'dashboard-1', text: 'General', icon: '' }
+//                ]
+//            },
             { id: 'modules', text: 'Modules', icon: '',  group1: true,
                 nodes: [
                     { id: 'modules-1', text: 'Downloader', icon: '' },
