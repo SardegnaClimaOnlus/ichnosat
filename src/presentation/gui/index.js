@@ -14,11 +14,28 @@ $(function () {
         name: 'demo-sidebar',
         img: null,
         nodes: [
-            { id: 'dashboard', text: 'Dashboard', icon: 'fa-dashboard',  group1: true,
+             { id: 'dashboard', text: 'Status', icon: '',  group1: true,
                 nodes: [
-                    { id: 'dashboard-1', text: 'Home', icon: 'fa-home' }
+                    { id: 'dashboard-1', text: 'General', icon: '' }
                 ]
             },
+            { id: 'modules', text: 'Modules', icon: '',  group1: true,
+                nodes: [
+                    { id: 'modules-1', text: 'Downloader', icon: '' },
+                    { id: 'modules-2', text: 'Processing Pipe', icon: '' }
+                ]
+            },
+            { id: 'products', text: 'Products', icon: '',  group1: true,
+                nodes: [
+                    { id: 'products-1', text: 'Pending', icon: '' },
+                    { id: 'products-2', text: 'Downloading', icon: '' },
+                    { id: 'products-3', text: 'Downloaded', icon: '' },
+                    { id: 'products-4', text: 'Processing', icon: '' },
+                    { id: 'products-5', text: 'Processed', icon: '' },
+                ]
+            }
+            //
+            ,
 //            { id: 'combo', text: 'Combinations', img: 'icon-folder', group1: true,
 //                nodes: [
 //                    { id: 'combo-1', text: 'Sidebar & Grid', icon: 'fa-star-empty' },
@@ -254,9 +271,21 @@ $(function () {
         var tmp = String(document.location.hash).split('/');
         switch (tmp[0]) {
             default:
+
+            //
+
+            //
             case '#!dashboard':
                 w2ui['demo-sidebar'].expand('dashboard');
                 w2ui['demo-sidebar'].click(tmp[1] || 'dashboard-1');
+                break;
+            case '#!modules':
+                w2ui['demo-sidebar'].expand('modules');
+                w2ui['demo-sidebar'].click(tmp[1] || 'modules-1');
+                break;
+            case '#!products':
+                w2ui['demo-sidebar'].expand('products');
+                w2ui['demo-sidebar'].click(tmp[1] || 'products-1');
                 break;
             case '#!combo':
                 w2ui['demo-sidebar'].expand('combo');

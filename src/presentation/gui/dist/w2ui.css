@@ -65,7 +65,7 @@
   -ms-box-sizing: border-box;
   -o-box-sizing: border-box;
   box-sizing: border-box;
-  font-family: "Courier New", Courier, monospace;
+  font-family: 'termub';
   font-size: 11px;
 }
 .w2ui-reset * {
@@ -88,7 +88,7 @@
 }
 .w2ui-reset table tr th,
 .w2ui-reset table tr td {
-  font-family: "Courier New", Courier, monospace;
+  font-family: 'termub';
   font-size: 11px;
 }
 .w2ui-reset input:not([type=button]):not([type=submit]):not([type=checkbox]):not([type=radio]),
@@ -398,7 +398,7 @@ input[type=checkbox].w2ui-toggle:focus {
   background-color: rgba(60, 60, 60, 0.9);
   color: #ffffff !important;
   font-size: 11px;
-  font-family: "Courier New", Courier, monospace;
+  font-family: 'termub';
   text-shadow: 1px 1px 3px #000;
   line-height: 1.4;
   letter-spacing: 0.1px;
@@ -597,7 +597,7 @@ input[type=checkbox].w2ui-toggle:focus {
   text-overflow: ellipsis;
   overflow: hidden;
   font-size: 13px;
-  font-family: "Courier New", Courier, monospace;
+  font-family: 'termub';
   opacity: 0.8;
   filter: alpha(opacity=80);
   background-color: #555555;
@@ -647,7 +647,7 @@ input[type=checkbox].w2ui-toggle:focus {
 button.w2ui-btn {
   position: relative;
   display: inline-block;
-  font-family: "Courier New", Courier, monospace;
+  font-family: 'termub';
 
   margin: 0px 5px;
   padding: 6px 12px;
@@ -1613,7 +1613,7 @@ button.w2ui-btn-small:focus:before {
   background-color: #eff3f5;
   white-space: nowrap;
   cursor: default;
-  font-family: "Courier New", Courier, monospace;
+  font-family: 'termub';
   font-size: 11px;
   line-height: 100%;
   height: 20px;
@@ -1774,6 +1774,7 @@ button.w2ui-btn-small:focus:before {
   bottom: 0px;
   z-index: 1;
   color: inherit;
+
 
 }
 .w2ui-layout > div .w2ui-resizer {
@@ -2425,7 +2426,7 @@ button.w2ui-btn-small:focus:before {
 }
 .w2ui-info-bubble table {
   font-size: 11px;
-  font-family: "Courier New", Courier, monospace;
+  font-family: 'termub';
   color: white;
   text-shadow: 1px 1px solid #999;
 }
@@ -2446,7 +2447,7 @@ button.w2ui-btn-small:focus:before {
 }
 .w2ui-overlay .w2ui-select-field table {
   font-size: 11px;
-  font-family: "Courier New", Courier, monospace;
+  font-family: 'termub';
   border-spacing: 0px;
   border-collapse: border-collapse;
 }
@@ -2566,7 +2567,7 @@ button.w2ui-btn-small:focus:before {
   z-index: 1600;
   overflow: hidden;
   
-  font-family: "Courier New", Courier, monospace;
+  font-family: 'termub';
 
   padding: 0px;
   margin: 0px;

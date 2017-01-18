@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'termub';
+  src: url(fonts/termub.ttf);
+  /*font-weight: bold;*/
+}
+
 * {
     margin: 0px;
     padding: 0px;
@@ -6,7 +12,7 @@
 
 body {
     overflow: hidden;
-    font-family:"Courier New", Courier, monospace;
+    font-family:'termub';
     font-size: 14px;
 }
 
@@ -65,7 +71,7 @@ input[type=text] {
     padding: 3px 12px;
     font-size: 13px;
     font-weight: normal;
-    font-family: verdana;
+    font-family: 'termub';
     text-align: center;
     white-space: nowrap;
     cursor: pointer;
