@@ -32,13 +32,13 @@ class ProductsService():
             filter(Product.status == ProductStatus.pending).all()
 
     def get_products_to_process(self):
-        logger.debug(">>> get products to process")
+        logger.debug(">>>>>>>>>>>>> get products to process")
         return self.session.query(Product). \
             filter(Product.status == ProductStatus.downloaded ).all()
 
     def update_product_status(self, product_name, status):
         product = self.session.query(Product). \
-            filter(Product.name == product_name).one()
+            filter(Product.name == product_name).first()
         if product != None:
             product.status = status
             product.last_modify = datetime.datetime.utcnow()

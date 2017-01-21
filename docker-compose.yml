@@ -1,8 +1,10 @@
 version: '2'
 services:
+  db:
+    image: postgres
   app:
     build: .
-    command: nohup sh /usr/ichnosat/src/core/system_manager/bash/init.sh &
+    command: python3.4 src/core/system_manager/init.py
     volumes:
     - ./:/usr/ichnosat
     ports:

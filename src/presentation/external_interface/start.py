@@ -2,6 +2,7 @@ from flask import Flask
 from flask_cors import CORS
 from src.data.logger.logger import logger
 import json
+import sys
 
 app = Flask(__name__)
 CORS(app)
@@ -19,7 +20,7 @@ def start_downloader_interface():
     app.system_manager.trigger_downloader()
     return "done"
 
-@app.route('/database', methods=['GET','POST'])
+@app.route('/create-database', methods=['GET','POST'])
 def create_database():
     app.system_manager.create_database()
     return "done"
@@ -28,7 +29,16 @@ def create_database():
 @app.route('/products/pending')
 def get_pending_products():
     logger.debug("(Presentation get_pending_products) ")
-    return str(app.system_manager.get_pending_products())
+    response = ""
+
+    try:
+        response = str(app.system_manager.get_pending_products())
+    except Exception as inst:
+        logger.debug("(Presentation get_pending_products) Unexpected error:" )
+        logger.debug(inst)
+
+    return response
+
 
 @app.route('/products/downloading')
 def get_downloading_products():

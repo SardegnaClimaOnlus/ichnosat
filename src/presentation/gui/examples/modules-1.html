@@ -47,16 +47,12 @@
 <div id="tab-example">
     <h1>Downloader</h1>
     <div id="tabs" style="width: 100%; height: 29px;"></div>
-    <div id="tab1" class="tab">
+    <divbr id="tab1" class="tab">
 
         <br/>
+        <button id="create-database" class="w2ui-btn" >Create Database</button>
+         <br/>
         <button id="start-downloader" class="w2ui-btn" >Start</button>
-        <div class="start-downloader-message">
-            <div class="start-downloader-request-in-progress">
-                <div class="message">Request in progress</div>
-                <div class="spinner"><img class="spinner-image" src="images/spinner_small.gif"></div>
-            </div>
-        </div>
         <hr class="vertical-separator"/>
     </div>
 
@@ -95,6 +91,18 @@ $(function () {
     $('#tabs').w2tabs(config.tabs);
     $('#tab1').show();
 
+
+    $('#create-database').click(function(){
+        $.ajax({url: "http://localhost:5000/create-database",
+           success: function(result){
+           },
+           error: function(result){
+                w2alert('Failed database creation. Please check log files.')
+                .ok(function () {
+                 });
+           }
+        });
+    });
     $('#start-downloader').click(function(){
         w2alert('Started Downloader and Processor processes. Check please the ichnosat.log'+
         ' file and Products lists to follow the progress. ')
@@ -104,18 +112,13 @@ $(function () {
 
 
        $.ajax({url: "http://localhost:5000/start-downloader",
-       success: function(result){
-
-
-       },
-       error: function(result){
-            w2alert('Failed downloader start. Please check log files.')
-            .ok(function () {
-
-             });
-
-        }
-
+           success: function(result){
+           },
+           error: function(result){
+                w2alert('Failed downloader start. Please check log files.')
+                .ok(function () {
+                 });
+           }
         });
     });
 

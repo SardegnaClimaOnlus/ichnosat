@@ -13,7 +13,11 @@ config_file_path = "/usr/ichnosat/src/core/processing_pipe/scientific_processor/
 @app.route('/process', methods=['POST'])
 def process_req():
     logger.debug("(scientific_processor.start.py process_req) ")
-    app.job_dispatcher.publish_new_job(request.get_json()['path'])
+    try:
+        app.job_dispatcher.publish_new_job(request.get_json()['path'])
+    except Exception as inst:
+        logger.debug("(scientific_processor.start.py process_req)  Unexpected error:" )
+        logger.debug(inst)
     return "done"
 
 def main():

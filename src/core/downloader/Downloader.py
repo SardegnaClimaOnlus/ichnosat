@@ -1,5 +1,6 @@
 from src.core.downloader.Configuration import Configuration
 from src.core.downloader.ConfigurationManager import ConfigurationManager
+from src.core.processing_pipe.src.ProcessingPipeManager import ProcessingPipeManager
 from src.core.downloader.SearchFilter import SearchFilter
 from src.core.downloader.Datasource import Datasource
 from src.data.database.services.products_service import ProductsService
@@ -49,5 +50,8 @@ class Downloader(threading.Thread):
                 self.productService.update_product_status(product_name, ProductStatus.downloading)
                 self.datasource.download_product(product_name)
                 self.productService.update_product_status(product_name, ProductStatus.downloaded)
+                # TODO: add a layer with notifications
+                processingPipeManager = ProcessingPipeManager()
+                processingPipeManager.start_processing()
 
 
