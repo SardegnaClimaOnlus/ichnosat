@@ -30,6 +30,7 @@ class ProductsService():
     def get_pending_products(self):
         return self.session.query(Product).\
             filter(Product.status == ProductStatus.pending).all()
+
     def get_products_to_process(self):
         logger.debug(">>> get products to process")
         return self.session.query(Product). \
@@ -42,4 +43,30 @@ class ProductsService():
             product.status = status
             product.last_modify = datetime.datetime.utcnow()
             self.session.commit()
+
+
+    def get_pending_products(self):
+        return self.session.query(Product).\
+            filter(Product.status == ProductStatus.pending).all()
+
+
+
+    def get_downloading_products(self):
+        return self.session.query(Product). \
+            filter(Product.status == ProductStatus.downloading).all()
+
+    def get_downloaded_products(self):
+        return self.session.query(Product). \
+            filter(Product.status == ProductStatus.downloaded).all()
+
+
+    def get_processing_products(self):
+        return self.session.query(Product). \
+            filter(Product.status == ProductStatus.processing).all()
+
+
+    def get_processed_products(self):
+        return self.session.query(Product). \
+            filter(Product.status == ProductStatus.processed).all()
+
 

@@ -24,6 +24,6 @@ class ProductDownloader:
             url = self.domain + product_name + file_name
             new_file_path = new_product_path + '/' + file_name
             urllib.request.urlretrieve(url, new_file_path)
-        ps = ProductsService()
-        ps.update_product_status(product_name, ProductStatus.downloaded)
+
+
         return

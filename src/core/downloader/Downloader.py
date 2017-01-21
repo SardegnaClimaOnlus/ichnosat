@@ -6,10 +6,12 @@ from src.data.database.services.products_service import ProductsService
 from src.data.database.entities.product import ProductStatus
 from src.data.database.entities.product import Product
 from src.data.logger.logger import logger
+import threading
 
-class Downloader:
+class Downloader(threading.Thread):
     def __init__(self):
         logger.debug("(Downloader __init__)")
+        threading.Thread.__init__(self)
         self.configurationManager = ConfigurationManager()
         self.configuration = self.configurationManager.get_configuration()
         self.datasource = Datasource(self.configuration)
@@ -44,6 +46,8 @@ class Downloader:
                                                             status=ProductStatus.pending))
             # download products
             for product_name in products_list:
+                self.productService.update_product_status(product_name, ProductStatus.downloading)
                 self.datasource.download_product(product_name)
+                self.productService.update_product_status(product_name, ProductStatus.downloaded)
 
 

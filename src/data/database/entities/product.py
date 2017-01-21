@@ -6,9 +6,14 @@ from src.data.logger.logger import logger
 from src.data.database.base import Base
 
 class ProductStatus(enum.Enum):
-    downloading = "downloading"
     pending = "pending"
+    downloading = "downloading"
     downloaded = "downloaded"
+    processing = "processing"
+    processed = "processed"
+
+
+
 
 class Product(Base):
     __tablename__ = 'products'
@@ -18,5 +23,5 @@ class Product(Base):
     last_modify = Column(DateTime, default=datetime.datetime.utcnow)
 
     def __repr__(self):
-        return "<Product(name='%s', status='%s', last_modify='%s')>" % (
+        return "{\"name\":\"%s\", \"status\":\"%s\", \"last_modify\":\"%s\"}" % (
             self.name, str(self.status), str(self.last_modify))

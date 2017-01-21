@@ -3,7 +3,8 @@ from src.core.processing_pipe.src.Job import Job
 from src.data.logger.logger import logger
 
 class JobDispatcher():
-    def __init__(self,outbox_path,plugins_path):
+    def __init__(self, outbox_path,plugins_path):
+        logger.debug("(JobDispatcher __init__) ")
         self.queue = []
         self.processing = False
         self.lock = threading.Lock()
@@ -11,10 +12,12 @@ class JobDispatcher():
         self.plugins_path = plugins_path
 
     def publish_new_job(self, product):
+        logger.debug("(JobDispatcher publish_new_job) ")
         self.queue.append(product)
         self.dispatch_new_job()
 
     def dispatch_new_job(self):
+        logger.debug("(JobDispatcher dispatch_new_job) ")
         self.lock.acquire()
         if self.processing:
             self.lock.release()

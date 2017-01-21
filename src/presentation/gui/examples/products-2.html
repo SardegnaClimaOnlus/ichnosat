@@ -1,3 +1,8 @@
+<style>
+    #reload{
+        margin: 10px;
+    }
+</style>
 <div class="content">
     <div id="example_title">
         <h1>Downloading products</h1>
@@ -8,42 +13,76 @@
 </div>
 
 <!--CODE-->
-<div id="grid" style="width: 100%; height: 400px;"></div>
+<button id="reload" class="w2ui-btn">Reload data</button>
+<br/>
+<div id="grid-downloading" style="width: 100%; height: 400px;"></div>
 
 <!--CODE-->
 <script>
-$(function () {
-    $('#grid').w2grid({ 
-        name: 'grid', 
-        header: 'List of Names',
+$(function() {
+    var products = [];
+    function loadData(){
+
+        $.ajax({
+            url: "http://localhost:5000/products/downloading",
+            success: function(result) {
+                products = JSON.parse(result);
+                for (var i = 0; i < products.length; i++)
+                    products[i].recid = i;
+                var grid = $('#grid-downloading').w2grid();
+                grid.records = products;
+                grid.reload();
+            },
+            error: function(result) {
+                w2alert('Error retrieving products! Please check logs.')
+                    .ok(function() {});
+            }
+        });
+    }
+
+     $('#grid-downloading').w2grid({
+        name: 'grid',
+        header: 'Downloading Products',
         show: {
-            toolbar: true
+            toolbar: false,
+            toolbarReload: false
         },
-        columns: [                
-            { field: 'fname', caption: 'First Name', size: '30%', resizable: true, sortable: true },
-            { field: 'lname', caption: 'Last Name', size: '30%', resizable: true, sortable: true },
-            { field: 'email', caption: 'Email', size: '40%', resizable: true, sortable: true },
-            { field: 'sdate', caption: 'Start Date', size: '120px', resizable: true, sortable: true, hidden: true }
+
+        columns: [{
+                field: 'name',
+                caption: 'Name',
+                size: '50%',
+                resizable: true,
+                sortable: true
+            },
+            {
+                field: 'last_modify',
+                caption: 'Last Modify',
+                size: '50%',
+                resizable: true,
+                sortable: true
+            }
         ],
-        records: [
-            { recid: 1, fname: 'John', lname: 'Doe', email: 'john@gmail.com', sdate: '1/3/2012' },
-            { recid: 2, fname: 'Stuart', lname: 'Motzart', email: 'stuart@gmail.com', sdate: '4/13/2012' },
-            { recid: 3, fname: 'Jin', lname: 'Franson', email: 'jin@gmail.com', sdate: '3/3/2012' },
-            { recid: 4, fname: 'Susan', lname: 'Ottie', email: 'susan@gmail.com', sdate: '5/3/2012' },
-            { recid: 5, fname: 'Kelly', lname: 'Silver', email: 'kelly@gmail.com', sdate: '8/19/2012' },
-            { recid: 6, fname: 'Francis', lname: 'Gatos', email: 'francis@gmail.com', sdate: '6/12/2012' },
-            { recid: 7, fname: 'Mark', lname: 'Welldo', email: 'mark@gmail.com', sdate: '8/13/2012' },
-            { recid: 8, fname: 'Thomas', lname: 'Bahh', email: 'thomas@gmail.com', sdate: '4/31/2012' },
-            { recid: 10, fname: 'John', lname: 'Doe', email: 'john@gmail.com', sdate: '1/3/2012' },
-            { recid: 12, fname: 'Stuart', lname: 'Motzart', email: 'stuart@gmail.com', sdate: '4/13/2012' },
-            { recid: 13, fname: 'Jin', lname: 'Franson', email: 'jin@gmail.com', sdate: '3/3/2012' },
-            { recid: 14, fname: 'Susan', lname: 'Ottie', email: 'susan@gmail.com', sdate: '5/3/2012' },
-            { recid: 15, fname: 'Kelly', lname: 'Silver', email: 'kelly@gmail.com', sdate: '8/19/2012' },
-            { recid: 16, fname: 'Francis', lname: 'Gatos', email: 'francis@gmail.com', sdate: '6/12/2012' },
-            { recid: 17, fname: 'Mark', lname: 'Welldo', email: 'mark@gmail.com', sdate: '8/13/2012' },
-            { recid: 18, fname: 'Thomas', lname: 'Bahh', email: 'thomas@gmail.com', sdate: '4/31/2012' },
-            { recid: 19, fname: 'Sergei', lname: 'Rachmaninov', email: 'sergei@gmail.com', sdate: '2/23/2012' }
-        ]
-    });    
+        records: products,
+        onClick: function (event) {
+            var grid = this;
+            setTimeout(function () {
+                console.log("clicked on element with id:", event.recid);
+            }, 150);
+        }
+    });
+
+
+    $(".w2ui-icon-reload").click(function(){
+        loadData();
+    });
+
+    $("#reload").click(function(){
+        loadData();
+    });
+
+    loadData();
+
+
 });
 </script>
