@@ -12,3 +12,4 @@ __pycache__
 pre-processor/outbox/!README.md
 *.sqlite
 supervisord.pid
+data_local/db/data/*
