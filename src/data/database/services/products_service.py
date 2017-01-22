@@ -14,7 +14,7 @@ class ProductsService():
     def __init__(self):
         config = configparser.ConfigParser()
         config.read("src/data/database/config/db.cfg")
-        engine = create_engine(config['database']['connection_string'], echo=True)
+        engine = create_engine(config['database']['connection_string'], echo=True, pool_recycle=3600)
         Session = sessionmaker(bind=engine)
         self.session = Session()
 
@@ -32,7 +32,6 @@ class ProductsService():
             filter(Product.status == ProductStatus.pending).all()
 
     def get_products_to_process(self):
-        logger.debug(">>>>>>>>>>>>> get products to process")
         return self.session.query(Product). \
             filter(Product.status == ProductStatus.downloaded ).all()
 
@@ -40,9 +39,15 @@ class ProductsService():
         product = self.session.query(Product). \
             filter(Product.name == product_name).first()
         if product != None:
+
             product.status = status
             product.last_modify = datetime.datetime.utcnow()
             self.session.commit()
+
+        all = self.session.query(Product).all()
+        for product in all:
+            logger.debug(str(product))
+
 
 
     def get_pending_products(self):

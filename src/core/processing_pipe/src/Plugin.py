@@ -27,7 +27,8 @@ class Plugin():
         try:
 
             product_name = source.split('/')[-2]
-            self.productService.update_product_status(product_name, ProductStatus.processing)
+            original_name = product_name.replace("-","/") + "/"
+            self.productService.update_product_status(original_name, ProductStatus.processing)
             destination = outbox_path + product_name + "-" + self.plugin_name + '/'
             if not os.path.exists(destination):
                 os.makedirs(destination)
@@ -37,7 +38,7 @@ class Plugin():
             destinationPath = destination.encode('utf-8')
             libc.process.argtypes = [c_char_p]
             libc.process(productPath, destinationPath)
-            self.productService.update_product_status(product_name, ProductStatus.processed)
+            self.productService.update_product_status(original_name, ProductStatus.processed)
             os.dup2(self.stdout, 1)
             self.read_pipe()
         except ValueError:

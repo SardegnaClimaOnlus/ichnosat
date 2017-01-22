@@ -1,4 +1,5 @@
 from flask import Flask, request
+from src.data.database.db import DB
 from src.core.processing_pipe.src.JobDispatcher import JobDispatcher
 from src.data.logger.logger import logger
 from flask_cors import CORS
