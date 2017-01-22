@@ -3,6 +3,7 @@ import os, sys, select
 from ctypes import *
 from src.data.database.services.products_service import ProductsService
 from src.data.database.entities.product import ProductStatus
+import shutil
 
 class Plugin():
     def __init__(self, plugin_name, plugin_path):
@@ -25,9 +26,8 @@ class Plugin():
 
     def run(self, source, outbox_path):
         try:
-
             product_name = source.split('/')[-2]
-            original_name = product_name.replace("-","/") + "/"
+            original_name = product_name.replace("-", "/") + "/"
             self.productService.update_product_status(original_name, ProductStatus.processing)
             destination = outbox_path + product_name + "-" + self.plugin_name + '/'
             if not os.path.exists(destination):
@@ -41,5 +41,6 @@ class Plugin():
             self.productService.update_product_status(original_name, ProductStatus.processed)
             os.dup2(self.stdout, 1)
             self.read_pipe()
+            shutil.rmtree(source)
         except ValueError:
             logger.warn("Failed scientific-processor plugin with name: " + self.plugin_name)
