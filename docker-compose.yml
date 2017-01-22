@@ -2,6 +2,11 @@ version: '2'
 services:
   db:
     image: postgres
+    volumes:
+    - ./data_local/db/postgresql:/etc/postgresql
+    - ./data_local/db/log:/var/log/postgresql
+    - ./data_local/db/data:/var/lib/postgresql/data
+
   app:
     build: .
     command: python3.4 src/core/system_manager/init.py

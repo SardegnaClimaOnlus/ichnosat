@@ -11989,13 +11989,13 @@ var w2popup = {};
             color     : '#000',
             opacity   : 0.4,
             speed     : 0.3,
-            modal     : false,
+            modal     : true,
             maximized : false,
             keyboard  : true,     // will close popup on esc if not modal
             width     : 500,
             height    : 300,
-            showClose : true,
-            showMax   : false,
+            showClose : false,
+            showMax   : true,
             transition: null
         },
         status    : 'closed',     // string that describes current status

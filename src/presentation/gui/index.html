@@ -26,14 +26,74 @@
     <img src="images/logo.png" class="ichnosat-logo"/>
 </body>
 
+<div id="popup1" style="display: none; width: 600px; height: 400px; overflow: hidden">
+    <div rel="title">
+        First Installation
+    </div>
+    <div rel="body" style="padding: 10px; line-height: 150%">
+        <div ><img style="float:left;width:150px;height:150px;margin-right:15px;" src="images/logo.png"> </div>
+        <h2>This is the first installation of ichnosat</h2>
+        <p>Click on the button below to create a new database</p>
+    </div>
+    <div rel="buttons">
+        <button class="w2ui-btn" onclick="createDatabase()">Create Database</button>
+    </div>
+    <script>
+        $(document).ready(function(){
+            window.createDatabase = function() {
+                w2popup.lock("Creating Database", true);
+                $.ajax({url: "http://localhost:5000/create-database",
+                   success: function(result){
+                        setTimeout(
+                            function () {
+                                w2popup.unlock();
+                                $("#finish-popup").w2popup({
+                                    transition: "slide-left"
+                                });
+                        }, 2000);
+                   },
+                   error: function(result){
+                        w2alert('Failed database creation. Please check log files.')
+                        .ok(function () {});
+                   }
+                });
+            }
+        });
+    </script>
+</div>
+
+<!-- POPUP 2 -->
+<div id="finish-popup" style="display: none; width: 600px; height: 400px; overflow: hidden">
+    <div rel="title">
+        First Installation
+    </div>
+    <div rel="body" style="padding: 10px; line-height: 150%">
+        <div ><img style="float:left;width:150px;height:150px;margin-right:15px;" src="images/success.png"> </div>
+        <h2>First Installation completed!</h2>
+        <br/>
+        <p>Ichnosat platform is ready to download and process products.</p>
+    </div>
+    <div rel="buttons">
+        <button class="w2ui-btn" onclick="finish()">Finish</button>
+    </div>
+    <script>
+        $(document).ready(function(){
+            window.finish = function(){
+                w2popup.close();
+            }
+        });
+    </script>
+</div>
 <script>
-/*
-    console.log("test");
     $(document).ready(function(){
-        $.ajax({url: "http://localhost:5000/start-downloader", success: function(result){
-            alert("hello");
-        }});
+        $.ajax({url: "http://localhost:5000/first-installation",
+            success: function(result){
+                var isFirstInstallation = JSON.parse(result).first_installation;
+                console.log("isFirstInstallation: " , isFirstInstallation);
+                if(isFirstInstallation == "true"){
+                    $('#popup1').w2popup()
+                }
+            }});
     });
-*/
 </script>
 </html>

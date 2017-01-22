@@ -11,11 +11,11 @@ from src.data.database.services.products_service import ProductsService
 class SystemManager():
     def __init__(self):
         self.config = configparser.ConfigParser()
-        self.config.read("/usr/ichnosat/src/core/system_manager/config/config.cfg")
+        self.config_file_path = "/usr/ichnosat/src/core/system_manager/config/config.cfg"
         self.ProcessingPipeManager = ProcessingPipeManager()
+        self.config.read(self.config_file_path)
         self.pluginManager = PluginManager(self.config['PATHS']['plugins'])
         self.productService = ProductsService()
-
 
     def compile_plugins(self):
         self.pluginManager.compile_plugins()
@@ -29,8 +29,15 @@ class SystemManager():
         self.ProcessingPipeManager.start_processing()
 
     def create_database(self):
-        db = DB()
-        db.create_db()
+        try:
+            db = DB()
+            db.create_db()
+            return True
+        except Exception as err:
+            logger.debug("(SystemManager create_database) Unexpected error:")
+            logger.debug(err)
+            return False
+
 
     def get_pending_products(self):
         logger.debug("(SystemManager get_pending_products) ")
@@ -47,3 +54,21 @@ class SystemManager():
 
     def get_processed_products(self):
         return self.productService.get_processed_products()
+
+    def is_first_installation(self):
+        self.config.read(self.config_file_path)
+        return True if self.config['SYSTEM_STATUS']['first_installation'] == 'true' else False
+
+    def set_first_installation_config(self, new_status):
+        try:
+            value = 'true' if new_status else 'false'
+            config = configparser.RawConfigParser()
+            config.read(self.config_file_path)
+            config.set('SYSTEM_STATUS', 'first_installation', value)
+            with open(self.config_file_path, 'w') as configfile:
+                config.write(configfile)
+            return True
+        except Exception as err:
+            logger.debug("(SystemManager set_first_installation_config) Unexpected error:")
+            logger.debug(err)
+            return False

@@ -22,8 +22,21 @@ def start_downloader_interface():
 
 @app.route('/create-database', methods=['GET','POST'])
 def create_database():
-    app.system_manager.create_database()
-    return "done"
+    logger.debug("(Presentation create_database)  >>>>>>>>>> ")
+    outcome = app.system_manager.create_database()
+    logger.debug("(Presentation create_database)  outcome: " + str(outcome))
+    if outcome:
+        logger.debug("(Presentation create_database)  >>>>>> set first installation config !!!! " )
+        success = app.system_manager.set_first_installation_config(False)
+        if success :
+            return "done"
+        else:
+            return "error", 500
+    else:
+        logger.debug("(Presentation create_database)  >>>>>> RETURN A 500")
+        return "error", 500
+
+
 
 # -- PRODUCTS -- #
 @app.route('/products/pending')
@@ -55,6 +68,13 @@ def get_processing_products():
 @app.route('/products/processed')
 def get_processed_products():
     return str(app.system_manager.get_processed_products())
+
+@app.route('/first-installation')
+def is_first_installation():
+    is_first_installation = app.system_manager.is_first_installation()
+    value = 'true' if  is_first_installation else 'false'
+    return "{ \"first_installation\": \"" + value + "\"}"
+
 
 
 if __name__ == '__main__':
