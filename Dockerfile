@@ -47,7 +47,7 @@ COPY vendors/get-pip.py /usr/pip
 RUN ls
 RUN python3.4 get-pip.py
 WORKDIR /usr
-#RUN rm -rf pip
+
 
 # install pika
 RUN pip install pika
@@ -64,7 +64,7 @@ RUN pip install sqlalchemy
 
 
 RUN mkdir -p /usr/ichnosat/server
-#COPY config/supervisord.conf /usr/ichnosat/conf/
+
 RUN export PYTHONPATH=${PYTHONPATH}:/usr/ichnosat
 WORKDIR /usr/ichnosat/
 RUN apt-get update
@@ -79,12 +79,10 @@ RUN apt-get install -y  libpq-dev postgresql-client postgresql-client-common
 RUN apt-get install -y  python3-psycopg2
 
 ##install crontab
-#RUN apt-get install -y cron
-#RUN apt-get install -y python3-crontab
-
-RUN pip3 install apscheduler
+RUN apt-get install -y cron
+RUN apt-get install -y python3-crontab
 
 
 WORKDIR /usr/ichnosat/
-#ENTRYPOINT [ "make" ]
+
 
