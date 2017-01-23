@@ -1,5 +1,12 @@
 version: '2'
 services:
+  nginx:
+    image: nginx
+    volumes:
+    - ./src/gui:/usr/share/nginx/html
+    ports:
+    - "5040:80"
+
   db:
     image: postgres
     volumes:

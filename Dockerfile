@@ -79,8 +79,10 @@ RUN apt-get install -y  libpq-dev postgresql-client postgresql-client-common
 RUN apt-get install -y  python3-psycopg2
 
 ##install crontab
-RUN apt-get install -y cron
-RUN apt-get install -y python3-crontab
+#RUN apt-get install -y cron
+#RUN apt-get install -y python3-crontab
+
+RUN pip3 install apscheduler
 
 
 WORKDIR /usr/ichnosat/
