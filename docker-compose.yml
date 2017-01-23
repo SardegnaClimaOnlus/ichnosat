@@ -9,7 +9,8 @@ services:
 
   app:
     build: .
-    command: python3.4 src/core/system_manager/init.py
+    #command: python3.4 src/core/system_manager/init.py
+    command: nohup sh /usr/ichnosat/src/core/system_manager/bash/init.sh &
     volumes:
     - ./:/usr/ichnosat
     ports:

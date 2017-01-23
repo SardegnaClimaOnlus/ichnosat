@@ -1,26 +1,28 @@
 import sys
+from crontab import CronTab
 sys.path.append('/usr/ichnosat/')
 
 import subprocess
-from pathlib import Path
+
 from src.core.system_manager.system_manager import SystemManager
-
 import time
-
 
 sm = SystemManager()
 
-# create database if not exists
-# db_file = Path("/usr/ichnosat/data_local/db/ichnosat.sqlite")
-# if not db_file.is_file():
-#     sm.create_database()
-
 # compile plugins
 sm.compile_plugins()
+# set cron tab
+cron = CronTab(user=True)
+job = cron.new(command='wget http://localhost:5000/start-downloader')
+job.setall('00 23 * * *')
+cron.write()
+
+# run init.sh
+# subprocess.Popen(["/bin/bash", "/usr/ichnosat/src/core/system_manager/bash/init.sh", "var=11; ignore all"])
+#
+#
+# while True:
+#     time.sleep(10000)
 
 
-subprocess.Popen(["/bin/bash", "/usr/ichnosat/src/core/system_manager/bash/init.sh", "var=11; ignore all"])
-
-while True:
-    time.sleep(10000)
 

@@ -1,5 +1,5 @@
 from src.data.logger.logger import logger
-
+import sys
 from src.core.processing_pipe.src.PluginManager import PluginManager
 #from src.core.downloader.start import start_downloader
 from src.core.downloader.Downloader import Downloader
@@ -72,3 +72,8 @@ class SystemManager():
             logger.debug("(SystemManager set_first_installation_config) Unexpected error:")
             logger.debug(err)
             return False
+
+
+
+
+

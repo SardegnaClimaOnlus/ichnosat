@@ -74,12 +74,13 @@ RUN python2.7 get-pip.py
 RUN python2.7 -m pip install supervisor
 
 ## install postgres
-
-
 RUN apt-get update
-#RUN apt-get install -y postgresql libpq-dev postgresql-client postgresql-client-common
 RUN apt-get install -y  libpq-dev postgresql-client postgresql-client-common
 RUN apt-get install -y  python3-psycopg2
+
+##install crontab
+RUN apt-get install -y cron
+RUN apt-get install -y python3-crontab
 
 
 WORKDIR /usr/ichnosat/
