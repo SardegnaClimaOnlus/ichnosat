@@ -42,5 +42,8 @@ class Plugin():
             os.dup2(self.stdout, 1)
             self.read_pipe()
             shutil.rmtree(source)
-        except ValueError:
+        except Exception as err:
             logger.warn("Failed scientific-processor plugin with name: " + self.plugin_name)
+            logger.debug("(SystemManager set_first_installation_config) Unexpected error:")
+            logger.debug(err)
+            return False

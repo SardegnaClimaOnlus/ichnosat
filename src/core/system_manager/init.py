@@ -13,7 +13,7 @@ sm.compile_plugins()
 # set cron tab
 cron = CronTab(user='root')
 job = cron.new(command='wget -qO- http://localhost:5000/start-downloader &> /dev/null')
-job.setall('*/10 * * * *')
+job.setall('10 10 * * *')
 cron.write()
 
 

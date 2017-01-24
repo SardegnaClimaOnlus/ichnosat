@@ -14,64 +14,105 @@ class ProductsService():
     def __init__(self):
         config = configparser.ConfigParser()
         config.read("src/data/database/config/db.cfg")
-        engine = create_engine(config['database']['connection_string'], echo=True, pool_recycle=3600)
-        Session = sessionmaker(bind=engine)
-        self.session = Session()
+        self.engine = create_engine(config['database']['connection_string'], echo=True, pool_recycle=3600)
+
 
     def add_new_product(self, product):
+        result = False
         logger.debug("(ProductsService add_new_product) ")
         logger.debug("(ProductsService add_new_product) product.name: " + product.name)
-        already_present_product = self.session.query(Product). \
+        logger.debug("(ProductsService add_new_product) product.status: " + str(product.status))
+        Session = sessionmaker(bind=self.engine)
+        session = Session()
+        already_present_product = session.query(Product). \
             filter(Product.name == product.name).all()
-        if(len(already_present_product) == 0):
-            self.session.add(product)
-            self.session.commit()
+        logger.debug("(ProductsService add_new_product) len(already_present_product): >>>>@@@@@@****>>>>>>>>>>>" + str(len(already_present_product)))
+        logger.debug("(ProductsService add_new_product) len(already_present_product) == 0: >>>>@@@@@@****>>>>>>>>>>>" + str(len(already_present_product) == 0))
 
-    def get_pending_products(self):
-        return self.session.query(Product).\
-            filter(Product.status == ProductStatus.pending).all()
+        try:
+            if len(already_present_product) == 0:
+                session.add(product)
+                session.commit()
+                result = True
+            session.close()
+        except Exception as err:
+            logger.debug("(ProductsService add_new_product) Unexpected error:")
+            logger.debug(err)
+
+        return result
+
+
+
+
 
     def get_products_to_process(self):
-        return self.session.query(Product). \
-            filter(Product.status == ProductStatus.downloaded ).all()
+        Session = sessionmaker(bind=self.engine)
+        session = Session()
+        result = session.query(Product). \
+            filter(Product.status == ProductStatus.downloaded).all()
+        session.close()
+        return result
 
     def update_product_status(self, product_name, status):
-        product = self.session.query(Product). \
+        Session = sessionmaker(bind=self.engine)
+        session = Session()
+        product = session.query(Product). \
             filter(Product.name == product_name).first()
         if product != None:
 
             product.status = status
             product.last_modify = datetime.datetime.utcnow()
-            self.session.commit()
+            session.commit()
 
-        all = self.session.query(Product).all()
+        all = session.query(Product).all()
         for product in all:
             logger.debug(str(product))
+        session.close()
 
 
 
     def get_pending_products(self):
-        return self.session.query(Product).\
+        logger.debug("(ProductsService get_pending_products)  <<<<<<")
+        Session = sessionmaker(bind=self.engine)
+        session = Session()
+        result = session.query(Product).\
             filter(Product.status == ProductStatus.pending).all()
-
+        logger.debug("(ProductsService get_pending_products)  str(len(result))~~~~~~~~~~~~~~O:" + str(len(result)) )
+        session.close()
+        return result
 
 
     def get_downloading_products(self):
-        return self.session.query(Product). \
+        Session = sessionmaker(bind=self.engine)
+        session = Session()
+        result = session.query(Product). \
             filter(Product.status == ProductStatus.downloading).all()
+        session.close()
+        return result
 
     def get_downloaded_products(self):
-        return self.session.query(Product). \
+        Session = sessionmaker(bind=self.engine)
+        session = Session()
+        result = session.query(Product). \
             filter(Product.status == ProductStatus.downloaded).all()
+        session.close()
+        return result
 
 
     def get_processing_products(self):
-        return self.session.query(Product). \
+        Session = sessionmaker(bind=self.engine)
+        session = Session()
+        result = session.query(Product). \
             filter(Product.status == ProductStatus.processing).all()
+        session.close()
+        return result
 
 
     def get_processed_products(self):
-        return self.session.query(Product). \
+        Session = sessionmaker(bind=self.engine)
+        session = Session()
+        result = session.query(Product). \
             filter(Product.status == ProductStatus.processed).all()
-
+        session.close()
+        return result
 

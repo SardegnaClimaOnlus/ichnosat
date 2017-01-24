@@ -40,13 +40,19 @@ class Downloader(threading.Thread):
             # generate products list from search filter
             products_list = self.datasource.get_products_list(searchFilter)
             logger.debug("(Downloader run) products list debug: ")
-
+            products_to_download = []
             # add products in database
             for pending_product in products_list:
-                self.productService.add_new_product(Product(name=str(pending_product),
+                result = self.productService.add_new_product(Product(name=str(pending_product),
                                                             status=ProductStatus.pending))
+                if result:
+                    products_to_download.append(pending_product)
             # download products
-            for product_name in products_list:
+            logger.debug("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+            logger.debug("(Downloader run) ========== str(len(products_list)): " + str(len(products_to_download)) )
+
+            for product_name in products_to_download:
+                logger.debug("(Downloader run) ==========  >>> product_name: " + product_name)
                 self.productService.update_product_status(product_name, ProductStatus.downloading)
                 self.datasource.download_product(product_name)
                 self.productService.update_product_status(product_name, ProductStatus.downloaded)
