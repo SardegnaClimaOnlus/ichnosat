@@ -75,6 +75,10 @@ def is_first_installation():
     value = 'true' if  is_first_installation else 'false'
     return "{ \"first_installation\": \"" + value + "\"}"
 
+@app.route('/database/fix')
+def fix_inconsistent_data():
+    app.system_manager.fix_inconsistent_data_in_db()
+    return "done"
 
 
 if __name__ == '__main__':

@@ -10,6 +10,8 @@ sm = SystemManager()
 # compile plugins
 sm.compile_plugins()
 
+
+
 # set cron tab
 cron = CronTab(user='root')
 job = cron.new(command='wget -qO- http://localhost:5000/start-downloader &> /dev/null')

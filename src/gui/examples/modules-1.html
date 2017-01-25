@@ -52,7 +52,8 @@
         <!--<br/>-->
         <!--<button id="create-database" class="w2ui-btn" >Create Database</button>-->
          <!--<br/>-->
-        <button id="start-downloader" class="w2ui-btn" >Start</button>
+        <button id="start-downloader" class="w2ui-btn" >Start process</button>
+        <button id="fix-database" class="w2ui-btn" >Fix inconsistent data</button>
         <hr class="vertical-separator"/>
     </div>
 
@@ -103,6 +104,19 @@ $(function () {
            }
         });
     });
+
+    $('#fix-database').click(function(){
+        $.ajax({url: "http://localhost:5000/database/fix",
+           success: function(result){
+           },
+           error: function(result){
+                w2alert('Failed fixing database. Please check log files.')
+                .ok(function () {
+                 });
+           }
+        });
+    });
+
     $('#start-downloader').click(function(){
         w2alert('Started Downloader and Processor processes. Check please the ichnosat.log'+
         ' file and Products lists to follow the progress. ')

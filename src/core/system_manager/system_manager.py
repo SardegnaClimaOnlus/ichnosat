@@ -7,6 +7,7 @@ from src.data.database.db import DB
 from src.core.processing_pipe.src.ProcessingPipeManager import ProcessingPipeManager
 import configparser
 from src.data.database.services.products_service import ProductsService
+from src.data.database.services.products_service import ProductStatus
 
 class SystemManager():
     def __init__(self):
@@ -37,6 +38,15 @@ class SystemManager():
             logger.debug("(SystemManager create_database) Unexpected error:")
             logger.debug(err)
             return False
+
+    def fix_inconsistent_data_in_db(self):
+        downloading_products = self.productService.get_downloading_products()
+        for product in downloading_products:
+            self.productService.update_product_status(product.name, ProductStatus.pending)
+        processing_products = self.productService.get_processing_products()
+        for product in processing_products :
+            self.productService.update_product_status(product.name, ProductStatus.downloaded)
+
 
 
     def get_pending_products(self):
