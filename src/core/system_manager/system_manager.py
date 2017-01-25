@@ -17,17 +17,21 @@ class SystemManager():
         self.config.read(self.config_file_path)
         self.pluginManager = PluginManager(self.config['PATHS']['plugins'])
         self.productService = ProductsService()
+        self.downloader = Downloader()
 
     def compile_plugins(self):
         self.pluginManager.compile_plugins()
 
     def trigger_downloader(self):
         logger.debug("(SystemManager trigger_downloader) ")
-        logger.debug("(SystemManager get_pending_products) call downloader ")
-        downloader = Downloader()
-        downloader.start()
-        logger.debug("(SystemManager get_pending_products) call processing")
-        self.ProcessingPipeManager.start_processing()
+        logger.debug("(SystemManager trigger_downloader) call downloader ")
+        try:
+            self.downloader.start()
+            self.ProcessingPipeManager.start_processing()
+        except Exception as err:
+            logger.debug("(SystemManager trigger_downloader) Unexpeted error:")
+            logger.debug(err)
+
 
     def create_database(self):
         try:

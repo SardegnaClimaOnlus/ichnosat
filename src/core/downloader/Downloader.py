@@ -1,63 +1,34 @@
-from src.core.downloader.Configuration import Configuration
-from src.core.downloader.ConfigurationManager import ConfigurationManager
-from src.core.processing_pipe.src.ProcessingPipeManager import ProcessingPipeManager
-from src.core.downloader.SearchFilter import SearchFilter
-from src.core.downloader.Datasource import Datasource
 from src.data.database.services.products_service import ProductsService
-from src.data.database.entities.product import ProductStatus
-from src.data.database.entities.product import Product
 from src.data.logger.logger import logger
+from src.core.downloader.DownloaderJob import DownloaderJob
 import threading
 
-class Downloader(threading.Thread):
+class Downloader():
     def __init__(self):
         logger.debug("(Downloader __init__)")
-        threading.Thread.__init__(self)
-        self.configurationManager = ConfigurationManager()
-        self.configuration = self.configurationManager.get_configuration()
-        self.datasource = Datasource(self.configuration)
         self.productService = ProductsService()
+        self.pending_tasks = 0
+        self.lock = threading.Lock()
+        self.downloading = False
 
-    def refresh_configurations(self):
-        logger.debug("(Downloader refresh_configurations)")
-        self.configurationManager.load_configuration()
-        self.configuration = self.configurationManager.configuration
-        logger.debug("(Downloader refresh_configurations) finished")
-
-    def create_search_filter(self, tile):
-        return SearchFilter(tile, self.configuration.start_date, self.configuration.end_date)
-
-    def run(self):
-        logger.debug("(Downloader run)")
-        # reload configurations
-        logger.debug("(Downloader run) refresh configurations")
-        self.refresh_configurations()
-        # downloader loop
-        logger.debug("(Downloader run) downloader loop")
-        for tile in self.configuration.tiles:
-            logger.debug("(Downloader run) generate list of available products for tile: " + tile)
-            searchFilter = self.create_search_filter(tile)
-            # generate products list from search filter
-            products_list = self.datasource.get_products_list(searchFilter)
-            logger.debug("(Downloader run) products list debug: ")
-
-            # add products in database
-            for pending_product in products_list:
-                self.productService.add_new_product(Product(name=str(pending_product),
-                                                            status=ProductStatus.pending))
-
-            products_to_download = self.productService.get_pending_products()
-            # download products
-            logger.debug("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-            logger.debug("(Downloader run) ========== str(len(products_to_download)): " + str(len(products_to_download)) )
-
-            for product in products_to_download:
-                logger.debug("(Downloader run) ==========  >>> product.name: " + product.name)
-                self.productService.update_product_status(product.name, ProductStatus.downloading)
-                self.datasource.download_product(product.name)
-                self.productService.update_product_status(product.name, ProductStatus.downloaded)
-                # TODO: add a layer with notifications
-                processingPipeManager = ProcessingPipeManager()
-                processingPipeManager.start_processing()
-
+    def start(self):
+        logger.debug("(Downloader run ) ")
+        logger.debug("(Downloader run ) self.pending_tasks: " + str(self.pending_tasks))
+        self.pending_tasks += 1
+        self.lock.acquire()
+        if self.downloading:
+            logger.debug("(Downloader run ) ANOTHER DOWNLOADING PROCESS IN PROGRESS! ")
+            self.lock.release()
+            logger.debug("(Downloader run ) ANOTHER DOWNLOADING PROCESS IN PROGRESS! >>> RETURN ")
+            return
+        self.downloading = True
+        self.lock.release()
+        while self.pending_tasks:
+            logger.debug("(Downloader run ) LOOP : DOWNLOAD ")
+            downloader_job = DownloaderJob()
+            downloader_job.start()
+            self.pending_tasks -= 1
+        self.lock.acquire()
+        self.downloading = False
+        self.lock.release()
 
