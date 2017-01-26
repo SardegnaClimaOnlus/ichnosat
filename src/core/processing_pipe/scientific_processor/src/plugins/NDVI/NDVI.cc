@@ -41,8 +41,14 @@ void NDVI::ProcessRasterData(GDALRasterBand * band4_band01, GDALRasterBand * ban
 
     for(int j = 0;j < nXSize; j++){
         band4_buffer[j]=(float)band4_buffer[j] / (float)10000;
-        band8_buffer[j]=(float)band8_buffer[j] / (float)10000;
-        ndvi_raster[i*nXSize+j] = (band8_buffer[j] - band4_buffer[j])/(band8_buffer[j] + band4_buffer[j]);
+        if(band4_buffer[j] > 0.2){
+            ndvi_raster[i*nXSize+j] = std::numeric_limits<float>::infinity();
+        }
+        else{
+            band8_buffer[j]=(float)band8_buffer[j] / (float)10000;
+            ndvi_raster[i*nXSize+j] = (band8_buffer[j] - band4_buffer[j])/(band8_buffer[j] + band4_buffer[j]);
+        }
+
     }
   }
   CPLFree( band4_buffer );
