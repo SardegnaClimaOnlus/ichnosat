@@ -14,11 +14,6 @@ $(function () {
         name: 'demo-sidebar',
         img: null,
         nodes: [
-//             { id: 'dashboard', text: 'Status', icon: '',  group1: true,
-//                nodes: [
-//                    { id: 'dashboard-1', text: 'General', icon: '' }
-//                ]
-//            },
             { id: 'modules', text: 'Modules', icon: '',  group1: true,
                 nodes: [
                     { id: 'modules-1', text: 'Downloader', icon: '' },
@@ -34,159 +29,6 @@ $(function () {
                     { id: 'products-5', text: 'Processed', icon: '' },
                 ]
             }
-            //
-            ,
-//            { id: 'combo', text: 'Combinations', img: 'icon-folder', group1: true,
-//                nodes: [
-//                    { id: 'combo-1', text: 'Sidebar & Grid', icon: 'fa-star-empty' },
-//                    { id: 'combo-2', text: 'Grid & Edit', icon: 'fa-star-empty' },
-//                    { id: 'combo-3', text: 'Spreadsheet Like Grid', icon: 'fa-star-empty' },
-//                    { id: 'combo-4', text: 'Buffered Scroll', icon: 'fa-star-empty' },
-//                    { id: 'combo-9', text: 'Infinite Scroll', icon: 'fa-star-empty' },
-//                    { id: 'combo-5', text: 'Tabs With Content', icon: 'fa-star-empty' },
-//                    { id: 'combo-6', text: 'Layout & Dynamic Tabs', icon: 'fa-star-empty' },
-//                    { id: 'combo-7', text: 'Popup & Grid', icon: 'fa-star-empty' },
-//                    { id: 'combo-8', text: 'Popup & Layout', icon: 'fa-star-empty' },
-//                    { id: 'combo-10', text: 'Dependent Fields', icon: 'fa-star-empty' }
-//                ]
-//            },
-//            { id: 'layout', text: 'Layout', img: 'icon-folder', group1: true,
-//                nodes: [
-//                    { id: 'layout-1', text: 'Simple Layout', icon: 'fa-columns' },
-//                    { id: 'layout-2', text: 'Resizable Panels', icon: 'fa-columns' },
-//                    { id: 'layout-3', text: 'Show/Hide Panels', icon: 'fa-columns' },
-//                    { id: 'layout-4', text: 'Load Content', icon: 'fa-columns' },
-//                    { id: 'layout-5', text: 'Transitions', icon: 'fa-columns' },
-//                    { id: 'layout-6', text: 'Event Listeners', icon: 'fa-columns' },
-//                    { id: 'layout-7', text: 'Nested Layouts', icon: 'fa-columns' },
-//                    { id: 'layout-8', text: 'Panel With Tabs', icon: 'fa-columns' },
-//                    { id: 'layout-9', text: 'Panel With Toolbar', icon: 'fa-columns' },
-//                    { id: 'layout-10', text: 'Panel With Title', icon: 'fa-columns' },
-//                    { id: 'layout-11', text: 'Panel Messages (1.5+)', icon: 'fa-columns' }
-//                ]
-//            },
-//            { id: 'grid', text: 'Grid', img: 'icon-folder', group1: true,
-//                nodes: [
-//                    { id: 'grid-1', text: 'Simple Grid', icon: 'fa-table' },
-//                    { id: 'grid-3', text: 'Grid Elements', icon: 'fa-table' },
-//                    { id: 'grid-2', text: 'Row Formatting', icon: 'fa-table' },
-//                    { id: 'grid-23',text: 'Cell Formatting', icon: 'fa-table' },
-//                    { id: 'grid-4', text: 'Data Source', icon: 'fa-table' },
-//                    { id: 'grid-5', text: 'Load Data Once', icon: 'fa-table' },
-//                    { id: 'grid-6', text: 'Single or Multi Select', icon: 'fa-table' },
-//                    { id: 'grid-8', text: 'Show/Hide Columns', icon: 'fa-table' },
-//                    { id: 'grid-9', text: 'Add/Remove Records', icon: 'fa-table' },
-//                    { id: 'grid-10', text: 'Select/Unselect Records', icon: 'fa-table' },
-//                    { id: 'grid-11', text: 'Fixed/Resizable', icon: 'fa-table' },
-//                    { id: 'grid-12', text: 'Column Sort', icon: 'fa-table' },
-//                    { id: 'grid-13', text: 'Column Groups', icon: 'fa-table' },
-//                    { id: 'grid-14', text: 'Summary Records', icon: 'fa-table' },
-//                    { id: 'grid-15', text: 'Simple Search', icon: 'fa-table' },
-//                    { id: 'grid-16', text: 'Advanced Search', icon: 'fa-table' },
-//                    { id: 'grid-17', text: 'Grid Toolbar', icon: 'fa-table' },
-//                    { id: 'grid-18', text: 'Master -> Detail', icon: 'fa-table' },
-//                    { id: 'grid-19', text: 'Two Grids', icon: 'fa-table' },
-//                    { id: 'grid-20', text: 'Render to a New Box', icon: 'fa-table' },
-//                    { id: 'grid-21', text: 'Inline Editing', icon: 'fa-table' },
-//                    { id: 'grid-22', text: 'Resizable Columns', icon: 'fa-table' },
-//                    { id: 'grid-24', text: 'Lock/Unlock Grid', icon: 'fa-table' },
-//                    { id: 'grid-25', text: 'Re-Order Columns', icon: 'fa-table' },
-//                    { id: 'grid-26', text: 'Re-Order Records', icon: 'fa-table' },
-//                    { id: 'grid-7',  text: 'Tree-Like Grid (1.5+)', icon: 'fa-table' },
-//                    { id: 'grid-27', text: 'Frozen Columns (1.5+)', icon: 'fa-table' },
-//                    { id: 'grid-28', text: 'Info Bubble (1.5+)', icon: 'fa-table' }
-//                ]
-//            },
-//            { id: 'toolbar', text: 'Toolbar', img: 'icon-folder', group1: true,
-//                nodes: [
-//                    { id: 'toolbar-1', text: 'Simple Toolbar', icon: 'fa-hand-up' },
-//                    { id: 'toolbar-2', text: 'More Buttons Type', icon: 'fa-hand-up' },
-//                    { id: 'toolbar-3', text: 'Add/Remove Buttons', icon: 'fa-hand-up' },
-//                    { id: 'toolbar-4', text: 'Show/Hide Buttons', icon: 'fa-hand-up' },
-//                    { id: 'toolbar-5', text: 'Enable/Disable Buttons', icon: 'fa-hand-up' },
-//                    { id: 'toolbar-6', text: 'Menu Buttons (1.5+)', icon: 'fa-hand-up' },
-//                    { id: 'toolbar-7', text: 'Color Buttons (1.5+)', icon: 'fa-hand-up' },
-//                    { id: 'toolbar-8', text: 'Tooltips (1.5+)', icon: 'fa-hand-up' },
-//                    { id: 'toolbar-9', text: 'Custom Buttons (1.5+)', icon: 'fa-hand-up' },
-//                    { id: 'toolbar-10', text: 'Toolbar Overflow (1.5+)', icon: 'fa-hand-up' }
-//                ]
-//            },
-//            { id: 'sidebar', text: 'Sidebar', img: 'icon-folder', group1: true,
-//                nodes: [
-//                    { id: 'sidebar-1', text: 'Simple Sidebar', icon: 'fa-hand-left' },
-//                    { id: 'sidebar-2', text: 'Add/Remove', icon: 'fa-hand-left' },
-//                    { id: 'sidebar-3', text: 'Show/Hide', icon: 'fa-hand-left' },
-//                    { id: 'sidebar-4', text: 'Enable/Disable', icon: 'fa-hand-left' },
-//                    { id: 'sidebar-5', text: 'Expand/Collapse', icon: 'fa-hand-left' },
-//                    { id: 'sidebar-6', text: 'Select/Unselect', icon: 'fa-hand-left' },
-//                    { id: 'sidebar-8', text: 'Top & Bottom HTML', icon: 'fa-hand-left' },
-//                    { id: 'sidebar-7', text: 'Events', icon: 'fa-hand-left' },
-//                    { id: 'sidebar-9', text: 'Flat Sidebar (1.5+)', icon: 'fa-hand-up' },
-//                    { id: 'sidebar-10', text: 'In/Out of Focus (1.5+)', icon: 'fa-hand-up' }
-//                ]
-//            },
-//            { id: 'tabs', text: 'Tabs', img: 'icon-folder', group1: true,
-//                nodes: [
-//                    { id: 'tabs-1', text: 'Simple Tabs', icon: 'fa-folder-close-alt' },
-//                    { id: 'tabs-2', text: 'Set a Tab Active', icon: 'fa-folder-close-alt' },
-//                    { id: 'tabs-3', text: 'Closeable Tabs', icon: 'fa-folder-close-alt' },
-//                    { id: 'tabs-4', text: 'Add/Remove Tabs', icon: 'fa-folder-close-alt' },
-//                    { id: 'tabs-5', text: 'Enable/Disabled Tabs', icon: 'fa-folder-close-alt' },
-//                    { id: 'tabs-6', text: 'Show/Hide Tabs', icon: 'fa-folder-close-alt' },
-//                    { id: 'tabs-7', text: 'Tabs Overflow (1.5+)', icon: 'fa-folder-close-alt' },
-//                    { id: 'tabs-8', text: 'Tooltips (1.5+)', icon: 'fa-folder-close-alt' }
-//                ]
-//            },
-//            { id: 'forms', text: 'Forms', img: 'icon-folder', group1: true,
-//                nodes: [
-//                    { id: 'forms-1', text: 'Simple Form', icon: 'fa-edit' },
-//                    { id: 'forms-10',text: 'Auto Templates', icon: 'fa-edit' },
-//                    { id: 'forms-2', text: 'Field Types', icon: 'fa-edit' },
-//                    { id: 'forms-3', text: 'Large Form', icon: 'fa-edit' },
-//                    { id: 'forms-4', text: 'Multi Page Form', icon: 'fa-edit' },
-//                    { id: 'forms-5', text: 'Form Tabs', icon: 'fa-edit' },
-//                    { id: 'forms-9', text: 'Form Toolbar', icon: 'fa-edit' },
-//                    { id: 'forms-8', text: 'Form in a Popup', icon: 'fa-edit' },
-//                    { id: 'forms-6', text: 'Events', icon: 'fa-edit' },
-//                    { id: 'forms-11', text: 'Form Columns (1.5+)', icon: 'fa-edit' }
-//                ]
-//            },
-//            { id: 'fields', text: 'Fields', img: 'icon-folder', group1: true,
-//                nodes: [
-//                    { id: 'fields-1', text: 'Numeric', icon: 'fa-edit' },
-//                    { id: 'fields-2', text: 'Date, Time & Datetime', icon: 'fa-edit' },
-//                    { id: 'fields-3', text: 'Drop Down Lists', icon: 'fa-edit' },
-//                    { id: 'fields-4', text: 'Multi Selects', icon: 'fa-edit' },
-//                    { id: 'fields-5', text: 'File Upload', icon: 'fa-edit' },
-//                    { id: 'fields-6', text: 'Remote Source', icon: 'fa-edit' },
-//                    { id: 'fields-7', text: 'Get/Set Value (1.5+)', icon: 'fa-edit' }
-//                ]
-//            },
-//            { id: 'popup', text: 'Popup', img: 'icon-folder', group1: true,
-//                nodes: [
-//                    { id: 'popup-1', text: 'Simple Popup', icon: 'fa-list-alt' },
-//                    { id: 'popup-2', text: 'More Options', icon: 'fa-list-alt' },
-//                    { id: 'popup-3', text: 'Popup Elements', icon: 'fa-list-alt' },
-//                    { id: 'popup-4', text: 'Based on Markup', icon: 'fa-list-alt' },
-//                    { id: 'popup-5', text: 'Load Content', icon: 'fa-list-alt' },
-//                    { id: 'popup-6', text: 'Transitions', icon: 'fa-list-alt' },
-//                    { id: 'popup-7', text: 'Slide a Message', icon: 'fa-list-alt' },
-//                    { id: 'popup-9', text: 'Lock Content', icon: 'fa-list-alt' },
-//                    { id: 'popup-8', text: 'Dialogs (1.5+)', icon: 'fa-list-alt' },
-//                    { id: 'popup-10', text: 'Keyboard (1.5+)', icon: 'fa-list-alt' },
-//                    { id: 'popup-11', text: 'Messages (1.5+)', icon: 'fa-list-alt' }
-//                ]
-//            },
-//            { id: 'utils', text: 'Utilities', img: 'icon-folder', group1: true,
-//                nodes: [
-//                    { id: 'utils-1', text: 'Validation', icon: 'fa-star-empty' },
-//                    { id: 'utils-2', text: 'Encoding', icon: 'fa-star-empty' },
-//                    { id: 'utils-3', text: 'Transitions', icon: 'fa-star-empty' },
-//                    { id: 'utils-4', text: 'Tags (1.5+)', icon: 'fa-star-empty' },
-//                    { id: 'utils-5', text: 'Overlays (1.5+)', icon: 'fa-star-empty' },
-//                    { id: 'utils-6', text: 'Formatters (1.5+)', icon: 'fa-star-empty' },
-//                ]
-//            }
         ],
         onClick: function (event) {
             var cmd = event.target;
@@ -271,10 +113,6 @@ $(function () {
         var tmp = String(document.location.hash).split('/');
         switch (tmp[0]) {
             default:
-
-            //
-
-            //
             case '#!dashboard':
                 w2ui['demo-sidebar'].expand('dashboard');
                 w2ui['demo-sidebar'].click(tmp[1] || 'dashboard-1');
@@ -286,55 +124,6 @@ $(function () {
             case '#!products':
                 w2ui['demo-sidebar'].expand('products');
                 w2ui['demo-sidebar'].click(tmp[1] || 'products-1');
-                break;
-            case '#!combo':
-                w2ui['demo-sidebar'].expand('combo');
-                w2ui['demo-sidebar'].click(tmp[1] || 'combo-1');
-                break;
-
-            case '#!layout':
-                w2ui['demo-sidebar'].expand('layout');
-                w2ui['demo-sidebar'].click(tmp[1] || 'layout-1');
-                break;
-
-            case '#!grid':
-                w2ui['demo-sidebar'].expand('grid');
-                w2ui['demo-sidebar'].click(tmp[1] || 'grid-1');
-                break;
-
-            case '#!toolbar':
-                w2ui['demo-sidebar'].expand('toolbar');
-                w2ui['demo-sidebar'].click(tmp[1] || 'toolbar-1');
-                break;
-
-            case '#!sidebar':
-                w2ui['demo-sidebar'].expand('sidebar');
-                w2ui['demo-sidebar'].click(tmp[1] || 'sidebar-1');
-                break;
-
-            case '#!tabs':
-                w2ui['demo-sidebar'].expand('tabs');
-                w2ui['demo-sidebar'].click(tmp[1] || 'tabs-1');
-                break;
-
-            case '#!popup':
-                w2ui['demo-sidebar'].expand('popup');
-                w2ui['demo-sidebar'].click(tmp[1] || 'popup-1');
-                break;
-
-            case '#!forms':
-                w2ui['demo-sidebar'].expand('forms');
-                w2ui['demo-sidebar'].click(tmp[1] || 'forms-1');
-                break;
-
-            case '#!fields':
-                w2ui['demo-sidebar'].expand('fields');
-                w2ui['demo-sidebar'].click(tmp[1] || 'fields-1');
-                break;
-
-            case '#!utils':
-                w2ui['demo-sidebar'].expand('utils');
-                w2ui['demo-sidebar'].click(tmp[1] || 'utils-1');
                 break;
         }
     }, 100);
