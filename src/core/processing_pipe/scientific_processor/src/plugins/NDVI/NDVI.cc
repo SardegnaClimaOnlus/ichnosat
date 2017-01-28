@@ -18,10 +18,10 @@
 #include "ogr_core.h"
 #include "NDVI.h"
 
-const char * NDVI::ConcatString(const char * first, const char * second){
+char * NDVI::ConcatString(const char * first, const char * second){
   size_t first_len = first?strlen(first):0;
   size_t second_len = second?strlen(second):0;
-  char * concat = (char*) malloc((first_len+second_len) * sizeof(char));
+  char * concat = (char*) CPLMalloc((first_len+1+second_len+1) * sizeof(char));
   concat = strcpy(concat, first);
   concat = strcat(concat, second);
 
@@ -52,8 +52,8 @@ void NDVI::ProcessRasterData(GDALRasterBand * band4_band01, GDALRasterBand * ban
 
     }
   }
-  CPLFree( band4_buffer );
-  CPLFree( band8_buffer );
+  if(band4_buffer != NULL ) CPLFree( band4_buffer );
+  if(band8_buffer != NULL ) CPLFree( band8_buffer );
 
 }
 
@@ -75,13 +75,18 @@ void NDVI::process(char * productPath, char * ndvi_rasterinationPath){
   poDriver = GetGDALDriverManager()->GetDriverByName(DEST_FORMAT);
 
   // open band4 file and band8 file
-  GDALDataset * band4_dataset = (GDALDataset *) GDALOpen( this->ConcatString(productPath, BAND4_FILENAME), GA_ReadOnly );
-  GDALDataset * band8_dataset = (GDALDataset *) GDALOpen( this->ConcatString(productPath, BAND8_FILENAME), GA_ReadOnly );
+  char * band4_path = this->ConcatString(productPath, BAND4_FILENAME);
+  char * band8_path = this->ConcatString(productPath, BAND8_FILENAME);
+  GDALDataset * band4_dataset = (GDALDataset *) GDALOpen( ( const char *) band4_path, GA_ReadOnly );
+  GDALDataset * band8_dataset = (GDALDataset *) GDALOpen( ( const char *) band8_path, GA_ReadOnly );
+  if(band4_path != NULL) CPLFree( (void * ) band4_path);
+  if(band8_path != NULL) CPLFree( (void * ) band8_path);
+
 
   // get band B04
   GDALRasterBand  *band4_band01;
   band4_band01 = band4_dataset->GetRasterBand( 1 );
-  
+
   // get band B08
   GDALRasterBand  * band8_band01;
   band8_band01 = band8_dataset->GetRasterBand( 1 );
@@ -117,7 +122,7 @@ void NDVI::process(char * productPath, char * ndvi_rasterinationPath){
   if( band8_dataset != NULL ) GDALClose( (GDALDatasetH) band8_dataset );
 
   // free allocated memory
-  CPLFree( ndvi_raster );
+  if( ndvi_raster != NULL ) CPLFree( ndvi_raster );
 
   return ;
 }
