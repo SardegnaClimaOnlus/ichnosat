@@ -82,6 +82,8 @@ RUN apt-get install -y  python3-psycopg2
 RUN apt-get install -y cron
 RUN apt-get install -y python3-crontab
 
+## install valgrind
+RUN apt-get install -y valgrind
 
 WORKDIR /usr/ichnosat/
 
