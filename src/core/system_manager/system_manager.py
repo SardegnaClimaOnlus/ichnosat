@@ -1,13 +1,23 @@
+#!/usr/bin/env python
+
 from src.data.logger.logger import logger
-import sys
 from src.core.processing_pipe.src.PluginManager import PluginManager
-#from src.core.downloader.start import start_downloader
 from src.core.downloader.Downloader import Downloader
 from src.data.database.db import DB
 from src.core.processing_pipe.src.ProcessingPipeManager import ProcessingPipeManager
 import configparser
 from src.data.database.services.products_service import ProductsService
 from src.data.database.services.products_service import ProductStatus
+
+__author__ = "Raffaele Bua (buele)"
+__copyright__ = "Copyright 2017, Sardegna Clima"
+__credits__ = ["Raffaele Bua"]
+__license__ = "MIT"
+__version__ = "0.1"
+__maintainer__ = "Raffaele Bua"
+__contact__ = "info@raffaelebua.eu"
+__status__ = "Development"
+
 
 class SystemManager():
     def __init__(self):

@@ -1,14 +1,22 @@
+#!/usr/bin/env python
+
 from flask import Flask
 from flask_cors import CORS
 from src.data.logger.logger import logger
-import json
-import sys
+from src.core.system_manager.system_manager import SystemManager
+
+__author__ = "Raffaele Bua (buele)"
+__copyright__ = "Copyright 2017, Sardegna Clima"
+__credits__ = ["Raffaele Bua"]
+__license__ = "MIT"
+__version__ = "0.1"
+__maintainer__ = "Raffaele Bua"
+__contact__ = "info@raffaelebua.eu"
+__status__ = "Development"
 
 app = Flask(__name__)
 CORS(app)
 
-
-from src.core.system_manager.system_manager import SystemManager
 
 @app.route('/compile-plugins')
 def compile_plugins():

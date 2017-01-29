@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import datetime
 from sqlalchemy import *
 from sqlalchemy.orm import *
@@ -8,14 +10,20 @@ import configparser
 from src.data.database.entities.product import Product
 from src.data.database.entities.product import ProductStatus
 
-
+__author__ = "Raffaele Bua (buele)"
+__copyright__ = "Copyright 2017, Sardegna Clima"
+__credits__ = ["Raffaele Bua"]
+__license__ = "MIT"
+__version__ = "0.1"
+__maintainer__ = "Raffaele Bua"
+__contact__ = "info@raffaelebua.eu"
+__status__ = "Development"
 
 class ProductsService():
     def __init__(self):
         config = configparser.ConfigParser()
         config.read("src/data/database/config/db.cfg")
         self.engine = create_engine(config['database']['connection_string'], echo=True, pool_recycle=3600)
-
 
     def add_new_product(self, product):
         result = False
@@ -40,10 +48,6 @@ class ProductsService():
             logger.debug(err)
 
         return result
-
-
-
-
 
     def get_products_to_process(self):
         Session = sessionmaker(bind=self.engine)

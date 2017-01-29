@@ -1,9 +1,21 @@
+#!/usr/bin/env python
+
 from flask import Flask, request
 from src.data.database.db import DB
 from src.core.processing_pipe.src.JobDispatcher import JobDispatcher
 from src.data.logger.logger import logger
 from flask_cors import CORS
 import configparser
+
+__author__ = "Raffaele Bua (buele)"
+__copyright__ = "Copyright 2017, Sardegna Clima"
+__credits__ = ["Raffaele Bua"]
+__license__ = "MIT"
+__version__ = "0.1"
+__maintainer__ = "Raffaele Bua"
+__contact__ = "info@raffaelebua.eu"
+__status__ = "Development"
+
 
 app = Flask(__name__)
 CORS(app)

@@ -1,8 +1,20 @@
+#!/usr/bin/env python
+
 import os
 import urllib.request
 from src.data.database.services.products_service import ProductsService
 from src.data.database.entities.product import *
 from src.data.logger.logger import logger
+
+__author__ = "Raffaele Bua (buele)"
+__copyright__ = "Copyright 2017, Sardegna Clima"
+__credits__ = ["Raffaele Bua"]
+__license__ = "MIT"
+__version__ = "0.1"
+__maintainer__ = "Raffaele Bua"
+__contact__ = "info@raffaelebua.eu"
+__status__ = "Development"
+
 
 class ProductDownloader:
     def __init__(self, inbox_path, files_to_download, domain):

@@ -1,9 +1,21 @@
+#!/usr/bin/env python
+
 import sys
 from crontab import CronTab
 sys.path.append('/usr/ichnosat/')
 import configparser
 from src.core.system_manager.system_manager import SystemManager
 from src.data.logger.logger import logger
+
+__author__ = "Raffaele Bua (buele)"
+__copyright__ = "Copyright 2017, Sardegna Clima"
+__credits__ = ["Raffaele Bua"]
+__license__ = "MIT"
+__version__ = "0.1"
+__maintainer__ = "Raffaele Bua"
+__contact__ = "info@raffaelebua.eu"
+__status__ = "Development"
+
 
 
 sm = SystemManager()

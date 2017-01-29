@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from src.data.logger.logger import logger
 from src.core.downloader.ConfigurationManager import ConfigurationManager
 from src.core.processing_pipe.src.ProcessingPipeManager import ProcessingPipeManager
@@ -6,6 +8,16 @@ from src.core.downloader.Datasource import Datasource
 from src.data.database.services.products_service import ProductsService
 from src.data.database.entities.product import ProductStatus
 from src.data.database.entities.product import Product
+
+__author__ = "Raffaele Bua (buele)"
+__copyright__ = "Copyright 2017, Sardegna Clima"
+__credits__ = ["Raffaele Bua"]
+__license__ = "MIT"
+__version__ = "0.1"
+__maintainer__ = "Raffaele Bua"
+__contact__ = "info@raffaelebua.eu"
+__status__ = "Development"
+
 
 class DownloaderJob():
     def __init__(self):

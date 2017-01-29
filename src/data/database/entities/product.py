@@ -1,9 +1,21 @@
+#!/usr/bin/env python
+
 import datetime
 import enum
 from sqlalchemy import *
 from sqlalchemy.orm import *
 from src.data.logger.logger import logger
 from src.data.database.base import Base
+
+__author__ = "Raffaele Bua (buele)"
+__copyright__ = "Copyright 2017, Sardegna Clima"
+__credits__ = ["Raffaele Bua"]
+__license__ = "MIT"
+__version__ = "0.1"
+__maintainer__ = "Raffaele Bua"
+__contact__ = "info@raffaelebua.eu"
+__status__ = "Development"
+
 
 class ProductStatus(enum.Enum):
     pending = "pending"
