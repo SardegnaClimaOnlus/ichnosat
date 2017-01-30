@@ -13,3 +13,4 @@ pre-processor/outbox/!README.md
 *.sqlite
 supervisord.pid
 data_local/db/data/*
+data_local/log/valgrind
