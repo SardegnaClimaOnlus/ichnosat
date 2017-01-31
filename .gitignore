@@ -14,3 +14,7 @@ pre-processor/outbox/!README.md
 supervisord.pid
 data_local/db/data/*
 data_local/log/valgrind
+auto-docs/**/*.rst
+auto-docs/**/build
+!auto-docs/source/index.rst
+**/**/*.pyc

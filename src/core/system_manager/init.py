@@ -32,6 +32,7 @@
 # ==================================================================================== #
 
 import sys
+import subprocess
 from crontab import CronTab
 sys.path.append('/usr/ichnosat/')
 import configparser
@@ -65,6 +66,10 @@ cron = CronTab(user=config['CRON']['user'])
 job = cron.new(command=config['CRON']['command'])
 job.setall(config['CRON']['cron'])
 cron.write()
+
+# generate documentation
+
+subprocess.Popen(["/bin/bash", "auto-docs/bash/generate-docs.sh", "var=11; ignore all"])
 
 
 

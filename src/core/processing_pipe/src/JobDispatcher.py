@@ -45,8 +45,14 @@ __contact__ = "info@raffaelebua.eu"
 __status__ = "Development"
 
 
-class JobDispatcher():
-    def __init__(self, outbox_path,plugins_path):
+
+class JobDispatcher:
+    """The summary line for a class docstring should fit on one line.
+
+
+
+    """
+    def __init__(self, outbox_path, plugins_path):
         logger.debug("(JobDispatcher __init__) ")
         self.queue = []
         self.processing = False
@@ -55,6 +61,39 @@ class JobDispatcher():
         self.plugins_path = plugins_path
 
     def publish_new_job(self, product):
+        """Example of docstring on the publish_new_job method.
+        The __init__ method may be documented in either the class level
+        docstring, or as a docstring on the __init__ method itself.
+
+        Either form is acceptable, but the two should not be mixed. Choose one
+        convention to document the __init__ method and be consistent with it.
+
+        +------------------------+------------+----------+----------+
+        | Header row, column 1   | Header 2   | Header 3 | Header 4 |
+        | (header rows optional) |            |          |          |
+        +========================+============+==========+==========+
+        | body row 1, column 1   | column 2   | column 3 | column 4 |
+        +------------------------+------------+----------+----------+
+        | body row 2             | Cells may span columns.          |
+        +------------------------+------------+---------------------+
+        | body row 3             | Cells may  | - Table cells       |
+        +------------------------+ span rows. | - contain           |
+        | body row 4             |            | - body elements.    |
+        +------------------------+------------+---------------------+
+
+
+
+
+
+        Note:
+           Do not include the `self` parameter in the ``Args`` section.
+
+        Args:
+           product (Product): Description of `product`.
+
+
+
+        """
         logger.debug("(JobDispatcher publish_new_job) ")
         self.queue.append(product)
         self.dispatch_new_job()

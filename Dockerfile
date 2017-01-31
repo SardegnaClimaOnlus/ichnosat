@@ -116,6 +116,9 @@ RUN apt-get install -y python3-crontab
 ## install valgrind
 RUN apt-get install -y valgrind
 
+RUN pip3 install Sphinx
+RUN apt-get install -y vim
+
 WORKDIR /usr/ichnosat/
 
 
