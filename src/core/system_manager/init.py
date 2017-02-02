@@ -69,7 +69,7 @@ cron.write()
 
 # generate documentation
 
-subprocess.Popen(["/bin/bash", "auto-docs/bash/generate-docs.sh", "var=11; ignore all"])
+#subprocess.Popen(["/bin/bash", "auto-docs/bash/generate-docs.sh", "var=11; ignore all"])
 
 
 

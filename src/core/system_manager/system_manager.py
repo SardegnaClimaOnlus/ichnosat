@@ -68,7 +68,6 @@ class SystemManager():
         logger.debug("(SystemManager trigger_downloader) call downloader ")
         try:
             self.downloader.start()
-            self.ProcessingPipeManager.start_processing()
         except Exception as err:
             logger.debug("(SystemManager trigger_downloader) Unexpeted error:")
             logger.debug(err)

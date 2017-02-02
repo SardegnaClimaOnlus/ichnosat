@@ -33,6 +33,7 @@
 
 from src.core.processing_pipe.src.PluginManager import PluginManager
 from src.data.logger.logger import logger
+import shutil
 
 __author__ = "Raffaele Bua (buele)"
 __copyright__ = "Copyright 2017, Sardegna Clima"
@@ -55,3 +56,4 @@ class Job():
     def run(self):
         for plugin in self.plugins:
             plugin.run(self.source, self.outbox_path)
+        shutil.rmtree(self.source)

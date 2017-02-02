@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 
 # ==================================================================================== #
 #  __     ______     __  __     __   __     ______     ______     ______     ______
@@ -32,9 +32,18 @@
 # ==================================================================================== #
 
 from src.data.database.services.products_service import ProductsService
+from src.data.database.entities.product import Product
+from src.data.database.entities.product import ProductStatus
 from src.data.logger.logger import logger
 from src.core.downloader.DownloaderJob import DownloaderJob
 import threading
+import queue
+from collections import deque
+from src.core.downloader.ConfigurationManager import ConfigurationManager
+from src.core.downloader.SearchFilter import SearchFilter
+from src.core.downloader.Datasource import Datasource
+
+
 
 __author__ = "Raffaele Bua (buele)"
 __copyright__ = "Copyright 2017, Sardegna Clima"
@@ -46,32 +55,46 @@ __contact__ = "info@raffaelebua.eu"
 __status__ = "Development"
 
 
-class Downloader():
+class Downloader:
     def __init__(self):
         logger.debug("(Downloader __init__)")
         self.productService = ProductsService()
-        self.pending_tasks = 0
-        self.lock = threading.Lock()
         self.downloading = False
+        self.configurationManager = ConfigurationManager()
+        self.configuration = self.configurationManager.get_configuration()
+        self.queue = queue.Queue()
+        self.pending_tasks = 0
+        self.datasource = Datasource(self.configuration)
+
+    def create_search_filter(self, tile):
+        return SearchFilter(tile, self.configuration.start_date, self.configuration.end_date)
 
     def start(self):
         logger.debug("(Downloader run ) ")
-        logger.debug("(Downloader run ) self.pending_tasks: " + str(self.pending_tasks))
         self.pending_tasks += 1
-        self.lock.acquire()
+
         if self.downloading:
-            logger.debug("(Downloader run ) ANOTHER DOWNLOADING PROCESS IN PROGRESS! ")
-            self.lock.release()
-            logger.debug("(Downloader run ) ANOTHER DOWNLOADING PROCESS IN PROGRESS! >>> RETURN ")
             return
         self.downloading = True
-        self.lock.release()
-        while self.pending_tasks:
-            logger.debug("(Downloader run ) LOOP : DOWNLOAD ")
-            downloader_job = DownloaderJob()
-            downloader_job.start()
-            self.pending_tasks -= 1
-        self.lock.acquire()
-        self.downloading = False
-        self.lock.release()
 
+        # retrieve pending products list
+        for tile in self.configuration.tiles:
+            logger.debug("(Downloader download) generate list of available products for tile: " + tile)
+            searchFilter = self.create_search_filter(tile)
+            # generate products list from search filter
+            products_list = self.datasource.get_products_list(searchFilter)
+            # add products in database
+            for pending_product in products_list:
+                self.productService.add_new_product(Product(name=str(pending_product),
+                                                            status=ProductStatus.pending))
+
+        products = [self.queue.put(product) for product in self.productService.get_pending_products()]
+
+        while self.pending_tasks:
+            for i in range(3):
+                t = DownloaderJob(self.queue)
+                t.daemon = True
+                t.start()
+
+            self.pending_tasks -= 1
+        self.downloading = False

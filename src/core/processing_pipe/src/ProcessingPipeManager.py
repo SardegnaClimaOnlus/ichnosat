@@ -69,9 +69,7 @@ class ProcessingPipeManager:
 
     def start_processing(self):
         logger.debug("(ProcessingPipeManager start_processing) ")
-        logger.debug(">>>>>>>>>>>> BEFORE THE PROCESSING LOOP")
         ps = ProductsService()
         for product in ps.get_products_to_process():
-            logger.debug("-----> indaloop:  product.name: " + product.name)
             self.process_product(product.name)
 

@@ -36,7 +36,7 @@ import os, sys, select
 from ctypes import *
 from src.data.database.services.products_service import ProductsService
 from src.data.database.entities.product import ProductStatus
-import shutil
+
 
 __author__ = "Raffaele Bua (buele)"
 __copyright__ = "Copyright 2017, Sardegna Clima"
@@ -83,7 +83,7 @@ class Plugin():
             self.productService.update_product_status(original_name, ProductStatus.processed)
             os.dup2(self.stdout, 1)
             self.read_pipe()
-            shutil.rmtree(source)
+
         except Exception as err:
             logger.warn("Failed scientific-processor plugin with name: " + self.plugin_name)
             logger.debug("(SystemManager set_first_installation_config) Unexpected error:")
