@@ -69,18 +69,15 @@ class Plugin():
     def run(self, source, outbox_path):
         try:
             product_name = source.split('/')[-2]
-            original_name = product_name.replace("-", "/") + "/"
-            self.productService.update_product_status(original_name, ProductStatus.processing)
             destination = outbox_path + product_name + "-" + self.plugin_name + '/'
             if not os.path.exists(destination):
                 os.makedirs(destination)
             cdll.LoadLibrary(self.plugin_path)
             libc = CDLL(self.plugin_path)
-            productPath = source.encode('utf-8')
-            destinationPath = destination.encode('utf-8')
+            product_path = source.encode('utf-8')
+            destination_path = destination.encode('utf-8')
             libc.process.argtypes = [c_char_p]
-            libc.process(productPath, destinationPath)
-            self.productService.update_product_status(original_name, ProductStatus.processed)
+            libc.process(product_path, destination_path)
             os.dup2(self.stdout, 1)
             self.read_pipe()
 

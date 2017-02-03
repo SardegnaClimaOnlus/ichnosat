@@ -72,7 +72,6 @@ class SystemManager():
             logger.debug("(SystemManager trigger_downloader) Unexpeted error:")
             logger.debug(err)
 
-
     def create_database(self):
         try:
             db = DB()
@@ -90,8 +89,6 @@ class SystemManager():
         processing_products = self.productService.get_processing_products()
         for product in processing_products :
             self.productService.update_product_status(product.name, ProductStatus.downloaded)
-
-
 
     def get_pending_products(self):
         logger.debug("(SystemManager get_pending_products) ")

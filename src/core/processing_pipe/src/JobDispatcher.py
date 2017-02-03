@@ -34,6 +34,9 @@
 import threading
 from src.core.processing_pipe.src.Job import Job
 from src.data.logger.logger import logger
+import queue
+from src.data.database.services.products_service import ProductsService
+import threading
 
 __author__ = "Raffaele Bua (buele)"
 __copyright__ = "Copyright 2017, Sardegna Clima"
@@ -44,49 +47,34 @@ __maintainer__ = "Raffaele Bua"
 __contact__ = "info@raffaelebua.eu"
 __status__ = "Development"
 
-
-
-class JobDispatcher:
-    """The summary line for a class docstring should fit on one line.
-    """
-    def __init__(self, outbox_path, plugins_path):
-        logger.debug("(JobDispatcher __init__) ")
-        self.queue = []
-        self.processing = False
-        self.lock = threading.Lock()
+class JobDispatcher(threading.Thread):
+    def __init__(self, outbox_path, plugins_path, delegate):
+        logger.info("(JobDispatcher __init__) ")
         self.outbox_path = outbox_path
         self.plugins_path = plugins_path
+        self.products_queue = queue.Queue()
+        self.productService = ProductsService()
+        self.delegate = delegate
+        threading.Thread.__init__(self)
 
-    def publish_new_job(self, product):
-        """Example of docstring on the publish_new_job method.
+    def run(self):
+        logger.info("(JobDispatcher run) ")
+        threads = []
+        logger.info("(JobDispatcher run) get list of downloaded products")
+        products = [self.products_queue.put(product) for product in self.productService.get_downloaded_products()]
+        logger.info("(JobDispatcher run) self.products_queue" + str(self.products_queue.qsize()))
 
-        Note:
-           Do not include the `self` parameter in the ``Args`` section.
+        for i in range(2):
+            logger.info("(JobDispatcher run) SPREAD (" + str(i) + ") thread")
+            t = Job(self.outbox_path, self.plugins_path, self.products_queue)
+            t.daemon = True
+            t.start()
+            threads.append(t)
+        logger.info("(JobDispatcher run) SPREAD wait threads end")
+        for thread in threads:
+            thread.join()
+        logger.info("(JobDispatcher run) SPREAD processing ended, set_processing on-going false on DELEGATE")
+        self.delegate.set_processing_false()
 
-        Args:
-           product (Product): Description of `product`.
 
-
-
-        """
-        logger.debug("(JobDispatcher publish_new_job) ")
-        self.queue.append(product)
-        self.dispatch_new_job()
-
-    def dispatch_new_job(self):
-        logger.debug("(JobDispatcher dispatch_new_job) ")
-        self.lock.acquire()
-        if self.processing:
-            self.lock.release()
-            return
-        self.processing = True
-        self.lock.release()
-        while len(self.queue) > 0:
-            product = self.queue.pop()
-            job = Job(self.outbox_path, self.plugins_path, product)
-            job.run()
-
-        self.lock.acquire()
-        self.processing = False
-        self.lock.release()
 

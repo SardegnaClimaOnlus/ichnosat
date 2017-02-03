@@ -31,7 +31,7 @@
 #
 # ==================================================================================== #
 
-from src.data.logger.logger import logger
+
 
 from src.data.database.base import Base
 import configparser
@@ -58,7 +58,6 @@ class DB:
         self.engine = create_engine(self.config['database']['connection_string_create'], echo=True, pool_recycle=3600)
 
     def create_db(self):
-        logger.debug("(DB create_db) @@@@@@@@@@@@@@@@@@@@@@@@@@@")
         try:
             conn = self.engine.connect()
             conn.execute("commit")
@@ -69,6 +68,5 @@ class DB:
             Base.metadata.create_all(engine2)
             return "created_database"
         except Exception as err:
-            logger.debug("(DB create_db) Unexpected error:")
-            logger.debug(err)
+            pass
             return False

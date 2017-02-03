@@ -52,7 +52,6 @@ class ProductDownloader:
         logger.debug("(ProductDownloader __init__) ")
         self.inbox_path = inbox_path
         self.files_to_download = files_to_download
-
         self.domain = domain
         return
 
@@ -67,6 +66,3 @@ class ProductDownloader:
             url = self.domain + product_name + file_name
             new_file_path = new_product_path + '/' + file_name
             urllib.request.urlretrieve(url, new_file_path)
-
-
-        return

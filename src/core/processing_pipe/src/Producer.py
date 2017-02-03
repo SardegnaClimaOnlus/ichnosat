@@ -31,16 +31,12 @@
 #
 # ==================================================================================== #
 
-from src.data.logger.logger import logger
-from src.core.downloader.ConfigurationManager import ConfigurationManager
-from src.core.processing_pipe.src.ProcessingPipeManager import ProcessingPipeManager
-from src.core.downloader.SearchFilter import SearchFilter
-from src.core.downloader.Datasource import Datasource
-from src.data.database.services.products_service import ProductsService
-from src.data.database.entities.product import ProductStatus
-from src.data.database.entities.product import Product
 import threading
+from src.core.processing_pipe.src.Job import Job
+from src.data.logger.logger import logger
 import queue
+from src.core.processing_pipe.src.JobDispatcher import JobDispatcher
+from src.data.database.services.products_service import ProductsService
 
 __author__ = "Raffaele Bua (buele)"
 __copyright__ = "Copyright 2017, Sardegna Clima"
@@ -51,38 +47,31 @@ __maintainer__ = "Raffaele Bua"
 __contact__ = "info@raffaelebua.eu"
 __status__ = "Development"
 
+class Producer():
+    def __init__(self, outbox_path, plugins_path):
+        logger.info("(Producer __init__) ")
+        self.processing = False
+        self.outbox_path = outbox_path
+        self.plugins_path = plugins_path
 
-class DownloaderJob(threading.Thread):
-    def __init__(self, queue):
-        logger.debug("(DownloaderJob __init__)")
-        self.configurationManager = ConfigurationManager()
-        self.configuration = self.configurationManager.get_configuration()
-        self.datasource = Datasource(self.configuration)
-        self.productService = ProductsService()
-        self.queue = queue
-        threading.Thread.__init__(self)
+    def publish_new_job(self):
+        logger.info("(Producer publish_new_job) ")
+        logger.info("(Producer publish_new_job) self.processing: " + str(self.processing))
+        if self.processing:
+            logger.info("(Producer publish_new_job) self.processing is true so return " )
+            return
+        logger.info("(Producer publish_new_job)  no processing on-going so set self.processing as True")
+        self.processing = True
+        logger.info("(Producer publish_new_job)  LAUNCH JobDispatcher ")
+        job_dispatcher = JobDispatcher(self.outbox_path, self.plugins_path, self)
+        job_dispatcher.start()
 
-    def refresh_configurations(self):
-        logger.debug("(Downloader refresh_configurations)")
-        self.configurationManager.load_configuration()
-        self.configuration = self.configurationManager.configuration
-        logger.debug("(Downloader refresh_configurations) finished")
+    def set_processing_false(self):
+        logger.debug("(Producer set_processing_false) ")
+        self.processing = False
 
-    def run(self):
-        while True:
-            try:
-                product = self.queue.get()
-                self.productService.update_product_status(product.name, ProductStatus.downloading)
-                self.queue.task_done()
-                self.datasource.download_product(product.name)
-                self.productService.update_product_status(product.name, ProductStatus.downloaded)
-                processing_pipe_manager = ProcessingPipeManager()
-                processing_pipe_manager.start_processing()
-            except queue.Empty:
-                break
-            else:
-                # Handle task here and call q.task_done()
-                pass
+
+
 
 
 

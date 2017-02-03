@@ -48,7 +48,6 @@ __maintainer__ = "Raffaele Bua"
 __contact__ = "info@raffaelebua.eu"
 __status__ = "Development"
 
-
 class AmazonBucketManager:
     def __init__(self, configurations):
         self.config = configurations

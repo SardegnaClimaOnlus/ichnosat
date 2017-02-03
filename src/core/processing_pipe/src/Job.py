@@ -34,6 +34,11 @@
 from src.core.processing_pipe.src.PluginManager import PluginManager
 from src.data.logger.logger import logger
 import shutil
+import queue
+from src.data.database.entities.product import ProductStatus
+import threading
+from src.data.logger.logger import logger
+from src.data.database.services.products_service import ProductsService
 
 __author__ = "Raffaele Bua (buele)"
 __copyright__ = "Copyright 2017, Sardegna Clima"
@@ -44,16 +49,43 @@ __maintainer__ = "Raffaele Bua"
 __contact__ = "info@raffaelebua.eu"
 __status__ = "Development"
 
-
-class Job():
-    def __init__(self, outbox_path, plugins_path, source):
-        self.source = source
+class Job(threading.Thread):
+    def __init__(self, outbox_path, plugins_path, queue):
+        logger.info("(Job __init__) ")
+        self.queue = queue
         self.outbox_path = outbox_path
         plugin_manager = PluginManager(plugins_path)
         self.plugins = plugin_manager.get_plugins()
+        self.productService = ProductsService()
+        threading.Thread.__init__(self)
         return
 
     def run(self):
-        for plugin in self.plugins:
-            plugin.run(self.source, self.outbox_path)
-        shutil.rmtree(self.source)
+        logger.info("(Job run) ")
+        while True:
+            try:
+                logger.info("(Job run) in the queue there are " + str(self.queue.qsize()) + " items")
+                if self.queue.qsize():
+                    logger.info("(Job run) get a product from queue")
+                    product = self.queue.get()
+                    original_name = product.name.replace("/", "-")
+                    source = "/usr/ichnosat/data_local/inbox/" + original_name[:-1] + "/"
+                    self.productService.update_product_status(product.name, ProductStatus.processing)
+                    self.queue.task_done()
+                    logger.info("(Job run) PROCESS PRODUCT WITH PATH -------: " + source)
+                    for plugin in self.plugins:
+                        plugin.run(source, self.outbox_path)
+                    self.productService.update_product_status(product.name, ProductStatus.processed)
+                    logger.info("(Job run) REMOVE PRODUCT WITH PATH > " + source)
+                    shutil.rmtree(source)
+                else:
+                    return
+            except queue.Empty:
+                logger.info("(Job run) THE QUEUE IS EMTPY EXIT")
+                self.queue.task_done()
+                break
+            else:
+                pass
+
+
+

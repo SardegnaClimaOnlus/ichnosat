@@ -45,7 +45,6 @@ __contact__ = "info@raffaelebua.eu"
 __status__ = "Development"
 
 
-
 class Datasource:
     def __init__(self, configurations):
         logger.debug("(Datasource __init__)")

@@ -46,7 +46,6 @@ __maintainer__ = "Raffaele Bua"
 __contact__ = "info@raffaelebua.eu"
 __status__ = "Development"
 
-
 class ConfigurationManager:
     def __init__(self):
         logger.debug("(ConfigurationManager __init__)")

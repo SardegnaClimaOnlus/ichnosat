@@ -48,20 +48,15 @@ __maintainer__ = "Raffaele Bua"
 __contact__ = "info@raffaelebua.eu"
 __status__ = "Development"
 
-
-
 sm = SystemManager()
 
 # compile plugins
 sm.compile_plugins()
 
-
-
 # set cron tab
 config = configparser.ConfigParser()
 config_file_path = "/usr/ichnosat/src/core/system_manager/config/config.cfg"
 config.read(config_file_path)
-
 cron = CronTab(user=config['CRON']['user'])
 job = cron.new(command=config['CRON']['command'])
 job.setall(config['CRON']['cron'])
