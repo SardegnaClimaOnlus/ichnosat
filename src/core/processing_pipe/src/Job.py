@@ -65,7 +65,7 @@ class Job(threading.Thread):
         return
 
     def fibonacci(self, max_value):
-        i, j = 0, 1
+        i, j = 2, 3
         while i < max_value:
             yield i
             i, j = j, i + j
@@ -83,9 +83,9 @@ class Job(threading.Thread):
         shutil.rmtree(source)
 
     def run(self):
-        WAIT_MULTIPLICATOR = 15
+        WAIT_MULTIPLICATOR = 0.5
         SECONDS_PER_MINUTE = 60
-        FIBONACCI_ITERATIONS = 10
+        FIBONACCI_ITERATIONS = 6000
         logger.info("(Job run)["+str(self.i)+"] ")
         iterator = self.fibonacci(FIBONACCI_ITERATIONS)
         while True:
