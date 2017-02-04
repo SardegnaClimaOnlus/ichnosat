@@ -50,4 +50,5 @@ class Configuration:
         self.tiles = []
         self.files = []
         self.inbox_path = None
+        self.parallel_downloads = 0
 

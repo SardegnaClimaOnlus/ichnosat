@@ -53,7 +53,7 @@ class ProductsService():
     def __init__(self):
         config = configparser.ConfigParser()
         config.read("src/data/database/config/db.cfg")
-        self.engine = create_engine(config['database']['connection_string'], echo=True, pool_recycle=3600)
+        self.engine = create_engine(config['database']['connection_string'],  pool_recycle=3600)
 
     def add_new_product(self, product):
         result = False
@@ -68,8 +68,7 @@ class ProductsService():
                 result = True
             session.close()
         except Exception as err:
-            logger.debug("(ProductsService add_new_product) Unexpected error:")
-            logger.debug(err)
+            pass
 
         return result
 
@@ -91,8 +90,6 @@ class ProductsService():
             product.last_modify = datetime.datetime.utcnow()
             session.commit()
         all = session.query(Product).all()
-        for product in all:
-            logger.debug(str(product))
         session.close()
 
     def get_pending_products(self):
@@ -108,6 +105,14 @@ class ProductsService():
         session = Session()
         result = session.query(Product). \
             filter(Product.status == ProductStatus.downloading).all()
+        session.close()
+        return result
+
+    def get_a_downloaded_product(self):
+        Session = sessionmaker(bind=self.engine)
+        session = Session()
+        result = session.query(Product). \
+            filter(Product.status == ProductStatus.downloaded).first()
         session.close()
         return result
 

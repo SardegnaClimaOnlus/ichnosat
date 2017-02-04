@@ -37,6 +37,7 @@ from src.data.logger.logger import logger
 import queue
 from src.data.database.services.products_service import ProductsService
 import threading
+import configparser
 
 __author__ = "Raffaele Bua (buele)"
 __copyright__ = "Copyright 2017, Sardegna Clima"
@@ -52,8 +53,9 @@ class JobDispatcher(threading.Thread):
         logger.info("(JobDispatcher __init__) ")
         self.outbox_path = outbox_path
         self.plugins_path = plugins_path
-        self.products_queue = queue.Queue()
         self.productService = ProductsService()
+        self.config = configparser.ConfigParser()
+        self.config.read("/usr/ichnosat/src/core/processing_pipe/config/config.cfg")
         self.delegate = delegate
         threading.Thread.__init__(self)
 
@@ -61,12 +63,10 @@ class JobDispatcher(threading.Thread):
         logger.info("(JobDispatcher run) ")
         threads = []
         logger.info("(JobDispatcher run) get list of downloaded products")
-        products = [self.products_queue.put(product) for product in self.productService.get_downloaded_products()]
-        logger.info("(JobDispatcher run) self.products_queue" + str(self.products_queue.qsize()))
-
-        for i in range(2):
+        lock = threading.Lock()
+        for i in range(int(self.config['PROCESSING_PIPE']['parallel_processing'])):
             logger.info("(JobDispatcher run) SPREAD (" + str(i) + ") thread")
-            t = Job(self.outbox_path, self.plugins_path, self.products_queue)
+            t = Job(self.outbox_path, self.plugins_path, lock, i)
             t.daemon = True
             t.start()
             threads.append(t)

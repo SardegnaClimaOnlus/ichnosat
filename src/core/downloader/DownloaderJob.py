@@ -71,13 +71,16 @@ class DownloaderJob(threading.Thread):
     def run(self):
         while True:
             try:
-                product = self.queue.get()
-                self.productService.update_product_status(product.name, ProductStatus.downloading)
-                self.queue.task_done()
-                self.datasource.download_product(product.name)
-                self.productService.update_product_status(product.name, ProductStatus.downloaded)
-                processing_pipe_manager = ProcessingPipeManager()
-                processing_pipe_manager.start_processing()
+                if self.queue.qsize():
+                    product = self.queue.get()
+                    self.productService.update_product_status(product.name, ProductStatus.downloading)
+                    self.queue.task_done()
+                    self.datasource.download_product(product.name)
+                    self.productService.update_product_status(product.name, ProductStatus.downloaded)
+                    processing_pipe_manager = ProcessingPipeManager()
+                    processing_pipe_manager.start_processing()
+                else:
+                    return
             except queue.Empty:
                 break
             else:

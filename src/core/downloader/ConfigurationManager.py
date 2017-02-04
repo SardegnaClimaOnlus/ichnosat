@@ -92,6 +92,9 @@ class ConfigurationManager:
     def load_inbox_path(self):
         return self.config['DOWNLOADER']['inbox_path']
 
+    def load_parallel_downloads(self):
+        return self.config['DOWNLOADER']['parallel_downloads']
+
     def load_configuration(self):
         logger.debug("(ConfigurationManager load_configuration)")
         self.configuration.start_date = self.load_start_date()
@@ -102,6 +105,7 @@ class ConfigurationManager:
         self.configuration.aws_products_regex = self.load_aws_products_regex()
         self.configuration.aws_domain = self.load_aws_domain()
         self.configuration.inbox_path = self.load_inbox_path()
+        self.configuration.parallel_downloads = self.load_parallel_downloads()
         logger.debug("(ConfigurationManager load_configuration) finished")
 
 

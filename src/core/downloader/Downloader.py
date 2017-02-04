@@ -69,6 +69,7 @@ class Downloader:
         return SearchFilter(tile, self.configuration.start_date, self.configuration.end_date)
 
     def start(self):
+        logger.debug("(Downloader start) ----------------------------------------------")
         processing_pipe_manager = ProcessingPipeManager()
         processing_pipe_manager.start_processing()
         self.pending_tasks += 1
@@ -83,9 +84,10 @@ class Downloader:
                                                             status=ProductStatus.pending))
         products = [self.queue.put(product) for product in self.productService.get_pending_products()]
         while self.pending_tasks:
-            for i in range(2):
+            for i in range(int(self.configuration.parallel_downloads)):
                 t = DownloaderJob(self.queue)
                 t.daemon = True
                 t.start()
             self.pending_tasks -= 1
         self.downloading = False
+

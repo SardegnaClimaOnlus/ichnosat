@@ -34,11 +34,12 @@
 from src.core.processing_pipe.src.PluginManager import PluginManager
 from src.data.logger.logger import logger
 import shutil
-import queue
+
 from src.data.database.entities.product import ProductStatus
 import threading
 from src.data.logger.logger import logger
 from src.data.database.services.products_service import ProductsService
+import time
 
 __author__ = "Raffaele Bua (buele)"
 __copyright__ = "Copyright 2017, Sardegna Clima"
@@ -49,43 +50,78 @@ __maintainer__ = "Raffaele Bua"
 __contact__ = "info@raffaelebua.eu"
 __status__ = "Development"
 
+
 class Job(threading.Thread):
-    def __init__(self, outbox_path, plugins_path, queue):
-        logger.info("(Job __init__) ")
-        self.queue = queue
+    def __init__(self, outbox_path, plugins_path, lock, i):
+        self.i = i
+        logger.info("(Job __init__) ["+str(self.i)+"]")
+        self.lock = lock
         self.outbox_path = outbox_path
         plugin_manager = PluginManager(plugins_path)
         self.plugins = plugin_manager.get_plugins()
         self.productService = ProductsService()
         threading.Thread.__init__(self)
+
         return
 
+    def fibonacci(self, max_value):
+        i, j = 0, 1
+        while i < max_value:
+            yield i
+            i, j = j, i + j
+
+    def _process(self, product):
+        logger.info("(Job _process) ["+str(self.i)+"] process the product with name: " + product.name)
+        original_name = product.name.replace("/", "-")
+        source = "/usr/ichnosat/data_local/inbox/" + original_name[:-1] + "/"
+
+        logger.info("(Job run)["+str(self.i)+"] process product with path: " + source)
+        for plugin in self.plugins:
+            plugin.run(source, self.outbox_path)
+        self.productService.update_product_status(product.name, ProductStatus.processed)
+        logger.info("(Job run) ["+str(self.i)+"]remove product with path > " + source)
+        shutil.rmtree(source)
+
     def run(self):
-        logger.info("(Job run) ")
+        WAIT_MULTIPLICATOR = 15
+        SECONDS_PER_MINUTE = 60
+        FIBONACCI_ITERATIONS = 10
+        logger.info("(Job run)["+str(self.i)+"] ")
+        iterator = self.fibonacci(FIBONACCI_ITERATIONS)
         while True:
-            try:
-                logger.info("(Job run) in the queue there are " + str(self.queue.qsize()) + " items")
-                if self.queue.qsize():
-                    logger.info("(Job run) get a product from queue")
-                    product = self.queue.get()
-                    original_name = product.name.replace("/", "-")
-                    source = "/usr/ichnosat/data_local/inbox/" + original_name[:-1] + "/"
-                    self.productService.update_product_status(product.name, ProductStatus.processing)
-                    self.queue.task_done()
-                    logger.info("(Job run) PROCESS PRODUCT WITH PATH -------: " + source)
-                    for plugin in self.plugins:
-                        plugin.run(source, self.outbox_path)
-                    self.productService.update_product_status(product.name, ProductStatus.processed)
-                    logger.info("(Job run) REMOVE PRODUCT WITH PATH > " + source)
-                    shutil.rmtree(source)
-                else:
-                    return
-            except queue.Empty:
-                logger.info("(Job run) THE QUEUE IS EMTPY EXIT")
-                self.queue.task_done()
-                break
+            total_wait_time = 0
+            logger.info("(Job run) ["+str(self.i)+"]@ Acquire the lock")
+            self.lock.acquire()
+            logger.info("(Job run)["+str(self.i)+"] @ Get a downloaded product from db")
+            product = self.productService.get_a_downloaded_product()
+            logger.info("(Job run) ["+str(self.i)+"]@ Extracted downloaded product " + str(product))
+            if product:
+                logger.info("(Job run) ["+str(self.i)+"]@ found a product to process")
+                self.productService.update_product_status(product.name, ProductStatus.processing)
+                self.lock.release()
+                self._process(product)
+                del iterator
+                iterator = self.fibonacci(FIBONACCI_ITERATIONS)
             else:
-                pass
+                logger.info("(Job run) ["+str(self.i)+"]@ not found a product, relase the lock")
+                self.lock.release()
+                try:
+                    logger.info("(Job run) ["+str(self.i)+"]@ Iteration")
+                    n = next(iterator)
+                    wait_seconds = n * WAIT_MULTIPLICATOR
+                    total_wait_time += wait_seconds
+                    time.sleep(wait_seconds)
+                    logger.info(" (Job run) ["+str(self.i)+"] ---- > waited " + str(total_wait_time) +
+                          " seconds, " + str(total_wait_time / SECONDS_PER_MINUTE) +
+                          " minutes in total")
+                    continue
+                except StopIteration:
+                    logger.info("(Job run) ["+str(self.i)+"]@ Iteration attempts finished, return")
+                    del iterator
+                    break
+
+
+
 
 
 
