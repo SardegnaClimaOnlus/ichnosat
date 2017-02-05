@@ -85,7 +85,7 @@ class Job(threading.Thread):
     def run(self):
         WAIT_MULTIPLICATOR = 0.5
         SECONDS_PER_MINUTE = 60
-        FIBONACCI_ITERATIONS = 6000
+        FIBONACCI_ITERATIONS = 1000
         logger.info("(Job run)["+str(self.i)+"] ")
         iterator = self.fibonacci(FIBONACCI_ITERATIONS)
         while True:
