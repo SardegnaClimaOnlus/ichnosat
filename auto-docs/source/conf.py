@@ -95,6 +95,11 @@ html_theme = 'bizstyle'
 
 html_logo = 'https://raw.githubusercontent.com/SardegnaClimaOnlus/ichnosat/master/logo.png'
 
+html_sidebars = {
+   '**': ['globaltoc.html',  'searchbox.html'],
+   'using/windows': ['windowssidebar.html', 'searchbox.html'],
+}
+
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.

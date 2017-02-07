@@ -3,25 +3,37 @@ Documentation
 
 Introduction
 ------------
-- Introduction to Ichnosat
-- Anatomy of Ichnosat platform
-- Installation and requirements
+.. toctree::
+   :maxdepth: 1
+
+   anatomy_of_ichnosat_platform
+   installation_and_requirements
+   ...
 
 Tutorial
 --------
-- How to launch the platform
-- The first installation
-- How to configure *Downloader*
-- How to configure *Processor Pipe*
-- How to create a new plugin
-- How to restore an inconsistent database
+.. toctree::
+   :maxdepth: 1
+
+   how_to_run
+   first_installation
+   how_to_configure_downloader
+   how_to_configure_processor
+   how_to_configure_system_manager
+   how_to_create_a_new_plugin
+   ...
+
 
 Documentation
 -------------
-- Platform Architecture
-- GUI
 
-Links
------
+.. toctree::
+   :maxdepth: 1
+
+   platform_architecture
+   gui
+   APIs <modules>
+   ...
+
 
 

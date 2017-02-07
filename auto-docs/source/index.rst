@@ -6,7 +6,7 @@ Welcome to Ichnosat
 
 Ichnosat is an `Open Source <https://opensource.org/>`_ plugin based platform to
 download an process satellite data written in
-`Python <https://www.python.org/>`_ and C++, designed and developed by `Raffaele Bua <https://buele.github.io>`_ for `Sardegna Clima NPO <http://www.sardegna-clima.it>`_ Downloads and Processes are multithreaded and schedulable.
+`Python <https://www.python.org/>`_ and C++, designed and developed by `Raffaele Bua <https://buele.github.io>`_ for `Sardegna Clima NPO <http://www.sardegna-clima.it>`_. Downloads and Processes are multithreaded and schedulable.
 The Platform is configurable and the *processor* is extendible via C++ plugins.
 
 
@@ -23,6 +23,7 @@ the `MIT  <https://opensource.org/licenses/MIT>`_ license and it is available on
 
 
 
+
 The *downloader* gets automatically products from
 `Sentinel-2 on AWS <http://sentinel-pds.s3-website.eu-central-1.amazonaws.com/>`_ portal. This downloader is multithreaded and
 fully customizable.
@@ -35,6 +36,19 @@ version the plugin available processes the  `NDVI <https://en.wikipedia.org/wiki
 
 Ichnosat *processor* is multithreaded, extendible
 via C++ plugins and customizable.
+
+
+
+
+|
+
+.. image:: _static/overview.png
+   :align: center
+
+
+
+
+|
 
 
 - Cross-platform support
@@ -77,12 +91,12 @@ Index
 .. toctree::
    :maxdepth: 1
 
-   about
-   overview
-   quick_start
+   index
    documentation
    APIs <modules>
    downloads
+   credits
+   contacts
    ...
 
 Download Ichnosat
