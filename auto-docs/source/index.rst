@@ -99,10 +99,13 @@ Index
    contacts
    ...
 
-Download Ichnosat
+Download
 -----------------
+`Source Code  <https://github.com/SardegnaClimaOnlus/ichnosat/archive/master.zip>`_
 
-Source code
+Fork on GitHub
+-----------------
+`Ichnosat repository  <https://github.com/SardegnaClimaOnlus/ichnosat/>`_
 
 
 
