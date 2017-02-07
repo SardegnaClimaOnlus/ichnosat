@@ -23,6 +23,7 @@ Launch Ichnosat
 
 |
 
+**IMPORTANT NOTE**: In this version (0.1) the port 5000 must be free.
 
 If you are running Ichnosat for the first time, you have to create the database, following these steps:
 
@@ -308,7 +309,7 @@ You can open the product with your preferred program:
 
 .. image:: _static/processed_product_preview.png
    :align: center
-   :width: 550 px
+   :width: 700 px
 
 |
 |

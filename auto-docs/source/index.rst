@@ -89,9 +89,8 @@ via C++ plugins and customizable.
 Index
 =====
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 3
 
-   index
    documentation
    APIs <modules>
    downloads
