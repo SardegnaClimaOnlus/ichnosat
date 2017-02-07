@@ -21,14 +21,48 @@ in C++ programming language, using `GDAL <http://www.gdal.org/>`_ library and ha
 `Python <https://www.python.org/>`_ programming.
 
 
-Download and Installation
+Download and Installation (Linux/MacOS)
 -------------------------
 
 Download
 ~~~~~~~~
-Download description
+Download the source code package: `zip package  <https://github.com/SardegnaClimaOnlus/ichnosat/archive/master.zip>`_
+
+.. code-block:: bash
+
+   wget https://github.com/SardegnaClimaOnlus/ichnosat/archive/master.zip
 
 Install
 ~~~~~~~
-Installation description
+
+1. unzip the package
+.. code-block:: bash
+
+   unzip ichnosat-master.zip
+
+#. create the working directory (in this example: /usr/ichnosat
+
+.. code-block:: bash
+
+   mkdir -p /usr/ichnosat
+
+#. move ichnosat source code from unzipped folder to working directory, and set as current directory
+
+.. code-block:: bash
+
+   mv ichnosat-master/* /usr/ichnosat
+   cd /usr/ichnosat
+
+#. build docker images
+
+.. code-block:: bash
+
+   docker-compose build
+
+This step takes a lot of minutes (10-30), building dependencies and local code.
+
+
+
+
+
 
