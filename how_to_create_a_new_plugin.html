@@ -1,0 +1,388 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>How to create a new plugin &#8212; ichnosat 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Software architecture" href="software_architecture.html" />
+    <link rel="prev" title="How to configure" href="how_to_configure.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="software_architecture.html" title="Software architecture"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="how_to_configure.html" title="How to configure"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">ichnosat 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="documentation.html" accesskey="U">Documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.png" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="documentation.html">Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="documentation.html#tutorial">Tutorial</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="installation_and_requirements.html">Installation and Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="how_to_run.html">How to run</a></li>
+<li class="toctree-l3"><a class="reference internal" href="how_to_stop.html">How to stop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="how_to_configure.html">How to configure</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">How to create a new plugin</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="documentation.html#id1">Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="downloads.html">Downloads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contacts.html">Contacts</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="how-to-create-a-new-plugin">
+<h1>How to create a new plugin<a class="headerlink" href="#how-to-create-a-new-plugin" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>The <em>Processor</em> is plugin based. Plugins are dynamic shared libraries written in C++.
+Ichnosat runs plugins for every downloaded product, creating processed products.
+The plugins are located in the path:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>/usr/ichnosat/src/core/processing_pipe/scientific_processor/src/plugins
+</pre></div>
+</div>
+<p>The <em>Processor</em> expects that the plugin exposes a method with prototype:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="k">extern</span> <span class="s">&quot;C&quot;</span> <span class="kt">void</span> <span class="n">process</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span> <span class="n">product_path</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">destination_path</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><strong>product_path</strong> is the path of folder where the download product data is located</li>
+<li><strong>destination_path</strong> is the path of folder where the plugin will save the processed image</li>
+</ul>
+<p>These attributes are autogenerated via the <em>Processor</em>, so you haven&#8217;t to care about how to generate them, as
+plugin developer, just care about to read and write from these paths.</p>
+<p>Put the processing code inside the <em>process</em> method, implementing your algorithm, reading from <em>product_path</em> the downloaded images, and writing the result in the <em>destination_path</em>.</p>
+</div>
+<div class="section" id="plugin-creation">
+<h2>Plugin Creation<a class="headerlink" href="#plugin-creation" title="Permalink to this headline">¶</a></h2>
+<p>To create a new plugin is enough to make a new directory in the folder:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>/usr/ichnosat/src/core/processing_pipe/scientific_processor/src/plugins
+</pre></div>
+</div>
+<p>with the name of your algorithm.
+The source code of your Plugin must be C/C++, the file extension must be &#8216;.cc&#8217; and &#8216;.h&#8217;.</p>
+</div>
+<div class="section" id="external-libraries">
+<h2>External libraries<a class="headerlink" href="#external-libraries" title="Permalink to this headline">¶</a></h2>
+<p>We use <a class="reference external" href="http://www.gdal.org/">GDAL</a>  in our NDVI algorithm implementation, to read and write <em>jp2</em> and <em>GeoTiff</em> images.
+GDAL Library is available inside the environment of Ichnosat, so you haven&#8217;t to care about how to install and/or configure GDAL, just include it in your C/C++ code.</p>
+</div>
+<div class="section" id="build-a-plugin">
+<h2>Build a Plugin<a class="headerlink" href="#build-a-plugin" title="Permalink to this headline">¶</a></h2>
+<p>Ichnosat contains the environment to compile the plugins. When Ichnosat starts (<em>docker-compose up</em>), Ichnosat compile all plugins
+present in the path <em>usr/ichnosat/src/core/processing_pipe/scientific_processor/src/plugins</em>.
+The logs of compilation are streamed in the <em>ichnosat.log</em> log file, located in the path:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>/usr/ichnosat/data_local/log/ichnosat.log
+</pre></div>
+</div>
+<p>Example of compiling process logs:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="m">02</span>/07/2017 <span class="m">08</span>:45:00 PM <span class="o">(</span>PluginManager:compile_plugins<span class="o">)</span> start
+<span class="m">02</span>/07/2017 <span class="m">08</span>:45:03 PM <span class="o">(</span>ichnosat-manager<span class="o">)</span> Completed compile NDVI plugin
+<span class="m">02</span>/07/2017 <span class="m">08</span>:45:03 PM <span class="o">(</span>ichnosat-manager<span class="o">)</span> COMPLETED compile scientific_processor plugins
+</pre></div>
+</div>
+<p>It is also possible to compile plugins from Graphical User Interface, clicking on the button with label &#8216;Build Plugins&#8217;,
+in the section &#8216;Modules/Processing Pipe&#8217;:</p>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/build_plugins.png"><img alt="_images/build_plugins.png" class="align-center" src="_images/build_plugins.png" style="width: 400px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="anatomy-of-a-processor-plugin">
+<h2>Anatomy of a Processor plugin<a class="headerlink" href="#anatomy-of-a-processor-plugin" title="Permalink to this headline">¶</a></h2>
+<p>An example of code structure of a plugin follows:</p>
+<div class="section" id="implementation-of-processor-interface">
+<h3>Implementation of <em>Processor</em> interface<a class="headerlink" href="#implementation-of-processor-interface" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="class-declaration">
+<h3>Class declaration<a class="headerlink" href="#class-declaration" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="c1">//    ====================================================================================</span>
+<span class="c1">//     __     ______     __  __     __   __     ______     ______     ______     ______</span>
+<span class="c1">//    /\ \   /\  ___\   /\ \_\ \   /\ &quot;-.\ \   /\  __ \   /\  ___\   /\  __ \   /\__  _\</span>
+<span class="c1">//    \ \ \  \ \ \____  \ \  __ \  \ \ \-.  \  \ \ \/\ \  \ \___  \  \ \  __ \  \/_/\ \/</span>
+<span class="c1">//     \ \_\  \ \_____\  \ \_\ \_\  \ \_\\&quot;\_\  \ \_____\  \/\_____\  \ \_\ \_\    \ \_\</span>
+<span class="c1">//      \/_/   \/_____/   \/_/\/_/   \/_/ \/_/   \/_____/   \/_____/   \/_/\/_/     \/_/</span>
+<span class="c1">//</span>
+<span class="c1">//    ====================================================================================</span>
+<span class="c1">//</span>
+<span class="c1">//    Copyright (c) 2017 Yourname</span>
+<span class="c1">//</span>
+<span class="c1">//    LICENSE OF YOUR PLUGIN</span>
+<span class="c1">//</span>
+<span class="c1">//    ====================================================================================</span>
+
+<span class="cp">#ifndef __MYPLUGIN_CLASS_H__</span>
+<span class="cp">#define __MYPLUGIN_CLASS_H__</span>
+
+<span class="n">class</span> <span class="n">MyPlugin</span><span class="p">{</span>
+
+ <span class="nl">private</span><span class="p">:</span>
+   <span class="kt">void</span> <span class="n">process_algorithm</span><span class="p">(</span><span class="n">GDALRasterBand</span> <span class="o">*</span> <span class="n">band01</span><span class="p">,</span> <span class="cm">/* your algorithm attributes */</span><span class="p">,</span> <span class="kt">float</span> <span class="o">*</span>  <span class="n">raster</span><span class="p">);</span>
+
+ <span class="nl">public</span><span class="p">:</span>
+   <span class="kt">void</span> <span class="n">process</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span>  <span class="n">product_path</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">destination_path</span><span class="p">);</span>
+
+<span class="p">};</span>
+
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="class-methods-implementation">
+<h3>Class methods implementation<a class="headerlink" href="#class-methods-implementation" title="Permalink to this headline">¶</a></h3>
+<p>The steps of a processing plugin <em>could be</em>:</p>
+<ul class="simple">
+<li>constants definition</li>
+<li>setup GDAL: create a driver to write output files</li>
+<li>load gadl drivers</li>
+<li>load driver</li>
+<li>open input files</li>
+<li>extract the gdal dataset from input image</li>
+<li>release unused memory</li>
+<li>get band from dataset</li>
+<li>get raster data</li>
+<li>allocate raster matrix of output</li>
+<li>create new file</li>
+<li>copy geo tranformation information from input file to output file</li>
+<li>copy projection information from input file to output file</li>
+<li>process raster data</li>
+<li>write data to output file</li>
+<li>close file and release memory</li>
+</ul>
+<p>A snippet of C++ code as example follows:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="c1">//    ====================================================================================</span>
+<span class="c1">//     __     ______     __  __     __   __     ______     ______     ______     ______</span>
+<span class="c1">//    /\ \   /\  ___\   /\ \_\ \   /\ &quot;-.\ \   /\  __ \   /\  ___\   /\  __ \   /\__  _\</span>
+<span class="c1">//    \ \ \  \ \ \____  \ \  __ \  \ \ \-.  \  \ \ \/\ \  \ \___  \  \ \  __ \  \/_/\ \/</span>
+<span class="c1">//     \ \_\  \ \_____\  \ \_\ \_\  \ \_\\&quot;\_\  \ \_____\  \/\_____\  \ \_\ \_\    \ \_\</span>
+<span class="c1">//      \/_/   \/_____/   \/_/\/_/   \/_/ \/_/   \/_____/   \/_____/   \/_/\/_/     \/_/</span>
+<span class="c1">//</span>
+<span class="c1">//    ====================================================================================</span>
+<span class="c1">//</span>
+<span class="c1">//    Copyright (c) 2017 Yourname</span>
+<span class="c1">//</span>
+<span class="c1">//    LICENSE OF YOUR PLUGIN</span>
+<span class="c1">//</span>
+<span class="c1">//    ====================================================================================</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;limits&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;cpl_port.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;gdal.h&quot;</span><span class="cp"></span>
+
+<span class="c1">// your libraries inclusion ...</span>
+
+
+
+<span class="kt">void</span> <span class="n">MyPlugin</span><span class="o">::</span><span class="n">process_algorithm</span><span class="p">(</span> <span class="n">GDALRasterBand</span> <span class="o">*</span> <span class="n">band01</span><span class="p">,</span> <span class="cm">/* your algorithm attributes */</span><span class="p">,</span> <span class="kt">float</span> <span class="o">*</span>  <span class="n">raster</span><span class="p">){</span>
+  <span class="cm">/* processing algorithm implementation */</span>
+<span class="p">}</span>
+
+
+<span class="kt">void</span> <span class="n">MyPlugin</span><span class="o">::</span><span class="n">process</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span> <span class="n">product_path</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">destination_path</span><span class="p">){</span>
+
+  <span class="cm">/* constants definition ...*/</span>
+
+  <span class="c1">//  -- SETUP GDAL: CREATE A DRIVER TO WRITE OUTPUT FILES --</span>
+
+  <span class="n">GDALDriver</span> <span class="o">*</span> <span class="n">poDriver</span><span class="p">;</span>
+
+  <span class="c1">// load gadl drivers</span>
+  <span class="n">GDALAllRegister</span><span class="p">();</span>
+
+  <span class="c1">// load driver</span>
+  <span class="n">poDriver</span> <span class="o">=</span> <span class="n">GetGDALDriverManager</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">GetDriverByName</span><span class="p">(</span><span class="cm">/*GDAL DRIVER OF YOUR OUTPUT DATA FORMAT*/</span><span class="p">);</span>
+
+  <span class="c1">// -- OPEN INPUT FILES --</span>
+  <span class="kt">char</span> <span class="o">*</span> <span class="n">input_file1_path</span> <span class="o">=</span> <span class="n">concat_string</span><span class="p">(</span><span class="n">product_path</span><span class="p">,</span> <span class="n">INPUT_FILENAME_1</span><span class="p">);</span>
+
+  <span class="c1">// extract the gdal dataset from input image</span>
+  <span class="n">GDALDataset</span> <span class="o">*</span> <span class="n">dataset</span> <span class="o">=</span> <span class="p">(</span><span class="n">GDALDataset</span> <span class="o">*</span><span class="p">)</span> <span class="n">GDALOpen</span><span class="p">(</span> <span class="p">(</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="p">)</span> <span class="n">input_file1_path</span><span class="p">,</span> <span class="n">GA_ReadOnly</span> <span class="p">);</span>
+
+  <span class="c1">// release the memory</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">band4_path</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="n">CPLFree</span><span class="p">(</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span> <span class="p">)</span> <span class="n">input_file1_path</span><span class="p">);</span>
+
+
+  <span class="c1">// get band from dataset</span>
+  <span class="n">GDALRasterBand</span>  <span class="o">*</span> <span class="n">band01</span><span class="p">;</span>
+  <span class="n">band01</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">-&gt;</span><span class="n">GetRasterBand</span><span class="p">(</span> <span class="mi">1</span> <span class="p">);</span>
+
+
+
+  <span class="c1">// get raster data</span>
+  <span class="kt">int</span>   <span class="n">nXSize</span> <span class="o">=</span> <span class="n">band01</span><span class="o">-&gt;</span><span class="n">GetXSize</span><span class="p">();</span>
+  <span class="kt">int</span>   <span class="n">nYSize</span> <span class="o">=</span> <span class="n">band01</span><span class="o">-&gt;</span><span class="n">GetYSize</span><span class="p">();</span>
+
+  <span class="c1">// allocate raster matrix of output</span>
+  <span class="kt">float</span> <span class="o">*</span> <span class="n">raster</span> <span class="o">=</span> <span class="p">(</span><span class="kt">float</span> <span class="o">*</span><span class="p">)</span> <span class="n">CPLMalloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="o">*</span><span class="n">nXSize</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="o">*</span><span class="n">nYSize</span><span class="p">)</span> <span class="p">;</span>
+
+  <span class="c1">// create new file</span>
+  <span class="n">GDALDataset</span> <span class="o">*</span> <span class="n">output_dataset</span> <span class="o">=</span> <span class="n">poDriver</span><span class="o">-&gt;</span><span class="n">Create</span><span class="p">(</span> <span class="n">concat_string</span><span class="p">(</span><span class="n">destination_path</span><span class="p">,</span>
+                                                   <span class="cm">/* Processed product file name */</span><span class="p">),</span>
+                                                   <span class="n">nXSize</span><span class="p">,</span>
+                                                   <span class="n">nYSize</span><span class="p">,</span>
+                                                   <span class="mi">1</span><span class="p">,</span>
+                                                   <span class="n">GDT_Float32</span><span class="p">,</span>
+                                                   <span class="nb">NULL</span> <span class="p">);</span>
+
+  <span class="c1">// copy geo tranformation information from input file to output file</span>
+  <span class="kt">double</span> <span class="n">adfGeoTransform</span><span class="p">[</span><span class="mi">6</span><span class="p">];</span>
+  <span class="n">band4_dataset</span><span class="o">-&gt;</span><span class="n">GetGeoTransform</span><span class="p">(</span><span class="n">adfGeoTransform</span><span class="p">);</span>
+  <span class="n">nvdi_dataset</span><span class="o">-&gt;</span><span class="n">SetGeoTransform</span><span class="p">(</span> <span class="n">adfGeoTransform</span> <span class="p">);</span>
+
+  <span class="c1">// copy projection information from input file to output file</span>
+  <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">pszProjection</span><span class="p">;</span>
+  <span class="n">pszProjection</span> <span class="o">=</span> <span class="n">band4_dataset</span><span class="o">-&gt;</span><span class="n">GetProjectionRef</span><span class="p">();</span>
+  <span class="n">nvdi_dataset</span><span class="o">-&gt;</span><span class="n">SetProjection</span><span class="p">(</span><span class="n">pszProjection</span><span class="p">);</span>
+
+  <span class="c1">// process raster data</span>
+  <span class="n">this</span><span class="o">-&gt;</span><span class="n">process_algorithm</span><span class="p">(</span><span class="n">band01</span><span class="p">,</span> <span class="cm">/* your algorithm attributes */</span><span class="p">,</span> <span class="n">raster</span><span class="p">);</span>
+
+  <span class="c1">// write data</span>
+  <span class="n">CPLErr</span> <span class="n">err</span> <span class="o">=</span> <span class="n">output_dataset</span><span class="o">-&gt;</span><span class="n">RasterIO</span><span class="p">(</span><span class="n">GF_Write</span><span class="p">,</span>
+                                 <span class="mi">0</span><span class="p">,</span>
+                                 <span class="mi">0</span><span class="p">,</span>
+                                 <span class="n">nXSize</span><span class="p">,</span>
+                                 <span class="n">nYSize</span><span class="p">,</span>
+                                 <span class="n">raster</span><span class="p">,</span>
+                                 <span class="n">nXSize</span><span class="p">,</span>
+                                 <span class="n">nYSize</span><span class="p">,</span>
+                                 <span class="n">GDT_Float32</span><span class="p">,</span>
+                                 <span class="mi">1</span><span class="p">,</span>
+                                 <span class="nb">NULL</span><span class="p">,</span>
+                                 <span class="mi">0</span><span class="p">,</span>
+                                 <span class="mi">0</span><span class="p">,</span>
+                                 <span class="mi">0</span><span class="p">,</span>
+                                 <span class="nb">NULL</span><span class="p">);</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="n">err</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;err: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">err</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+  <span class="c1">// close file and release memory</span>
+  <span class="k">if</span><span class="p">(</span> <span class="n">output_dataset</span> <span class="o">!=</span> <span class="nb">NULL</span> <span class="p">)</span> <span class="n">GDALClose</span><span class="p">(</span> <span class="p">(</span><span class="n">GDALDatasetH</span><span class="p">)</span> <span class="n">output_dataset</span> <span class="p">);</span>
+  <span class="k">if</span><span class="p">(</span> <span class="n">dataset</span> <span class="o">!=</span> <span class="nb">NULL</span> <span class="p">)</span> <span class="n">GDALClose</span><span class="p">(</span> <span class="p">(</span><span class="n">GDALDatasetH</span><span class="p">)</span> <span class="n">dataset</span> <span class="p">);</span>
+  <span class="k">if</span><span class="p">(</span> <span class="n">raster</span> <span class="o">!=</span> <span class="nb">NULL</span> <span class="p">)</span> <span class="n">CPLFree</span><span class="p">(</span> <span class="n">raster</span> <span class="p">);</span>
+
+  <span class="k">return</span> <span class="p">;</span>
+</pre></div>
+</div>
+<p>}</p>
+</div>
+</div>
+<div class="section" id="working-plugin-example">
+<h2>Working plugin example<a class="headerlink" href="#working-plugin-example" title="Permalink to this headline">¶</a></h2>
+<p>In the path</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>/usr/ichnosat/src/core/processing_pipe/scientific_processor/src/plugins/NDVI
+</pre></div>
+</div>
+<p>there is a working example of Ichnosat plugin to calculate Normalized Difference Vegetation Index.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="software_architecture.html" title="Software architecture"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="how_to_configure.html" title="How to configure"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">ichnosat 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="documentation.html" >Documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Sardegna Clima - Raffaele Bua (buele).
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+    </div>
+  </body>
+</html>

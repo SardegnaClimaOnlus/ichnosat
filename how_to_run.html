@@ -1,0 +1,392 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>How to run &#8212; ichnosat 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="How to stop" href="how_to_stop.html" />
+    <link rel="prev" title="Installation and Requirements" href="installation_and_requirements.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="how_to_stop.html" title="How to stop"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="installation_and_requirements.html" title="Installation and Requirements"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">ichnosat 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="documentation.html" accesskey="U">Documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.png" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="documentation.html">Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="documentation.html#tutorial">Tutorial</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="installation_and_requirements.html">Installation and Requirements</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">How to run</a></li>
+<li class="toctree-l3"><a class="reference internal" href="how_to_stop.html">How to stop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="how_to_configure.html">How to configure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="documentation.html#id1">Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="downloads.html">Downloads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contacts.html">Contacts</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="how-to-run">
+<h1>How to run<a class="headerlink" href="#how-to-run" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="launch-ichnosat">
+<h2>Launch Ichnosat<a class="headerlink" href="#launch-ichnosat" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><strong>set installation folder as current directory (e.g. /usr/ichnosat)</strong></li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> /usr/ichnosat
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><strong>launch container</strong></li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>docker-compose up
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p><strong>IMPORTANT NOTE</strong>: In this version (0.1) the port 5000 must be free.</p>
+<p>If you are running Ichnosat for the first time, you have to create the database, following these steps:</p>
+<p>2.1. <strong>Wait when Postgres server is ready to receive queries:</strong></p>
+<p>Check the logs in the terminal where docker-compose has been launched and wait the log &#8216;database system is ready to accept connections&#8217;</p>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/db_ready.png"><img alt="_images/db_ready.png" class="align-center" src="_images/db_ready.png" style="width: 550px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<p>2.2. <strong>Open the gui client at</strong>  <a class="reference external" href="http://localhost:5040">http://localhost:5040</a></p>
+<p>When the page is loaded, the dialog of first installation appears:</p>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/first_installation_dialog.png"><img alt="_images/first_installation_dialog.png" class="align-center" src="_images/first_installation_dialog.png" style="width: 400px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<p>2.3. <strong>Click on the button &#8216;Create Database&#8217;:</strong></p>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/first_installation_dialog_create_database.png"><img alt="_images/first_installation_dialog_create_database.png" class="align-center" src="_images/first_installation_dialog_create_database.png" style="width: 400px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<p>2.4. <strong>Wait database creation:</strong></p>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/creating_database.png"><img alt="_images/creating_database.png" class="align-center" src="_images/creating_database.png" style="width: 400px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<p>2.5. <strong>Click on &#8216;Finish&#8217; button:</strong></p>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/creating_database_finish.png"><img alt="_images/creating_database_finish.png" class="align-center" src="_images/creating_database_finish.png" style="width: 400px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<p>Now Ichnosat is ready to download and process satellite products.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/gui_home.png"><img alt="_images/gui_home.png" class="align-center" src="_images/gui_home.png" style="width: 400px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="run-downloader">
+<h2>Run Downloader<a class="headerlink" href="#run-downloader" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><strong>Click on &#8216;+&#8217; of *Modules* voice in side bar on the left:</strong></li>
+</ol>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/modules_sidebar.png"><img alt="_images/modules_sidebar.png" class="align-center" src="_images/modules_sidebar.png" style="width: 400px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><strong>Click on &#8216;Downloader&#8217; menu item:</strong></li>
+</ol>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/downloader_section.png"><img alt="_images/downloader_section.png" class="align-center" src="_images/downloader_section.png" style="width: 400px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><strong>Start ichnosat clicking on &#8216;Start process&#8217; button:</strong></li>
+</ol>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/start_ichnosat.png"><img alt="_images/start_ichnosat.png" class="align-center" src="_images/start_ichnosat.png" style="width: 400px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="monitor-activities-via-gui-and-console">
+<h2>Monitor activities via gui and console<a class="headerlink" href="#monitor-activities-via-gui-and-console" title="Permalink to this headline">¶</a></h2>
+<p>To monitor progress activities check the lists of products on Graphica User Interface, logs and file system,
+as shown in the following steps:</p>
+<ol class="arabic simple">
+<li><strong>Check pending products in the GUI</strong></li>
+</ol>
+<p>The pending products are the products that Ichnosat are available to download, but are waiting to download
+by the <em>Downloader</em>. To see the list of pending products, click on &#8216;Pending&#8217; item of &#8216;Products&#8217; void in the side bar:</p>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/pending_products.png"><img alt="_images/pending_products.png" class="align-center" src="_images/pending_products.png" style="width: 400px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><strong>Check downloading products in the GUI</strong></li>
+</ol>
+<p>You will find the downloading products list via GUI:</p>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/downloading_products.png"><img alt="_images/downloading_products.png" class="align-center" src="_images/downloading_products.png" style="width: 400px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<p>You could also check the progress of download via command line (Unix systems), monitoring
+the file size of downloading products. The downloading and downloaded products are located in the folder
+&#8216;/usr/ichnosat/data_local/inbox&#8217;</p>
+<p>2.1. <strong>Set inbox folder as current directory</strong></p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> /usr/ichnosat/data_local/
+</pre></div>
+</div>
+<p>2.2. <strong>Monitor download progress via bash scripting (Unix Systems)</strong></p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="k">while</span> sleep <span class="m">2</span><span class="p">;</span> <span class="k">do</span> <span class="nb">echo</span> <span class="s2">&quot; -------- &quot;</span> <span class="o">&amp;&amp;</span>  du -a ./inbox/<span class="p">;</span> <span class="k">done</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/monitor_inbox.png"><img alt="_images/monitor_inbox.png" class="align-center" src="_images/monitor_inbox.png" style="width: 400px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><strong>Check processing products in the GUI</strong></li>
+</ol>
+<p>You will find the processing products on-going list via GUI:</p>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/processing_products.png"><img alt="_images/processing_products.png" class="align-center" src="_images/processing_products.png" style="width: 400px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<p>You could also check the progress of processing via command line (Unix systems), monitoring
+the file size present in the processor folder. The processing and processed products are located in the folder
+&#8216;/usr/ichnosat/data_local/outbox&#8217;</p>
+<p>2.1. <strong>Set inbox folder as current directory</strong></p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> /usr/ichnosat/data_local/
+</pre></div>
+</div>
+<p>2.2. <strong>Monitor processing progress via bash scripting (Unix Systems)</strong></p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="k">while</span> sleep <span class="m">2</span><span class="p">;</span> <span class="k">do</span> <span class="nb">echo</span> <span class="s2">&quot; -------- &quot;</span> <span class="o">&amp;&amp;</span>  du -a ./outbox/<span class="p">;</span> <span class="k">done</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/monitor_outbox.png"><img alt="_images/monitor_outbox.png" class="align-center" src="_images/monitor_outbox.png" style="width: 400px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="monitor-activities-via-logs">
+<h2>Monitor activities via logs<a class="headerlink" href="#monitor-activities-via-logs" title="Permalink to this headline">¶</a></h2>
+<p>Detailed logs are streamed in the &#8216;ichnosat.log&#8217; file. The location of this file is
+&#8216;/usr/ichnosat/data_local/log/ichnosat.log&#8217;.</p>
+<p>You can watch the stream of logs via command line:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> /usr/ichnosat/data_local/log
+tail -f ichnosat.log
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/log_example.png"><img alt="_images/log_example.png" class="align-center" src="_images/log_example.png" style="width: 400px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="open-processed-product">
+<h2>Open processed product<a class="headerlink" href="#open-processed-product" title="Permalink to this headline">¶</a></h2>
+<p>The processed products are located in the &#8216;/usr/ichnosat/data_local/outbox&#8217; folder.
+Every product is a folder with the name composed via the tile name, sensing time, and Processor plugin name.
+Like: &#8216;tiles-32-T-ML-2016-7-28-1-NDVI&#8217;
+where:</p>
+<ul class="simple">
+<li><strong>32-T-ML</strong> is the tile id</li>
+<li><strong>2016-7-28</strong> is the sensing date</li>
+<li><strong>-1-</strong> is the processing id (of data provider)</li>
+<li><strong>NDVI</strong> is the Plugin name, in this example it is a Normalized Difference Vegetation Index product</li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/processed_product.png"><img alt="_images/processed_product.png" class="align-center" src="_images/processed_product.png" style="width: 550px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<p>You can open the product with your preferred program:</p>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/processed_product_preview.png"><img alt="_images/processed_product_preview.png" class="align-center" src="_images/processed_product_preview.png" style="width: 700px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="how_to_stop.html" title="How to stop"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="installation_and_requirements.html" title="Installation and Requirements"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">ichnosat 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="documentation.html" >Documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Sardegna Clima - Raffaele Bua (buele).
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+    </div>
+  </body>
+</html>

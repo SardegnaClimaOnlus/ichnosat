@@ -1,0 +1,183 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Installation and Requirements &#8212; ichnosat 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="How to run" href="how_to_run.html" />
+    <link rel="prev" title="Documentation" href="documentation.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="how_to_run.html" title="How to run"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="documentation.html" title="Documentation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">ichnosat 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="documentation.html" accesskey="U">Documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.png" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Welcome to Ichnosat</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html#index">Index</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="documentation.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="downloads.html">Downloads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contacts.html">Contacts</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="installation-and-requirements">
+<h1>Installation and Requirements<a class="headerlink" href="#installation-and-requirements" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="software-requirements">
+<h2>Software Requirements<a class="headerlink" href="#software-requirements" title="Permalink to this headline">¶</a></h2>
+<p>You need a working <a class="reference external" href="https://www.docker.com/">Docker</a>  and <a class="reference external" href="https://docs.docker.com/compose/">Docker Compose</a>
+installation on the machine on which you are installing Ichnosat.
+To install Docker and Docker Compose follow the guide for your operating system from the
+official documentation:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://docs.docker.com/engine/installation/">Docker Installation</a></li>
+<li><a class="reference external" href="https://docs.docker.com/compose/install/">Docker  Compose  Installation</a></li>
+</ul>
+</div>
+<div class="section" id="skills">
+<h2>Skills<a class="headerlink" href="#skills" title="Permalink to this headline">¶</a></h2>
+<p>You need to be able to use basic console commands, since the primary purpose of Ichnosat platform is to
+process satellite images, you will also need to understand the basics of satellite data structure and image processing.</p>
+<p>In addition, if you want to extend Ichnosat platform creating a new addon, you need to be able to develop
+in C++ programming language, using <a class="reference external" href="http://www.gdal.org/">GDAL</a> library and having a basic knoledge of
+<a class="reference external" href="https://www.python.org/">Python</a> programming.</p>
+</div>
+<div class="section" id="download-and-installation-linux-macos">
+<h2>Download and Installation (Linux/MacOS)<a class="headerlink" href="#download-and-installation-linux-macos" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="download">
+<h3>Download<a class="headerlink" href="#download" title="Permalink to this headline">¶</a></h3>
+<p>Download the source code package: <a class="reference external" href="https://github.com/SardegnaClimaOnlus/ichnosat/archive/master.zip">zip package</a></p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>wget https://github.com/SardegnaClimaOnlus/ichnosat/archive/master.zip
+</pre></div>
+</div>
+</div>
+<div class="section" id="install">
+<h3>Install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h3>
+<p>1. unzip the package
+.. code-block:: bash</p>
+<blockquote>
+<div>unzip ichnosat-master.zip</div></blockquote>
+<ol class="arabic simple">
+<li>create the working directory (in this example: /usr/ichnosat</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>mkdir -p /usr/ichnosat
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li>move ichnosat source code from unzipped folder to working directory, and set as current directory</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>mv ichnosat-master/* /usr/ichnosat
+<span class="nb">cd</span> /usr/ichnosat
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li>build docker images</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>docker-compose build
+</pre></div>
+</div>
+<p>This step takes a lot of minutes (10-30), building dependencies and local code.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="how_to_run.html" title="How to run"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="documentation.html" title="Documentation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">ichnosat 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="documentation.html" >Documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Sardegna Clima - Raffaele Bua (buele).
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+    </div>
+  </body>
+</html>

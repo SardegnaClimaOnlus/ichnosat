@@ -1,0 +1,273 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>How to configure &#8212; ichnosat 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Software architecture" href="software_architecture.html" />
+    <link rel="prev" title="How to stop" href="how_to_stop.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="software_architecture.html" title="Software architecture"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="how_to_stop.html" title="How to stop"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">ichnosat 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="documentation.html" accesskey="U">Documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.png" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="documentation.html">Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="documentation.html#tutorial">Tutorial</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="installation_and_requirements.html">Installation and Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="how_to_run.html">How to run</a></li>
+<li class="toctree-l3"><a class="reference internal" href="how_to_stop.html">How to stop</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">How to configure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="documentation.html#id1">Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="downloads.html">Downloads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contacts.html">Contacts</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="how-to-configure">
+<h1>How to configure<a class="headerlink" href="#how-to-configure" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="how-to-configure-the-downloader">
+<h2>How to configure the downloader<a class="headerlink" href="#how-to-configure-the-downloader" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="set-tiles-to-download">
+<h3>Set Tiles to download<a class="headerlink" href="#set-tiles-to-download" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Edit the <em>Downloader</em> configuration file</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>vim /usr/ichnosat/src/core/downloader/config/config.cfg
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Set the list of tiles using the comma &#8216;,&#8217; as separator, in the &#8216;tiles&#8217; key; e.g.:</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nv">tiles</span><span class="o">=</span><span class="m">32</span>/T/ML,32/T/NL,32/T/MK,32/T/NK,32/S/MJ,32/S/NJ
+</pre></div>
+</div>
+</div>
+<div class="section" id="set-files-to-download-for-each-tile">
+<h3>Set files to download for each tile<a class="headerlink" href="#set-files-to-download-for-each-tile" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Edit the <em>Downloader</em> configuration file</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>vim /usr/ichnosat/src/core/downloader/config/config.cfg
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Set the list of tiles using the comma &#8216;,&#8217; as separator, in the &#8216;files_to_download&#8217; key; e.g.:</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nv">files_to_download</span><span class="o">=</span>B04.jp2,B08.jp2
+</pre></div>
+</div>
+</div>
+<div class="section" id="set-sensing-time-interval">
+<h3>Set Sensing time interval<a class="headerlink" href="#set-sensing-time-interval" title="Permalink to this headline">¶</a></h3>
+<p>You can filter the products to download, setting the sensing time interval.
+The interval is composed of <em>start</em> date and <em>end</em> date.</p>
+<ol class="arabic simple">
+<li>Edit the <em>Downloader</em> configuration file</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>vim /usr/ichnosat/src/core/downloader/config/config.cfg
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Set the sensing time <strong>start</strong>, in the &#8216;start_date&#8217; key; e.g.:</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nv">start_date</span><span class="o">=</span><span class="m">2016</span>/07/13
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>Set the sensing time <strong>end</strong>, in the &#8216;end_date&#8217; key; e.g.:</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nv">end_date</span><span class="o">=</span><span class="m">2017</span>/07/13
+</pre></div>
+</div>
+<p>It is possible to set <em>NOW</em> as sensing time <em>end</em>, this means that the <em>Downloader</em> for every download cycle consider as sensing time <em>end</em> the current date; e.g.:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nv">end_date</span><span class="o">=</span>NOW
+</pre></div>
+</div>
+</div>
+<div class="section" id="set-how-many-parallels-download-threads">
+<h3>Set how many parallels download threads<a class="headerlink" href="#set-how-many-parallels-download-threads" title="Permalink to this headline">¶</a></h3>
+<p>You can define how many parallels download run in the same time:</p>
+<ol class="arabic simple">
+<li>Edit the <em>Downloader</em> configuration file</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>vim /usr/ichnosat/src/core/downloader/config/config.cfg
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Set how many threads the <em>Downloader</em> launches, in the &#8216;parallel_downloads&#8217; key; e.g.:</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nv">parallel_downloads</span><span class="o">=</span><span class="m">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="how-to-configure-the-processor">
+<h2>How to configure the processor<a class="headerlink" href="#how-to-configure-the-processor" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="set-how-many-parallels-processing-threads">
+<h3>Set how many parallels processing threads<a class="headerlink" href="#set-how-many-parallels-processing-threads" title="Permalink to this headline">¶</a></h3>
+<p>You can define how many parallels processing run in the same time:</p>
+<ol class="arabic simple">
+<li>Edit the <em>Processor</em> configuration file</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>vim /usr/ichnosat/src/core/processing_pipe/config/config.cfg
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Set how many threads the <em>Processor</em> launches, in the &#8216;parallel_processing&#8217; key; e.g.:</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nv">parallel_processing</span><span class="o">=</span><span class="m">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="how-to-configure-the-global-platform-parameters">
+<h2>How to configure the global platform parameters<a class="headerlink" href="#how-to-configure-the-global-platform-parameters" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="how-to-configure-the-cron">
+<h2>How to configure the cron<a class="headerlink" href="#how-to-configure-the-cron" title="Permalink to this headline">¶</a></h2>
+<p>Ichnosat exploit linux cron to run periodically the process.</p>
+<ol class="arabic simple">
+<li>Edit the <em>System Manager</em> configuration file</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>vim /usr/ichnosat/src/core/system_manager/config/config.cfg
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Set the cron string, in the &#8216;cron&#8217; key; e.g.:</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nv">cron</span> <span class="o">=</span> <span class="m">10</span> <span class="m">10</span> * * *
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-to-configure-the-graphical-user-interface-port">
+<h2>How to configure the graphical user interface port<a class="headerlink" href="#how-to-configure-the-graphical-user-interface-port" title="Permalink to this headline">¶</a></h2>
+<p>Using Docker and Docker Compose, you can set the port of GUI client:</p>
+<ol class="arabic simple">
+<li>Edit the docker-compose.yml configuration file</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>vim /usr/ichnosat/docker-compose.yml
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Set the port number, in the &#8216;ports&#8217; property; e.g. (in this example is 5040):</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>nginx:
+   image: nginx
+   volumes:
+   - ./src/gui:/usr/share/nginx/html
+   ports:
+   - <span class="s2">&quot;5040:80&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="software_architecture.html" title="Software architecture"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="how_to_stop.html" title="How to stop"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">ichnosat 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="documentation.html" >Documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Sardegna Clima - Raffaele Bua (buele).
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+    </div>
+  </body>
+</html>

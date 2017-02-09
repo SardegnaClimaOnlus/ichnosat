@@ -1,0 +1,208 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>src.core.processing_pipe.src.PluginManager &#8212; ichnosat 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../../../_static/bizstyle.js"></script>
+    <link rel="author" title="About these documents" href="../../../../../about.html" />
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">ichnosat 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../../../index.html">
+              <img class="logo" src="../../../../../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h3><a href="../../../../../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../documentation.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../modules.html">APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../downloads.html">Downloads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../contacts.html">Contacts</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for src.core.processing_pipe.src.PluginManager</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+
+<span class="c1"># ==================================================================================== #</span>
+<span class="c1">#  __     ______     __  __     __   __     ______     ______     ______     ______</span>
+<span class="c1"># /\ \   /\  ___\   /\ \_\ \   /\ &quot;-.\ \   /\  __ \   /\  ___\   /\  __ \   /\__  _\</span>
+<span class="c1"># \ \ \  \ \ \____  \ \  __ \  \ \ \-.  \  \ \ \/\ \  \ \___  \  \ \  __ \  \/_/\ \/</span>
+<span class="c1">#  \ \_\  \ \_____\  \ \_\ \_\  \ \_\\&quot;\_\  \ \_____\  \/\_____\  \ \_\ \_\    \ \_\</span>
+<span class="c1">#   \/_/   \/_____/   \/_/\/_/   \/_/ \/_/   \/_____/   \/_____/   \/_/\/_/     \/_/</span>
+<span class="c1">#</span>
+<span class="c1"># ==================================================================================== #</span>
+<span class="c1">#</span>
+<span class="c1"># Copyright (c) 2017 Sardegna Clima - Raffaele Bua (buele)</span>
+<span class="c1">#</span>
+<span class="c1"># Permission is hereby granted, free of charge, to any person obtaining a copy of</span>
+<span class="c1"># this software and associated documentation files (the &quot;Software&quot;), to deal in</span>
+<span class="c1"># the Software without restriction, including without limitation the rights to</span>
+<span class="c1"># use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies</span>
+<span class="c1"># of the Software, and to permit persons to whom the Software is furnished to do</span>
+<span class="c1"># so, subject to the following conditions:</span>
+<span class="c1">#</span>
+<span class="c1"># The above copyright notice and this permission notice shall be included in all</span>
+<span class="c1"># copies or substantial portions of the Software.</span>
+<span class="c1">#</span>
+<span class="c1"># THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span>
+<span class="c1"># IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span>
+<span class="c1"># FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span>
+<span class="c1"># AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span>
+<span class="c1"># LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span>
+<span class="c1"># OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</span>
+<span class="c1"># SOFTWARE.</span>
+<span class="c1">#</span>
+<span class="c1"># ==================================================================================== #</span>
+
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">fnmatch</span>
+<span class="kn">from</span> <span class="nn">src.core.processing_pipe.src.Plugin</span> <span class="k">import</span> <span class="n">Plugin</span>
+<span class="kn">from</span> <span class="nn">src.data.logger.logger</span> <span class="k">import</span> <span class="n">logger</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s2">&quot;Raffaele Bua (buele)&quot;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;Copyright 2017, Sardegna Clima&quot;</span>
+<span class="n">__credits__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Raffaele Bua&quot;</span><span class="p">]</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s2">&quot;MIT&quot;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;0.1&quot;</span>
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s2">&quot;Raffaele Bua&quot;</span>
+<span class="n">__contact__</span> <span class="o">=</span> <span class="s2">&quot;info@raffaelebua.eu&quot;</span>
+<span class="n">__status__</span> <span class="o">=</span> <span class="s2">&quot;Development&quot;</span>
+
+<div class="viewcode-block" id="PluginManager"><a class="viewcode-back" href="../../../../../src.core.processing_pipe.src.html#src.core.processing_pipe.src.PluginManager.PluginManager">[docs]</a><span class="k">class</span> <span class="nc">PluginManager</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plugins_path</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">plugins_path</span> <span class="o">=</span> <span class="n">plugins_path</span>
+
+<div class="viewcode-block" id="PluginManager.get_plugins"><a class="viewcode-back" href="../../../../../src.core.processing_pipe.src.html#src.core.processing_pipe.src.PluginManager.PluginManager.get_plugins">[docs]</a>    <span class="k">def</span> <span class="nf">get_plugins</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">pattern</span> <span class="o">=</span> <span class="s1">&#39;*.so&#39;</span>
+        <span class="n">plugins</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">dName</span><span class="p">,</span> <span class="n">sdName</span><span class="p">,</span> <span class="n">fList</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plugins_path</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">fileName</span> <span class="ow">in</span> <span class="n">fList</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">fnmatch</span><span class="o">.</span><span class="n">fnmatch</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
+                    <span class="n">regex_plugin_name</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">dName</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;\/(.*?)\.so&#39;</span>
+                    <span class="n">plugin_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dName</span><span class="p">,</span> <span class="n">fileName</span><span class="p">)</span>
+                    <span class="n">plugin_name</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">regex_plugin_name</span><span class="p">,</span> <span class="n">plugin_path</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                    <span class="n">new_plugin</span> <span class="o">=</span> <span class="n">Plugin</span><span class="p">(</span><span class="n">plugin_name</span><span class="p">,</span> <span class="n">plugin_path</span><span class="p">)</span>
+                    <span class="n">plugins</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_plugin</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">plugins</span></div>
+
+<div class="viewcode-block" id="PluginManager.compile_plugins"><a class="viewcode-back" href="../../../../../src.core.processing_pipe.src.html#src.core.processing_pipe.src.PluginManager.PluginManager.compile_plugins">[docs]</a>    <span class="k">def</span> <span class="nf">compile_plugins</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;(PluginManager:compile_plugins) start&quot;</span><span class="p">)</span>
+        <span class="n">dirnames</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plugins_path</span><span class="p">)</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;^[^\.]&#39;</span><span class="p">)</span>
+        <span class="n">dirnames</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">match</span><span class="p">,</span> <span class="n">dirnames</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">plugin_name</span> <span class="ow">in</span> <span class="n">dirnames</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">completed_without_error</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">p</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">([</span><span class="s2">&quot;/bin/bash&quot;</span><span class="p">,</span>
+                                      <span class="s2">&quot;src/core/system_manager/bash/compile-plugins.sh&quot;</span><span class="p">,</span>
+                                      <span class="bp">self</span><span class="o">.</span><span class="n">plugins_path</span><span class="p">,</span>
+                                      <span class="n">plugin_name</span><span class="p">,</span>
+                                      <span class="s2">&quot;var=11; ignore all&quot;</span><span class="p">],</span>
+                                     <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span>
+                                     <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">):</span>
+                        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;(BASH - compile-plugins.sh): &quot;</span> <span class="o">+</span> <span class="n">line</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">):</span>
+                        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;[ERROR] (BASH compile-plugins.sh): &quot;</span> <span class="o">+</span> <span class="n">line</span><span class="p">)</span>
+                        <span class="n">completed_without_error</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">completed_without_error</span><span class="p">):</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;(ichnosat-manager): Completed compile &quot;</span> <span class="o">+</span> <span class="n">plugin_name</span> <span class="o">+</span> <span class="s2">&quot; plugin&quot;</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+                        <span class="s2">&quot;[ERROR] (ichnosat-manager): Failed compilation of scientific_processor plugin &#39;&quot;</span> <span class="o">+</span> <span class="n">plugin_name</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+                    <span class="s2">&quot;[ERROR] (ichnosat-manager): Failed compilation of scientific_processor plugin &#39;&quot;</span> <span class="o">+</span> <span class="n">plugin_name</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;(ichnosat-manager): COMPLETED compile scientific_processor plugins&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;Done&quot;</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">ichnosat 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Sardegna Clima - Raffaele Bua (buele).
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+    </div>
+  </body>
+</html>

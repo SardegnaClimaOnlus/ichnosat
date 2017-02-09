@@ -1,0 +1,323 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>src.core.downloader package &#8212; ichnosat 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="src.core.processing_pipe package" href="src.core.processing_pipe.html" />
+    <link rel="prev" title="src.core package" href="src.core.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="src.core.processing_pipe.html" title="src.core.processing_pipe package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="src.core.html" title="src.core package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">ichnosat 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >src</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="src.html" >src package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="src.core.html" accesskey="U">src.core package</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.png" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="home.html">Welcome to Ichnosat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="downloads.html">Downloads</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="src-core-downloader-package">
+<h1>src.core.downloader package<a class="headerlink" href="#src-core-downloader-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-src.core.downloader.AmazonBucketManager">
+<span id="src-core-downloader-amazonbucketmanager-module"></span><h2>src.core.downloader.AmazonBucketManager module<a class="headerlink" href="#module-src.core.downloader.AmazonBucketManager" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="src.core.downloader.AmazonBucketManager.AmazonBucketManager">
+<em class="property">class </em><code class="descclassname">src.core.downloader.AmazonBucketManager.</code><code class="descname">AmazonBucketManager</code><span class="sig-paren">(</span><em>configurations</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/AmazonBucketManager.html#AmazonBucketManager"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.AmazonBucketManager.AmazonBucketManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dl class="method">
+<dt id="src.core.downloader.AmazonBucketManager.AmazonBucketManager.extract_date">
+<code class="descname">extract_date</code><span class="sig-paren">(</span><em>item</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/AmazonBucketManager.html#AmazonBucketManager.extract_date"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.AmazonBucketManager.AmazonBucketManager.extract_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="src.core.downloader.AmazonBucketManager.AmazonBucketManager.generate_url">
+<code class="descname">generate_url</code><span class="sig-paren">(</span><em>tile</em>, <em>year</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/AmazonBucketManager.html#AmazonBucketManager.generate_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.AmazonBucketManager.AmazonBucketManager.generate_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="src.core.downloader.AmazonBucketManager.AmazonBucketManager.get_products_list">
+<code class="descname">get_products_list</code><span class="sig-paren">(</span><em>searchFilter</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/AmazonBucketManager.html#AmazonBucketManager.get_products_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.AmazonBucketManager.AmazonBucketManager.get_products_list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="src.core.downloader.AmazonBucketManager.AmazonBucketManager.load_products">
+<code class="descname">load_products</code><span class="sig-paren">(</span><em>tile</em>, <em>year</em>, <em>paginated=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/AmazonBucketManager.html#AmazonBucketManager.load_products"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.AmazonBucketManager.AmazonBucketManager.load_products" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-src.core.downloader.Configuration">
+<span id="src-core-downloader-configuration-module"></span><h2>src.core.downloader.Configuration module<a class="headerlink" href="#module-src.core.downloader.Configuration" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="src.core.downloader.Configuration.Configuration">
+<em class="property">class </em><code class="descclassname">src.core.downloader.Configuration.</code><code class="descname">Configuration</code><a class="reference internal" href="_modules/src/core/downloader/Configuration.html#Configuration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.Configuration.Configuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-src.core.downloader.ConfigurationManager">
+<span id="src-core-downloader-configurationmanager-module"></span><h2>src.core.downloader.ConfigurationManager module<a class="headerlink" href="#module-src.core.downloader.ConfigurationManager" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="src.core.downloader.ConfigurationManager.ConfigurationManager">
+<em class="property">class </em><code class="descclassname">src.core.downloader.ConfigurationManager.</code><code class="descname">ConfigurationManager</code><a class="reference internal" href="_modules/src/core/downloader/ConfigurationManager.html#ConfigurationManager"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.ConfigurationManager.ConfigurationManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dl class="method">
+<dt id="src.core.downloader.ConfigurationManager.ConfigurationManager.datetime_from_string">
+<code class="descname">datetime_from_string</code><span class="sig-paren">(</span><em>date_string</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/ConfigurationManager.html#ConfigurationManager.datetime_from_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.ConfigurationManager.ConfigurationManager.datetime_from_string" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="src.core.downloader.ConfigurationManager.ConfigurationManager.get_configuration">
+<code class="descname">get_configuration</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/ConfigurationManager.html#ConfigurationManager.get_configuration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.ConfigurationManager.ConfigurationManager.get_configuration" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="src.core.downloader.ConfigurationManager.ConfigurationManager.load_aws_domain">
+<code class="descname">load_aws_domain</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/ConfigurationManager.html#ConfigurationManager.load_aws_domain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.ConfigurationManager.ConfigurationManager.load_aws_domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="src.core.downloader.ConfigurationManager.ConfigurationManager.load_aws_products_regex">
+<code class="descname">load_aws_products_regex</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/ConfigurationManager.html#ConfigurationManager.load_aws_products_regex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.ConfigurationManager.ConfigurationManager.load_aws_products_regex" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="src.core.downloader.ConfigurationManager.ConfigurationManager.load_aws_xmlns">
+<code class="descname">load_aws_xmlns</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/ConfigurationManager.html#ConfigurationManager.load_aws_xmlns"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.ConfigurationManager.ConfigurationManager.load_aws_xmlns" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="src.core.downloader.ConfigurationManager.ConfigurationManager.load_configuration">
+<code class="descname">load_configuration</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/ConfigurationManager.html#ConfigurationManager.load_configuration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.ConfigurationManager.ConfigurationManager.load_configuration" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="src.core.downloader.ConfigurationManager.ConfigurationManager.load_end_date">
+<code class="descname">load_end_date</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/ConfigurationManager.html#ConfigurationManager.load_end_date"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.ConfigurationManager.ConfigurationManager.load_end_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="src.core.downloader.ConfigurationManager.ConfigurationManager.load_files_to_download">
+<code class="descname">load_files_to_download</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/ConfigurationManager.html#ConfigurationManager.load_files_to_download"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.ConfigurationManager.ConfigurationManager.load_files_to_download" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="src.core.downloader.ConfigurationManager.ConfigurationManager.load_inbox_path">
+<code class="descname">load_inbox_path</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/ConfigurationManager.html#ConfigurationManager.load_inbox_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.ConfigurationManager.ConfigurationManager.load_inbox_path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="src.core.downloader.ConfigurationManager.ConfigurationManager.load_parallel_downloads">
+<code class="descname">load_parallel_downloads</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/ConfigurationManager.html#ConfigurationManager.load_parallel_downloads"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.ConfigurationManager.ConfigurationManager.load_parallel_downloads" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="src.core.downloader.ConfigurationManager.ConfigurationManager.load_start_date">
+<code class="descname">load_start_date</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/ConfigurationManager.html#ConfigurationManager.load_start_date"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.ConfigurationManager.ConfigurationManager.load_start_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="src.core.downloader.ConfigurationManager.ConfigurationManager.load_tiles">
+<code class="descname">load_tiles</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/ConfigurationManager.html#ConfigurationManager.load_tiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.ConfigurationManager.ConfigurationManager.load_tiles" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-src.core.downloader.Datasource">
+<span id="src-core-downloader-datasource-module"></span><h2>src.core.downloader.Datasource module<a class="headerlink" href="#module-src.core.downloader.Datasource" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="src.core.downloader.Datasource.Datasource">
+<em class="property">class </em><code class="descclassname">src.core.downloader.Datasource.</code><code class="descname">Datasource</code><span class="sig-paren">(</span><em>configurations</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/Datasource.html#Datasource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.Datasource.Datasource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dl class="method">
+<dt id="src.core.downloader.Datasource.Datasource.download_product">
+<code class="descname">download_product</code><span class="sig-paren">(</span><em>product</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/Datasource.html#Datasource.download_product"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.Datasource.Datasource.download_product" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="src.core.downloader.Datasource.Datasource.get_products_list">
+<code class="descname">get_products_list</code><span class="sig-paren">(</span><em>searchFilter</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/Datasource.html#Datasource.get_products_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.Datasource.Datasource.get_products_list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-src.core.downloader.Downloader">
+<span id="src-core-downloader-downloader-module"></span><h2>src.core.downloader.Downloader module<a class="headerlink" href="#module-src.core.downloader.Downloader" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="src.core.downloader.Downloader.Downloader">
+<em class="property">class </em><code class="descclassname">src.core.downloader.Downloader.</code><code class="descname">Downloader</code><a class="reference internal" href="_modules/src/core/downloader/Downloader.html#Downloader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.Downloader.Downloader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dl class="method">
+<dt id="src.core.downloader.Downloader.Downloader.create_search_filter">
+<code class="descname">create_search_filter</code><span class="sig-paren">(</span><em>tile</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/Downloader.html#Downloader.create_search_filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.Downloader.Downloader.create_search_filter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="src.core.downloader.Downloader.Downloader.start">
+<code class="descname">start</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/Downloader.html#Downloader.start"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.Downloader.Downloader.start" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-src.core.downloader.DownloaderJob">
+<span id="src-core-downloader-downloaderjob-module"></span><h2>src.core.downloader.DownloaderJob module<a class="headerlink" href="#module-src.core.downloader.DownloaderJob" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="src.core.downloader.DownloaderJob.DownloaderJob">
+<em class="property">class </em><code class="descclassname">src.core.downloader.DownloaderJob.</code><code class="descname">DownloaderJob</code><span class="sig-paren">(</span><em>queue</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/DownloaderJob.html#DownloaderJob"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.DownloaderJob.DownloaderJob" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/threading.html#threading.Thread" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">threading.Thread</span></code></a></p>
+<dl class="method">
+<dt id="src.core.downloader.DownloaderJob.DownloaderJob.refresh_configurations">
+<code class="descname">refresh_configurations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/DownloaderJob.html#DownloaderJob.refresh_configurations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.DownloaderJob.DownloaderJob.refresh_configurations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="src.core.downloader.DownloaderJob.DownloaderJob.run">
+<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/DownloaderJob.html#DownloaderJob.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.DownloaderJob.DownloaderJob.run" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-src.core.downloader.ProductDownloader">
+<span id="src-core-downloader-productdownloader-module"></span><h2>src.core.downloader.ProductDownloader module<a class="headerlink" href="#module-src.core.downloader.ProductDownloader" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="src.core.downloader.ProductDownloader.ProductDownloader">
+<em class="property">class </em><code class="descclassname">src.core.downloader.ProductDownloader.</code><code class="descname">ProductDownloader</code><span class="sig-paren">(</span><em>inbox_path</em>, <em>files_to_download</em>, <em>domain</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/ProductDownloader.html#ProductDownloader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.ProductDownloader.ProductDownloader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dl class="method">
+<dt id="src.core.downloader.ProductDownloader.ProductDownloader.download_product">
+<code class="descname">download_product</code><span class="sig-paren">(</span><em>product_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/ProductDownloader.html#ProductDownloader.download_product"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.ProductDownloader.ProductDownloader.download_product" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-src.core.downloader.SearchFilter">
+<span id="src-core-downloader-searchfilter-module"></span><h2>src.core.downloader.SearchFilter module<a class="headerlink" href="#module-src.core.downloader.SearchFilter" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="src.core.downloader.SearchFilter.SearchFilter">
+<em class="property">class </em><code class="descclassname">src.core.downloader.SearchFilter.</code><code class="descname">SearchFilter</code><span class="sig-paren">(</span><em>tile</em>, <em>start_date</em>, <em>end_date</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/SearchFilter.html#SearchFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.SearchFilter.SearchFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-src.core.downloader">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-src.core.downloader" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="src.core.processing_pipe.html" title="src.core.processing_pipe package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="src.core.html" title="src.core package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">ichnosat 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >src</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="src.html" >src package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="src.core.html" >src.core package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Sardegna Clima - Raffaele Bua (buele).
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+    </div>
+  </body>
+</html>
