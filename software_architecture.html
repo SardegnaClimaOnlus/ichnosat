@@ -63,9 +63,15 @@
             </a></p>
 <h3><a href="index.html">Table Of Contents</a></h3>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="index.html">Welcome to Ichnosat</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html#index">Index</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="documentation.html">Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="documentation.html">Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="documentation.html#tutorial">Tutorial</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="documentation.html#id1">Documentation</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Software architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules.html">APIs</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">APIs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="downloads.html">Downloads</a></li>
 <li class="toctree-l1"><a class="reference internal" href="credits.html">Credits</a></li>
@@ -92,17 +98,352 @@
             
   <div class="section" id="software-architecture">
 <h1>Software architecture<a class="headerlink" href="#software-architecture" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="downloader-class-diagram">
-<h2>Downloader class diagram<a class="headerlink" href="#downloader-class-diagram" title="Permalink to this headline">¶</a></h2>
-<p>(...)</p>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The Ichnosat goal is to <strong>Download</strong> satellite data and <strong>Process</strong> this data automatically.
+The high level workflow of the platform is simple:</p>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
-<div class="section" id="processor-class-diagram">
-<h2>Processor class diagram<a class="headerlink" href="#processor-class-diagram" title="Permalink to this headline">¶</a></h2>
-<p>(...)</p>
+<img alt="_images/overview.png" class="align-center" src="_images/overview.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<img alt="_images/ichnosat-workflow.png" class="align-center" src="_images/ichnosat-workflow.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<p><em>Downloader</em> and <em>Processor</em> are the main modules of this platform. The schema with all modules involved follows:</p>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<img alt="_images/ichnosat-modules.png" class="align-center" src="_images/ichnosat-modules.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="downloader">
+<h2>Downloader<a class="headerlink" href="#downloader" title="Permalink to this headline">¶</a></h2>
+<p>This module is deputed to retrieve the list of available products and download them, on the basis of the configurations set by user.
+The possible configurations to filter the list of products are:</p>
+<ul class="simple">
+<li>List of tiles</li>
+<li>List of files to download for each tile</li>
+<li>Sensing time interval (start - end )</li>
+</ul>
+<div class="section" id="class-diagram">
+<h3>Class diagram<a class="headerlink" href="#class-diagram" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<img alt="_images/downloader-class-diagram.png" class="align-center" src="_images/downloader-class-diagram.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="sequence-diagram">
+<h3>Sequence diagram<a class="headerlink" href="#sequence-diagram" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<img alt="_images/downloader-sequence-diagram.png" class="align-center" src="_images/downloader-sequence-diagram.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</div>
+</div>
+<div class="section" id="processor">
+<h2>Processor<a class="headerlink" href="#processor" title="Permalink to this headline">¶</a></h2>
+<p>The goal of this component is to process downloaded products.
+Every processing algorithm is represented by C++ plugins. This means that <em>Processor</em> module is
+extendible. Plugins are dynamic shared library (Linux environment)</p>
+<p>The processor runs as http server to receive requests via http:</p>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<img alt="_images/processor-web-interface.png" class="align-center" src="_images/processor-web-interface.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<p>When the POST /process http is received the <em>Processor</em> starts a processing task, spreading a pool of threads.
+The number of threads is configurable via <em>conf.cfg</em> file.</p>
+<p>If you want to develop a new plugin
+for your processing purposes, please follows the tutorial:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="how_to_create_a_new_plugin.html">How to create a new plugin</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="how_to_create_a_new_plugin.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="how_to_create_a_new_plugin.html#plugin-creation">Plugin Creation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="how_to_create_a_new_plugin.html#external-libraries">External libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="how_to_create_a_new_plugin.html#build-a-plugin">Build a Plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="how_to_create_a_new_plugin.html#anatomy-of-a-processor-plugin">Anatomy of a Processor plugin</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="how_to_create_a_new_plugin.html#implementation-of-processor-interface">Implementation of <em>Processor</em> interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="how_to_create_a_new_plugin.html#class-declaration">Class declaration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="how_to_create_a_new_plugin.html#class-methods-implementation">Class methods implementation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="how_to_create_a_new_plugin.html#working-plugin-example">Working plugin example</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id1">
+<h3>Class diagram<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<img alt="_images/processor-class-diagram.png" class="align-center" src="_images/processor-class-diagram.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h3>Sequence diagram<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<img alt="_images/processor-sequence-diagram.png" class="align-center" src="_images/processor-sequence-diagram.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</div>
+</div>
+<div class="section" id="system-manager">
+<h2>System Manager<a class="headerlink" href="#system-manager" title="Permalink to this headline">¶</a></h2>
+<p>System Manager is the high level module to manage other modules.</p>
+<div class="section" id="id3">
+<h3>Class diagram<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<img alt="_images/system_manager-class-diagram.png" class="align-center" src="_images/system_manager-class-diagram.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</div>
+</div>
+<div class="section" id="database">
+<h2>Database<a class="headerlink" href="#database" title="Permalink to this headline">¶</a></h2>
+<p>Database module contains the classes of ORM.
+In this version (0.1) is used <em>SqlAlchemy</em> ORM.</p>
+<div class="section" id="id4">
+<h3>Class diagram<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<img alt="_images/database-class-diagram.png" class="align-center" src="_images/database-class-diagram.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="database-schema">
+<h3>Database schema<a class="headerlink" href="#database-schema" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<img alt="_images/database-schema.png" class="align-center" src="_images/database-schema.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</div>
+</div>
+<div class="section" id="folder-structure">
+<h2>Folder Structure<a class="headerlink" href="#folder-structure" title="Permalink to this headline">¶</a></h2>
+<p>The description of the main folders in the source code follows:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="p">|</span>-- Dockerfile             <span class="c1"># Docker file of ichnosat platform</span>
+<span class="p">|</span>-- LICENSE.TXT            <span class="c1"># MIT license text</span>
+<span class="p">|</span>-- README.md              <span class="c1"># README of the project (for github main page)</span>
+<span class="p">|</span>-- auto-docs              <span class="c1"># Documentation sources and images</span>
+<span class="p">|</span>-- data_local
+<span class="p">|</span>   <span class="p">|</span>-- db                 <span class="c1"># Postgresql database files (mounted by docker-compose)</span>
+<span class="p">|</span>   <span class="p">|</span>-- inbox              <span class="c1"># Temporary downloaded products by the Downloader</span>
+<span class="p">|</span>   <span class="p">|</span>-- log                <span class="c1"># Ichnosat logs</span>
+<span class="p">|</span>   <span class="p">|</span>-- outbox             <span class="c1"># Processed products folder</span>
+<span class="p">|</span>   <span class="p">|</span>-- supervisord        <span class="c1"># Supervisord log folder</span>
+<span class="p">|</span>-- docker-compose.yml     <span class="c1"># Docker Compose definition file</span>
+<span class="p">|</span>-- src
+<span class="p">|</span>   <span class="p">|</span>-- core               <span class="c1"># Main Modules source code (Downloader, Processor, System Manager)</span>
+<span class="p">|</span>   <span class="p">|</span>-- data               <span class="c1"># Database and Logger source code</span>
+<span class="p">|</span>   <span class="p">|</span>-- gui                <span class="c1"># Web GUI interface source code</span>
+<span class="p">|</span>   <span class="p">|</span>-- presentation       <span class="c1"># External interface (http) source code</span>
+<span class="p">|</span>   <span class="sb">`</span>-- tests              <span class="c1"># Tests</span>
+<span class="sb">`</span>-- vendors                <span class="c1"># Third part dependencies</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="external-inteface-apis">
+<h2>External Inteface APIs<a class="headerlink" href="#external-inteface-apis" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<img alt="_images/external-interface-apis.png" class="align-center" src="_images/external-interface-apis.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
 </div>
 <div class="section" id="technologies">
 <h2>Technologies<a class="headerlink" href="#technologies" title="Permalink to this headline">¶</a></h2>
-<p>(...)</p>
+<ul class="simple">
+<li><strong>Docker and docker compose</strong>: virtual image container</li>
+<li><strong>SqlAlchemy</strong>: ORM framework for python</li>
+<li><strong>Supervisord</strong>: Task manager</li>
+<li><strong>Valgrind</strong>: Process monitoring</li>
+<li><strong>Sphinx</strong>: Automatic Documentation for python</li>
+<li><strong>Flask</strong>: light webserver</li>
+<li><strong>Nginx</strong>: web server</li>
+<li><strong>Postgresql</strong>: database</li>
+<li><strong>GDAL</strong>: C/C++ library for satellite image processing</li>
+<li><strong>OpenJPG</strong>: library to manage jpeg2000 images</li>
+<li><strong>Python 3.4</strong></li>
+<li><strong>crontab</strong></li>
+<li><strong>debian</strong></li>
+<li><strong>pip</strong></li>
+<li><strong>C++11</strong></li>
+</ul>
+</div>
+<div class="section" id="code-documentation">
+<h2>Code documentation<a class="headerlink" href="#code-documentation" title="Permalink to this headline">¶</a></h2>
+<p>For more details about methods internals, please visit the section of <em>Code APIs</em> documentation:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">APIs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="src.html">src package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="src.core.html">src.core package</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="src.core.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="src.core.downloader.html">src.core.downloader package</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="src.core.downloader.html#submodules">Submodules</a></li>
+<li class="toctree-l7"><a class="reference internal" href="src.core.downloader.html#module-src.core.downloader.AmazonBucketManager">src.core.downloader.AmazonBucketManager module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="src.core.downloader.html#module-src.core.downloader.Configuration">src.core.downloader.Configuration module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="src.core.downloader.html#module-src.core.downloader.ConfigurationManager">src.core.downloader.ConfigurationManager module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="src.core.downloader.html#module-src.core.downloader.Datasource">src.core.downloader.Datasource module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="src.core.downloader.html#module-src.core.downloader.Downloader">src.core.downloader.Downloader module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="src.core.downloader.html#module-src.core.downloader.DownloaderJob">src.core.downloader.DownloaderJob module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="src.core.downloader.html#module-src.core.downloader.ProductDownloader">src.core.downloader.ProductDownloader module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="src.core.downloader.html#module-src.core.downloader.SearchFilter">src.core.downloader.SearchFilter module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="src.core.downloader.html#module-src.core.downloader">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="src.core.processing_pipe.html">src.core.processing_pipe package</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="src.core.processing_pipe.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="src.core.processing_pipe.scientific_processor.html">src.core.processing_pipe.scientific_processor package</a><ul>
+<li class="toctree-l9"><a class="reference internal" href="src.core.processing_pipe.scientific_processor.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l10"><a class="reference internal" href="src.core.processing_pipe.scientific_processor.src.html">src.core.processing_pipe.scientific_processor.src package</a></li>
+</ul>
+</li>
+<li class="toctree-l9"><a class="reference internal" href="src.core.processing_pipe.scientific_processor.html#module-src.core.processing_pipe.scientific_processor">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l8"><a class="reference internal" href="src.core.processing_pipe.src.html">src.core.processing_pipe.src package</a><ul>
+<li class="toctree-l9"><a class="reference internal" href="src.core.processing_pipe.src.html#submodules">Submodules</a></li>
+<li class="toctree-l9"><a class="reference internal" href="src.core.processing_pipe.src.html#module-src.core.processing_pipe.src.Job">src.core.processing_pipe.src.Job module</a></li>
+<li class="toctree-l9"><a class="reference internal" href="src.core.processing_pipe.src.html#module-src.core.processing_pipe.src.JobDispatcher">src.core.processing_pipe.src.JobDispatcher module</a></li>
+<li class="toctree-l9"><a class="reference internal" href="src.core.processing_pipe.src.html#module-src.core.processing_pipe.src.Plugin">src.core.processing_pipe.src.Plugin module</a></li>
+<li class="toctree-l9"><a class="reference internal" href="src.core.processing_pipe.src.html#module-src.core.processing_pipe.src.PluginManager">src.core.processing_pipe.src.PluginManager module</a></li>
+<li class="toctree-l9"><a class="reference internal" href="src.core.processing_pipe.src.html#module-src.core.processing_pipe.src.ProcessingPipeManager">src.core.processing_pipe.src.ProcessingPipeManager module</a></li>
+<li class="toctree-l9"><a class="reference internal" href="src.core.processing_pipe.src.html#module-src.core.processing_pipe.src">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l7"><a class="reference internal" href="src.core.processing_pipe.html#module-src.core.processing_pipe">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="src.core.system_manager.html">src.core.system_manager package</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="src.core.system_manager.html#submodules">Submodules</a></li>
+<li class="toctree-l7"><a class="reference internal" href="src.core.system_manager.html#module-src.core.system_manager.cli">src.core.system_manager.cli module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="src.core.system_manager.html#src-core-system-manager-init-module">src.core.system_manager.init module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="src.core.system_manager.html#module-src.core.system_manager.system_manager">src.core.system_manager.system_manager module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="src.core.system_manager.html#module-src.core.system_manager">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="src.core.html#module-src.core">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="src.data.html">src.data package</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="src.data.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="src.data.database.html">src.data.database package</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="src.data.database.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="src.data.database.entities.html">src.data.database.entities package</a><ul>
+<li class="toctree-l9"><a class="reference internal" href="src.data.database.entities.html#submodules">Submodules</a></li>
+<li class="toctree-l9"><a class="reference internal" href="src.data.database.entities.html#module-src.data.database.entities.product">src.data.database.entities.product module</a></li>
+<li class="toctree-l9"><a class="reference internal" href="src.data.database.entities.html#module-src.data.database.entities">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l8"><a class="reference internal" href="src.data.database.services.html">src.data.database.services package</a><ul>
+<li class="toctree-l9"><a class="reference internal" href="src.data.database.services.html#submodules">Submodules</a></li>
+<li class="toctree-l9"><a class="reference internal" href="src.data.database.services.html#module-src.data.database.services.products_service">src.data.database.services.products_service module</a></li>
+<li class="toctree-l9"><a class="reference internal" href="src.data.database.services.html#module-src.data.database.services">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l7"><a class="reference internal" href="src.data.database.html#submodules">Submodules</a></li>
+<li class="toctree-l7"><a class="reference internal" href="src.data.database.html#module-src.data.database.base">src.data.database.base module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="src.data.database.html#module-src.data.database.db">src.data.database.db module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="src.data.database.html#module-src.data.database">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="src.data.logger.html">src.data.logger package</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="src.data.logger.html#submodules">Submodules</a></li>
+<li class="toctree-l7"><a class="reference internal" href="src.data.logger.html#module-src.data.logger.logger">src.data.logger.logger module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="src.data.logger.html#module-src.data.logger">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="src.data.html#module-src.data">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="src.presentation.html">src.presentation package</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="src.presentation.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="src.presentation.external_interface.html">src.presentation.external_interface package</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="src.presentation.external_interface.html#submodules">Submodules</a></li>
+<li class="toctree-l7"><a class="reference internal" href="src.presentation.external_interface.html#module-src.presentation.external_interface.start">src.presentation.external_interface.start module</a></li>
+<li class="toctree-l7"><a class="reference internal" href="src.presentation.external_interface.html#module-src.presentation.external_interface">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="src.presentation.html#module-src.presentation">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#module-src">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
 </div>
 </div>
 
