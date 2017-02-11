@@ -38,8 +38,6 @@ Ichnosat *processor* is multithreaded, extendible
 via C++ plugins and customizable.
 
 
-
-
 |
 
 .. image:: _static/overview.png
@@ -49,6 +47,19 @@ via C++ plugins and customizable.
 
 
 |
+
+
+|
+|
+
+.. image:: _static/ichnosat-workflow.png
+   :align: center
+
+|
+|
+
+
+
 
 
 - Cross-platform support

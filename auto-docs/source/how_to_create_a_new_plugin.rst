@@ -63,7 +63,7 @@ The logs of compilation are streamed in the *ichnosat.log* log file, located in 
    /usr/ichnosat/data_local/log/ichnosat.log
 
 
-Example of compile process logs:
+Example of compiling process logs:
 
 .. code-block:: bash
 
