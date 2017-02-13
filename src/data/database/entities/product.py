@@ -47,6 +47,8 @@ __contact__ = "info@raffaelebua.eu"
 __status__ = "Development"
 
 class ProductStatus(enum.Enum):
+    """ Possible product statuses in the database.
+    """
     pending = "pending"
     downloading = "downloading"
     downloaded = "downloaded"
@@ -54,6 +56,8 @@ class ProductStatus(enum.Enum):
     processed = "processed"
 
 class Product(Base):
+    """ SqlAlchemy product entity.
+    """
     __tablename__ = 'products'
     id = Column(Integer, Sequence('products_id_seq'), primary_key=True)
     name = Column(String(50))

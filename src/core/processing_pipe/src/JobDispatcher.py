@@ -49,6 +49,8 @@ __contact__ = "info@raffaelebua.eu"
 __status__ = "Development"
 
 class JobDispatcher(threading.Thread):
+    """ This class dispatches processing jobs.
+    """
     def __init__(self, outbox_path, plugins_path, delegate):
         logger.info("(JobDispatcher __init__) ")
         self.outbox_path = outbox_path
@@ -60,6 +62,10 @@ class JobDispatcher(threading.Thread):
         threading.Thread.__init__(self)
 
     def run(self):
+        """ Thread run method implementation.
+            It launches the *Job* objects to process products via *Processor* plugins.
+
+        """
         logger.info("(JobDispatcher run) ")
         threads = []
         logger.info("(JobDispatcher run) get list of downloaded products")

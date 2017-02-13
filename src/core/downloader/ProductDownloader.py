@@ -48,6 +48,8 @@ __status__ = "Development"
 
 
 class ProductDownloader:
+    """ This class is the interface with the internet to retrieve data from remote datasource.
+    """
     def __init__(self, inbox_path, files_to_download, domain):
         logger.debug("(ProductDownloader __init__) ")
         self.inbox_path = inbox_path
@@ -56,6 +58,15 @@ class ProductDownloader:
         return
 
     def download_product(self, product_name):
+        """ This method launches the http request to download the product via product name.
+
+            :param product_name: The name of product to download
+            :type product_name: String
+
+            :returns: None
+            :rtype: None
+
+        """
         logger.debug("(ProductDownloader download_product) ")
         logger.debug("(ProductDownloader download_product) product.name: " + product_name)
         new_product_path = self.inbox_path + product_name.replace("/", "-")[:-1]

@@ -43,6 +43,8 @@ __contact__ = "info@raffaelebua.eu"
 __status__ = "Development"
 
 class Configuration:
+    """ This class is the container of *Downloader* configurations.
+    """
     def __init__(self):
         logger.debug("(ConfigurationManager __init__)")
         self.start_date = None

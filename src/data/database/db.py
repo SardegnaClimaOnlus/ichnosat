@@ -52,12 +52,16 @@ __status__ = "Development"
 
 
 class DB:
+    """ Database wrapper exploiting SqlAlchemy ORM.
+    """
     def __init__(self):
         self.config = configparser.ConfigParser()
         self.config.read("src/data/database/config/db.cfg")
         self.engine = create_engine(self.config['database']['connection_string_create'], pool_recycle=3600)
 
     def create_db(self):
+        """ This method creates a new database from scratch.
+        """
         try:
             conn = self.engine.connect()
             conn.execute("commit")

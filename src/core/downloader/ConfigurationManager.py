@@ -48,6 +48,9 @@ __status__ = "Development"
 
 class ConfigurationManager:
     def __init__(self):
+        """ This class manages configurations, it extracts the configurations strings from the
+        config file and put the values in the *Configuration*  class.
+        """
         logger.debug("(ConfigurationManager __init__)")
         self.config = configparser.ConfigParser()
         self.config.read("/usr/ichnosat/src/core/downloader/config/config.cfg")

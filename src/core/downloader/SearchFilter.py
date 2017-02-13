@@ -42,6 +42,8 @@ __status__ = "Development"
 
 
 class SearchFilter:
+    """ This class is the container of filtering parameters to retrieve data from *Downloader* datasource.
+    """
     def __init__(self, tile, start_date, end_date):
         self.tile = tile
         self.start_date = start_date

@@ -53,6 +53,8 @@ __status__ = "Development"
 
 
 class DownloaderJob(threading.Thread):
+    """ This class manages the *ProductDownloader* classes. This is an async method, launched by the Downloader.
+    """
     def __init__(self, queue):
         logger.debug("(DownloaderJob __init__)")
         self.configurationManager = ConfigurationManager()
@@ -63,12 +65,17 @@ class DownloaderJob(threading.Thread):
         threading.Thread.__init__(self)
 
     def refresh_configurations(self):
+        """ This method reload the configurations from the *Downloader* config file.
+        """
         logger.debug("(Downloader refresh_configurations)")
         self.configurationManager.load_configuration()
         self.configuration = self.configurationManager.configuration
         logger.debug("(Downloader refresh_configurations) finished")
 
     def run(self):
+        """ The *run* method of the thread, this method calls the datasource method to download the
+            products available to download from the database  (the products with the status *pending*.
+        """
         while True:
             try:
                 if self.queue.qsize():

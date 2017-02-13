@@ -48,17 +48,32 @@ __status__ = "Development"
 
 
 class ProcessingPipeManager:
+    """ It is the entry point of the *Processor*, handling the processing requests triggered by the *Downloader*
+    """
     def __init__(self):
         logger.debug("(ProcessingPipeManager __init__) ")
         self.config = configparser.ConfigParser()
         self.config.read("/usr/ichnosat/src/core/processing_pipe/config/config.cfg")
 
     def process_product(self, product_name):
+        """ This method is the wrapper of the web request to trigger a new processing task.
+
+            :param product_name: The name of the product to process
+            :type product_name: String
+
+        """
         logger.debug("(ProcessingPipeManager process_product) ")
         product_path = self.config['FOLDERS']['inbox_path'] + product_name.replace("/", "-")[:-1]
         self.notify_to_scientific_processor(product_path + '/')
 
     def notify_to_scientific_processor(self, file_path):
+        """ This method launches the http request to trigger a new processing process.
+            It represent the networking interface to the scientific processor.
+
+            :param file_path: The path where is located the product to process
+            :type file_path: String
+
+        """
         logger.debug("(ProcessingPipeManager notify_to_scientific_processor) ")
         body = {"path": file_path}
         params = json.dumps(body).encode('utf8')
@@ -68,6 +83,8 @@ class ProcessingPipeManager:
         response = urllib.request.urlopen(req)
 
     def start_processing(self):
+        """ The entry point of the *ProcessingPipeManager* class.
+        """
         logger.debug("(ProcessingPipeManager start_processing) ")
         ps = ProductsService()
         for product in ps.get_products_to_process():

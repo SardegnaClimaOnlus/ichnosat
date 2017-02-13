@@ -49,10 +49,20 @@ __contact__ = "info@raffaelebua.eu"
 __status__ = "Development"
 
 class PluginManager():
+    """ This is the manager of plugins, it compiles C++ plugins and retrieve the list of available plugins,
+        in ichnosat platform
+    """
     def __init__(self, plugins_path):
         self.plugins_path = plugins_path
 
     def get_plugins(self):
+        """ This method retrieve the list of plugins available to process product, via file system
+            inspection.
+
+            :returns: list of available plugins in ichnosat platform
+            :rtype: List
+
+        """
         pattern = '*.so'
         plugins = []
         for dName, sdName, fList in os.walk(self.plugins_path):
@@ -66,6 +76,8 @@ class PluginManager():
         return plugins
 
     def compile_plugins(self):
+        """ This method compiles  every c++ plugin present in the *plugins* folder of *Processor* module
+        """
         logger.debug("(PluginManager:compile_plugins) start")
         dirnames = os.listdir(self.plugins_path)
         r = re.compile('^[^\.]')

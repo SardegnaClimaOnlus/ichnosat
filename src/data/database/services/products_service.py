@@ -50,12 +50,22 @@ __contact__ = "info@raffaelebua.eu"
 __status__ = "Development"
 
 class ProductsService():
+    """ This class is the service to manage products inside the database. It is a wrapper to manage products,
+        exploiting SqlAlchemy ORM.
+    """
     def __init__(self):
         config = configparser.ConfigParser()
         config.read("src/data/database/config/db.cfg")
         self.engine = create_engine(config['database']['connection_string'],  pool_recycle=3600)
 
     def add_new_product(self, product):
+        """ Add a new product in the database
+
+            :param product: Product entity to add in the database
+            :type product: Product
+
+
+        """
         result = False
         Session = sessionmaker(bind=self.engine)
         session = Session()

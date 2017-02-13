@@ -46,6 +46,8 @@ __status__ = "Development"
 
 
 class Datasource:
+    """ This class is the datasource of all data used by the *Downloader*.
+    """
     def __init__(self, configurations):
         logger.debug("(Datasource __init__)")
         self.configurations = configurations
@@ -56,6 +58,16 @@ class Datasource:
         return
 
     def get_products_list(self, searchFilter):
+        """ This method generates the product list from query filters defined in the config file
+            by the user.
+
+            :param searchFilter: Search parameters to filter the available files in the bucket
+            :type searchFilter: SearchFilter
+
+            :returns: The list of available products.
+            :rtype: List
+
+        """
         logger.debug("(Datasource get_products_list)")
         products_list = self.abm.get_products_list(searchFilter)
         logger.debug("(Datasrouce get_products_list) list of products:")
@@ -64,4 +76,13 @@ class Datasource:
         return products_list
 
     def download_product(self, product):
+        """ This method donwloads  the product passed as method paramenter.
+
+            :param product: The product to download
+            :type product: Product
+
+            :returns: None
+            :rtype: None
+
+        """
         self.productDownloader.download_product(product)

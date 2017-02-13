@@ -55,6 +55,9 @@ __status__ = "Development"
 
 
 class Downloader:
+    """ The main class of *Downloader* module, it is the entry point that receives the trigger of
+        download events.
+    """
     def __init__(self):
         logger.debug("(Downloader __init__)")
         self.productService = ProductsService()
@@ -66,10 +69,23 @@ class Downloader:
         self.datasource = Datasource(self.configuration)
 
     def create_search_filter(self, tile):
+        """ This method generates the *SearchFilter* object from the tile name and configurations set
+            by user.
+
+            :param tile: Tile name
+            :type tile: String
+
+            :returns: Search filter object to retrieve data from datasource
+            :rtype: SearchFilter
+
+        """
         return SearchFilter(tile, self.configuration.start_date, self.configuration.end_date)
 
     def start(self):
-        logger.debug("(Downloader start) ----------------------------------------------")
+        """ Download event handler. The entry point of the *Downloader* module.
+
+        """
+        logger.debug("(Downloader start) ")
         processing_pipe_manager = ProcessingPipeManager()
         processing_pipe_manager.start_processing()
         self.pending_tasks += 1

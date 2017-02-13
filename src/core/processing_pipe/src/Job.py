@@ -52,6 +52,9 @@ __status__ = "Development"
 
 
 class Job(threading.Thread):
+    """ This class is the thread to launch *Processors* plugin. This class retrieves the processable products from
+        database (products with state *donwloaded*) and it runs the plugins.
+    """
     def __init__(self, outbox_path, plugins_path, lock, i):
         self.i = i
         logger.info("(Job __init__) ["+str(self.i)+"]")
@@ -65,12 +68,27 @@ class Job(threading.Thread):
         return
 
     def fibonacci(self, max_value):
+        """ Fibonacci sequence algorithm implementation.
+
+            :param max_value: The max value to reach using the fibonacci algorithm
+            :type max_value: int
+
+            :returns: the n fibonacci number
+            :rtype: int
+
+        """
         i, j = 2, 3
         while i < max_value:
             yield i
             i, j = j, i + j
 
     def _process(self, product):
+        """ Private method to run *Processor* plugin.
+
+            :param product: The product to process
+            :type product: Product
+
+        """
         logger.info("(Job _process) ["+str(self.i)+"] process the product with name: " + product.name)
         original_name = product.name.replace("/", "-")
         source = "/usr/ichnosat/data_local/inbox/" + original_name[:-1] + "/"
@@ -83,6 +101,9 @@ class Job(threading.Thread):
         shutil.rmtree(source)
 
     def run(self):
+        """ Thread run method implementation.
+
+        """
         WAIT_MULTIPLICATOR = 0.5
         SECONDS_PER_MINUTE = 60
         FIBONACCI_ITERATIONS = 1000

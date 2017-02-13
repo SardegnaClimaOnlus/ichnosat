@@ -48,6 +48,9 @@ __contact__ = "info@raffaelebua.eu"
 __status__ = "Development"
 
 class Plugin():
+    """ It is a wrapper of C++ plugin. This class generates the folder of new product and runs the
+        dynamic shared libraries (c++ plugins).
+    """
     def __init__(self, plugin_name, plugin_path):
         self.productService = ProductsService()
         self.plugin_name = plugin_name
@@ -59,14 +62,31 @@ class Plugin():
         return
 
     def more_data(self):
+        """ Utility method to manage out stream of dynamic shared libraries.
+        """
         r, _, _ = select.select([self.pipe_out], [], [], 0)
         return bool(r)
 
     def read_pipe(self):
+        """ Utility method to manage out stream of dynamic shared libraries.
+            Reading the out stream pipe.
+        """
         while self.more_data():
             logger.debug(os.read(self.pipe_out, 1024).decode('utf-8'))
 
     def run(self, source, outbox_path):
+        """ This method runs the *process* method of dynamic shared library containing the plugin.
+
+            :param source: The path in file system where is located the downloaded file.
+            :type source: String
+
+            :param outbox_path: The path of the processed products folder
+            :type source: String
+
+            :returns: None
+            :rtype: None
+
+        """
         try:
             product_name = source.split('/')[-2]
             destination = outbox_path + product_name + "-" + self.plugin_name + '/'

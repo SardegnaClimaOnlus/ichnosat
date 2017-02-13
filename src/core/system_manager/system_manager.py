@@ -51,6 +51,10 @@ __status__ = "Development"
 
 
 class SystemManager():
+    """ This class is the manager of all ichnosat platform.
+        It is to consider the logic layer of external interface. The admin functionalities are implemented
+        here.
+    """
     def __init__(self):
         self.config = configparser.ConfigParser()
         self.config_file_path = "/usr/ichnosat/src/core/system_manager/config/config.cfg"

@@ -47,7 +47,10 @@ __maintainer__ = "Raffaele Bua"
 __contact__ = "info@raffaelebua.eu"
 __status__ = "Development"
 
-class Producer():
+class Producer:
+    """ This class is the producer of processing tasks, exploiting the *JobDispatcher* class.
+        The goal of this class is to manage async requests of processing, avoiding the overlap among tasks.
+    """
     def __init__(self, outbox_path, plugins_path):
         logger.info("(Producer __init__) ")
         self.processing = False
@@ -55,6 +58,8 @@ class Producer():
         self.plugins_path = plugins_path
 
     def publish_new_job(self):
+        """ This method filteres async processing requests, if there is another processing task on-going.
+        """
         logger.info("(Producer publish_new_job) ")
         logger.info("(Producer publish_new_job) self.processing: " + str(self.processing))
         if self.processing:
@@ -67,6 +72,8 @@ class Producer():
         job_dispatcher.start()
 
     def set_processing_false(self):
+        """ This method set the internal status *processing* to False, to accept new requests of processing.
+        """
         logger.debug("(Producer set_processing_false) ")
         self.processing = False
 
