@@ -3,9 +3,9 @@ Installation and Requirements
 
 Software Requirements
 ---------------------
-You need a working `Docker <https://www.docker.com/>`_  and `Docker Compose <https://docs.docker.com/compose/>`_
-installation on the machine on which you are installing Ichnosat.
-To install Docker and Docker Compose follow the guide for your operating system from the
+Before you start you need a working `Docker <https://www.docker.com/>`_  and `Docker Compose <https://docs.docker.com/compose/>`_
+installation on the machine where you are going to install Ichnosat.
+To install Docker and Docker Compose please follow the relevant instructions for your operating system on the
 official documentation:
 
 - `Docker Installation <https://docs.docker.com/engine/installation/>`_
@@ -14,10 +14,10 @@ official documentation:
 Skills
 ------
 You need to be able to use basic console commands, since the primary purpose of Ichnosat platform is to
-process satellite images, you will also need to understand the basics of satellite data structure and image processing.
+process EO satellite images, you will also need to understand the basics of satellite data structure and image processing.
 
-In addition, if you want to extend Ichnosat platform creating a new addon, you need to be able to develop
-in C++ programming language, using `GDAL <http://www.gdal.org/>`_ library and having a basic knoledge of
+In addition, if you want to extend Ichnosat platform creating a new addon, you should be able to develop
+in C++ programming language, using `GDAL <http://www.gdal.org/>`_ library and having a basic knowledge of
 `Python <https://www.python.org/>`_ programming.
 
 
@@ -59,7 +59,7 @@ Install
 
    docker-compose build
 
-This step takes a lot of minutes (10-30), building dependencies and local code.
+This step might take time (10-30 min), building dependencies and local code.
 
 
 
