@@ -130,6 +130,8 @@
 <span class="n">__status__</span> <span class="o">=</span> <span class="s2">&quot;Development&quot;</span>
 
 <div class="viewcode-block" id="ProductStatus"><a class="viewcode-back" href="../../../../../src.data.database.entities.html#src.data.database.entities.product.ProductStatus">[docs]</a><span class="k">class</span> <span class="nc">ProductStatus</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Possible product statuses in the database.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">pending</span> <span class="o">=</span> <span class="s2">&quot;pending&quot;</span>
     <span class="n">downloading</span> <span class="o">=</span> <span class="s2">&quot;downloading&quot;</span>
     <span class="n">downloaded</span> <span class="o">=</span> <span class="s2">&quot;downloaded&quot;</span>
@@ -137,6 +139,8 @@
     <span class="n">processed</span> <span class="o">=</span> <span class="s2">&quot;processed&quot;</span></div>
 
 <div class="viewcode-block" id="Product"><a class="viewcode-back" href="../../../../../src.data.database.entities.html#src.data.database.entities.product.Product">[docs]</a><span class="k">class</span> <span class="nc">Product</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; SqlAlchemy product entity.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__tablename__</span> <span class="o">=</span> <span class="s1">&#39;products&#39;</span>
     <span class="nb">id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">(</span><span class="s1">&#39;products_id_seq&#39;</span><span class="p">),</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">(</span><span class="mi">50</span><span class="p">))</span>

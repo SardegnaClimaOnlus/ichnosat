@@ -136,6 +136,8 @@
 
 
 <div class="viewcode-block" id="DownloaderJob"><a class="viewcode-back" href="../../../../src.core.downloader.html#src.core.downloader.DownloaderJob.DownloaderJob">[docs]</a><span class="k">class</span> <span class="nc">DownloaderJob</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; This class manages the *ProductDownloader* classes. This is an async method, launched by the Downloader.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queue</span><span class="p">):</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;(DownloaderJob __init__)&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">configurationManager</span> <span class="o">=</span> <span class="n">ConfigurationManager</span><span class="p">()</span>
@@ -146,12 +148,17 @@
         <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
 <div class="viewcode-block" id="DownloaderJob.refresh_configurations"><a class="viewcode-back" href="../../../../src.core.downloader.html#src.core.downloader.DownloaderJob.DownloaderJob.refresh_configurations">[docs]</a>    <span class="k">def</span> <span class="nf">refresh_configurations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; This method reload the configurations from the *Downloader* config file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;(Downloader refresh_configurations)&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">configurationManager</span><span class="o">.</span><span class="n">load_configuration</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">configurationManager</span><span class="o">.</span><span class="n">configuration</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;(Downloader refresh_configurations) finished&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="DownloaderJob.run"><a class="viewcode-back" href="../../../../src.core.downloader.html#src.core.downloader.DownloaderJob.DownloaderJob.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; The *run* method of the thread, this method calls the datasource method to download the</span>
+<span class="sd">            products available to download from the database  (the products with the status *pending*.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="o">.</span><span class="n">qsize</span><span class="p">():</span>

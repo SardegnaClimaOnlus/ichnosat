@@ -85,20 +85,20 @@
             
   <div class="section" id="welcome-to-ichnosat">
 <h1>Welcome to Ichnosat<a class="headerlink" href="#welcome-to-ichnosat" title="Permalink to this headline">¶</a></h1>
-<p>Ichnosat is an <a class="reference external" href="https://opensource.org/">Open Source</a> plugin based platform to
-download an process satellite data written in
-<a class="reference external" href="https://www.python.org/">Python</a> and C++, designed and developed by <a class="reference external" href="https://buele.github.io">Raffaele Bua</a> for <a class="reference external" href="http://www.sardegna-clima.it">Sardegna Clima NPO</a>. Downloads and Processes are multithreaded and schedulable.
+<p>Ichnosat is an <a class="reference external" href="https://opensource.org/">Open Source</a> plugin based platform able to
+download and process EO satellite data. It is written in
+<a class="reference external" href="https://www.python.org/">Python</a> and C++, has been designed and developed by <a class="reference external" href="https://buele.github.io">Raffaele Bua</a> for <a class="reference external" href="http://www.sardegna-clima.it">Sardegna Clima Onlus NPO</a>. Downloads and Processes are multithreaded and schedulable.
 The Platform is configurable and the <em>processor</em> is extendible via C++ plugins.</p>
 <p><a class="reference external" href="https://www.docker.com/">Docker</a>  containers are included in the package, facilitating the installation and running.</p>
 <p>Source code is released under
 the <a class="reference external" href="https://opensource.org/licenses/MIT">MIT</a> license and it is available on <a class="reference external" href="https://github.com/SardegnaClimaOnlus/ichnosat/">GitHub</a>.</p>
 <img alt="_images/ichnosat-intro.png" src="_images/ichnosat-intro.png" />
 <p>The <em>downloader</em> gets automatically products from
-<a class="reference external" href="http://sentinel-pds.s3-website.eu-central-1.amazonaws.com/">Sentinel-2 on AWS</a> portal. This downloader is multithreaded and
-fully customizable.</p>
-<p>The <em>processor</em> receives products from downloader
-and processes products via C++ plugins. In the current
-version the plugin available processes the  <a class="reference external" href="https://en.wikipedia.org/wiki/Normalized_Difference_Vegetation_Index">NDVI</a>  exploiting
+<a class="reference external" href="http://sentinel-pds.s3-website.eu-central-1.amazonaws.com/">Sentinel-2 on AWS</a> portal. Such a downloader is multithreaded and can be
+fully customized in terms of AOI (Area of Interest) and Products Sensing Time.</p>
+<p>The <em>processor</em> gets products from the downloader
+and processes products via C++ plugins. Current
+version contains a single plugin able to extract from Sentinel-2 data the  <a class="reference external" href="https://en.wikipedia.org/wiki/Normalized_Difference_Vegetation_Index">NDVI</a>  exploiting
 <a class="reference external" href="http://www.gdal.org/">GDAL</a>  library.</p>
 <p>Ichnosat <em>processor</em> is multithreaded, extendible
 via C++ plugins and customizable.</p>
@@ -132,12 +132,12 @@ via C++ plugins and customizable.</p>
 <dd><ul class="first last">
 <li>Get Sentinel-2 data from  <a class="reference external" href="http://sentinel-pds.s3-website.eu-central-1.amazonaws.com/">Sentinel-2 on AWS</a></li>
 <li><dl class="first docutils">
-<dt>Customizable properties:</dt>
+<dt>Customizable features:</dt>
 <dd><ul class="first last">
-<li>Tiles to download</li>
-<li>Files to download for each tile</li>
-<li>Date interval (Sensing time)</li>
-<li>Number of parallel downloads in the same time</li>
+<li>Tiles to download (UTM-MGRS Tile-ID)</li>
+<li>Files to download for each tile (Image files and/or metadata)</li>
+<li>Dates interval (Sensing time)</li>
+<li>Number of parallel downloads at the same time</li>
 </ul>
 </dd>
 </dl>
@@ -151,9 +151,9 @@ via C++ plugins and customizable.</p>
 <dd><ul class="first last">
 <li>Plugin based: the processors are extendible C++ Shared Libraries</li>
 <li><dl class="first docutils">
-<dt>Customizable properties:</dt>
+<dt>Customizable features:</dt>
 <dd><ul class="first last">
-<li>Number of parallel processing in the same time</li>
+<li>Number of parallel processings at the same time</li>
 </ul>
 </dd>
 </dl>

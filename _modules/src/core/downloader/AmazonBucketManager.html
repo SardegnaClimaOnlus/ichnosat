@@ -132,18 +132,66 @@
 <span class="n">__status__</span> <span class="o">=</span> <span class="s2">&quot;Development&quot;</span>
 
 <div class="viewcode-block" id="AmazonBucketManager"><a class="viewcode-back" href="../../../../src.core.downloader.html#src.core.downloader.AmazonBucketManager.AmazonBucketManager">[docs]</a><span class="k">class</span> <span class="nc">AmazonBucketManager</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot; This class is an Adapter of Amazon AWS services.</span>
+<span class="sd">        Main goal of this class is **Retrieve the list of products from aws via tile list, and time interval**</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">configurations</span><span class="p">):</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">configurations</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">product_list</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">last_item</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">return</span>
 
 <div class="viewcode-block" id="AmazonBucketManager.generate_url"><a class="viewcode-back" href="../../../../src.core.downloader.html#src.core.downloader.AmazonBucketManager.AmazonBucketManager.generate_url">[docs]</a>    <span class="k">def</span> <span class="nf">generate_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tile</span><span class="p">,</span> <span class="n">year</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; This method generates the aws url from the tile name string and the start year of filter interval.</span>
+<span class="sd">            AWS service has the *prefix* parameter, to filter the list of available files in the bucket.</span>
+<span class="sd">            This method generates the proper *prefix* parameter value, to give the list of files</span>
+<span class="sd">            available in the year of *year* argument passed in the method.</span>
+
+<span class="sd">            The generated parameter is like:</span>
+
+<span class="sd">            .. code-block:: bash</span>
+
+<span class="sd">                prefix=tiles/{tile}/{year}/</span>
+
+<span class="sd">            :param tile: The tile name string with a pattern like</span>
+
+<span class="sd">            .. code-block:: bash</span>
+
+<span class="sd">                32/T/MK</span>
+
+<span class="sd">            :param year: The year</span>
+<span class="sd">            :returns: request url</span>
+<span class="sd">            :rtype: String</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">url_template</span> <span class="o">=</span> <span class="s1">&#39;http://sentinel-s2-l1c.s3.amazonaws.com/?list-type=2&amp;prefix=tiles/</span><span class="si">{tile}</span><span class="s1">/</span><span class="si">{year}</span><span class="s1">/&#39;</span>
         <span class="n">url</span> <span class="o">=</span> <span class="n">url_template</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tile</span><span class="o">=</span><span class="n">tile</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="n">year</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">url</span></div>
 
 <div class="viewcode-block" id="AmazonBucketManager.extract_date"><a class="viewcode-back" href="../../../../src.core.downloader.html#src.core.downloader.AmazonBucketManager.AmazonBucketManager.extract_date">[docs]</a>    <span class="k">def</span> <span class="nf">extract_date</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; This method extracts the date from the tile name string (complete with the date).</span>
+
+<span class="sd">            :param item: The tile name complete string. e.g.</span>
+
+<span class="sd">            .. code-block:: bash</span>
+
+<span class="sd">                tiles/32/T/MK/YYYY/MM/DD/</span>
+
+<span class="sd">            where</span>
+<span class="sd">                * **YYYY** is the year</span>
+<span class="sd">                * **MM** is the month</span>
+<span class="sd">                * **DD** is the day</span>
+
+<span class="sd">            :returns: The extracted date form the tile name string</span>
+<span class="sd">            :rtype: Datetime</span>
+<span class="sd">            The method apply the regex:</span>
+
+<span class="sd">            .. code-block:: bash</span>
+
+<span class="sd">                tiles/[0-9]2/[A-Z]/[A-Z]{2}/([0-9]{4})/([0-9]*)/([0-9]*)/</span>
+
+<span class="sd">            to the *item* parameter</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">regex</span> <span class="o">=</span> <span class="s1">&#39;tiles/[0-9]2/[A-Z]/[A-Z]</span><span class="si">{2}</span><span class="s1">/([0-9]</span><span class="si">{4}</span><span class="s1">)/([0-9]*)/([0-9]*)/&#39;</span>
         <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">regex</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
         <span class="n">year</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -152,6 +200,22 @@
         <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">year</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">month</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">day</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="AmazonBucketManager.load_products"><a class="viewcode-back" href="../../../../src.core.downloader.html#src.core.downloader.AmazonBucketManager.AmazonBucketManager.load_products">[docs]</a>    <span class="k">def</span> <span class="nf">load_products</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tile</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">paginated</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; *load_products* load list products form the Amazon *AWS* Bucket of Sinergise *Sentinel-2 on AWS*.</span>
+<span class="sd">            This method contains the *AWS* APIs semantic it is the core of Adapter.</span>
+<span class="sd">            It manages also pagination.</span>
+
+<span class="sd">            :param tile: Tile name</span>
+<span class="sd">            :type tile: String</span>
+<span class="sd">            :param year: Year of interest, the method extract the whole list of products for this year</span>
+<span class="sd">            :type year: String</span>
+<span class="sd">            :param paginated: if this parameter is *True* that means that the list provided from AWS is</span>
+<span class="sd">                              paginated and the next page starts after the *last_item*</span>
+<span class="sd">            :type year: Boolean</span>
+<span class="sd">            :returns: None</span>
+<span class="sd">            :rtype: None</span>
+
+<span class="sd">            This method stores the list of products in the classes property *product_list*.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;(AmazonBucketManager load_products)&quot;</span><span class="p">)</span>
         <span class="c1"># Generate url for year</span>
         <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_url</span><span class="p">(</span><span class="n">tile</span><span class="p">,</span> <span class="n">year</span><span class="p">)</span>
@@ -179,6 +243,18 @@
             <span class="k">return</span> <span class="kc">False</span></div>
 
 <div class="viewcode-block" id="AmazonBucketManager.get_products_list"><a class="viewcode-back" href="../../../../src.core.downloader.html#src.core.downloader.AmazonBucketManager.AmazonBucketManager.get_products_list">[docs]</a>    <span class="k">def</span> <span class="nf">get_products_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">searchFilter</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; This method manages the retrieval of aws products.</span>
+<span class="sd">            This method contains the *AWS* APIs semantic it is the core of Adapter.</span>
+<span class="sd">            It manages also pagination.</span>
+
+<span class="sd">            :param searchFilter: Search parameters to filter the available files in the bucket</span>
+<span class="sd">            :type searchFilter: SearchFilter</span>
+
+<span class="sd">            :returns: The pending products available in the Amazon bucket.</span>
+<span class="sd">            :rtype: None</span>
+
+<span class="sd">            .. todo:: Optimize list retrieval using set end date year instead *NOW* year.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;(AmazonBucketManager get_products_list)&quot;</span><span class="p">)</span>
         <span class="n">tile</span> <span class="o">=</span> <span class="n">searchFilter</span><span class="o">.</span><span class="n">tile</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">product_list</span> <span class="o">=</span> <span class="p">[]</span>
@@ -187,6 +263,7 @@
         <span class="n">current_year</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">year</span>
         <span class="n">pending_products</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="c1"># Extract whole list of products via amazon, from start year to now</span>
+        <span class="c1"># TODO: OPTMIZE IT USING THE END DATE FROM CONFIGURATION AND NOT *NOW*</span>
         <span class="k">while</span> <span class="n">year</span> <span class="o">&lt;=</span> <span class="n">current_year</span><span class="p">:</span>
             <span class="n">is_truncated</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_products</span><span class="p">(</span><span class="n">tile</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
             <span class="k">while</span> <span class="n">is_truncated</span><span class="p">:</span>

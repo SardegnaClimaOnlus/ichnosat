@@ -129,6 +129,8 @@
 
 
 <div class="viewcode-block" id="Datasource"><a class="viewcode-back" href="../../../../src.core.downloader.html#src.core.downloader.Datasource.Datasource">[docs]</a><span class="k">class</span> <span class="nc">Datasource</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot; This class is the datasource of all data used by the *Downloader*.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">configurations</span><span class="p">):</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;(Datasource __init__)&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">configurations</span> <span class="o">=</span> <span class="n">configurations</span>
@@ -139,6 +141,16 @@
         <span class="k">return</span>
 
 <div class="viewcode-block" id="Datasource.get_products_list"><a class="viewcode-back" href="../../../../src.core.downloader.html#src.core.downloader.Datasource.Datasource.get_products_list">[docs]</a>    <span class="k">def</span> <span class="nf">get_products_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">searchFilter</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; This method generates the product list from query filters defined in the config file</span>
+<span class="sd">            by the user.</span>
+
+<span class="sd">            :param searchFilter: Search parameters to filter the available files in the bucket</span>
+<span class="sd">            :type searchFilter: SearchFilter</span>
+
+<span class="sd">            :returns: The list of available products.</span>
+<span class="sd">            :rtype: List</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;(Datasource get_products_list)&quot;</span><span class="p">)</span>
         <span class="n">products_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">abm</span><span class="o">.</span><span class="n">get_products_list</span><span class="p">(</span><span class="n">searchFilter</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;(Datasrouce get_products_list) list of products:&quot;</span><span class="p">)</span>
@@ -147,6 +159,15 @@
         <span class="k">return</span> <span class="n">products_list</span></div>
 
 <div class="viewcode-block" id="Datasource.download_product"><a class="viewcode-back" href="../../../../src.core.downloader.html#src.core.downloader.Datasource.Datasource.download_product">[docs]</a>    <span class="k">def</span> <span class="nf">download_product</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">product</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; This method donwloads  the product passed as method paramenter.</span>
+
+<span class="sd">            :param product: The product to download</span>
+<span class="sd">            :type product: Product</span>
+
+<span class="sd">            :returns: None</span>
+<span class="sd">            :rtype: None</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">productDownloader</span><span class="o">.</span><span class="n">download_product</span><span class="p">(</span><span class="n">product</span><span class="p">)</span></div></div>
 </pre></div>
 

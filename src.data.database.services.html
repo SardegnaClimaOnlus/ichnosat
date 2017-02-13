@@ -68,15 +68,7 @@
             </a></p>
 <h3><a href="index.html">Table Of Contents</a></h3>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="documentation.html">Documentation</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="documentation.html#tutorial">Tutorial</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="documentation.html#id1">Documentation</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="software_architecture.html">Software architecture</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="modules.html">APIs</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">APIs</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="src.html">src package</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="src.html#subpackages">Subpackages</a></li>
@@ -119,10 +111,21 @@
 <dt id="src.data.database.services.products_service.ProductsService">
 <em class="property">class </em><code class="descclassname">src.data.database.services.products_service.</code><code class="descname">ProductsService</code><a class="reference internal" href="_modules/src/data/database/services/products_service.html#ProductsService"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.data.database.services.products_service.ProductsService" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>This class is the service to manage products inside the database. It is a wrapper to manage products,
+exploiting SqlAlchemy ORM.</p>
 <dl class="method">
 <dt id="src.data.database.services.products_service.ProductsService.add_new_product">
 <code class="descname">add_new_product</code><span class="sig-paren">(</span><em>product</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/data/database/services/products_service.html#ProductsService.add_new_product"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.data.database.services.products_service.ProductsService.add_new_product" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Add a new product in the database</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>product</strong> (<a class="reference internal" href="src.data.database.entities.html#src.data.database.entities.product.Product" title="src.data.database.entities.product.Product"><em>Product</em></a>) &#8211; Product entity to add in the database</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="src.data.database.services.products_service.ProductsService.get_a_downloaded_product">

@@ -4,9 +4,9 @@ Welcome to Ichnosat
 =============================
 
 
-Ichnosat is an `Open Source <https://opensource.org/>`_ plugin based platform to
-download an process satellite data written in
-`Python <https://www.python.org/>`_ and C++, designed and developed by `Raffaele Bua <https://buele.github.io>`_ for `Sardegna Clima NPO <http://www.sardegna-clima.it>`_. Downloads and Processes are multithreaded and schedulable.
+Ichnosat is an `Open Source <https://opensource.org/>`_ plugin based platform able to
+download and process EO satellite data. It is written in
+`Python <https://www.python.org/>`_ and C++, has been designed and developed by `Raffaele Bua <https://buele.github.io>`_ for `Sardegna Clima Onlus NPO <http://www.sardegna-clima.it>`_. Downloads and Processes are multithreaded and schedulable.
 The Platform is configurable and the *processor* is extendible via C++ plugins.
 
 
@@ -25,17 +25,19 @@ the `MIT  <https://opensource.org/licenses/MIT>`_ license and it is available on
 
 
 The *downloader* gets automatically products from
-`Sentinel-2 on AWS <http://sentinel-pds.s3-website.eu-central-1.amazonaws.com/>`_ portal. This downloader is multithreaded and
-fully customizable.
+`Sentinel-2 on AWS <http://sentinel-pds.s3-website.eu-central-1.amazonaws.com/>`_ portal. Such a downloader is multithreaded and can be
+fully customized in terms of AOI (Area of Interest) and Products Sensing Time.
 
-The *processor* receives products from downloader
-and processes products via C++ plugins. In the current
-version the plugin available processes the  `NDVI <https://en.wikipedia.org/wiki/Normalized_Difference_Vegetation_Index>`_  exploiting
+The *processor* gets products from the downloader
+and processes products via C++ plugins. Current 
+version contains a single plugin able to extract from Sentinel-2 data the  `NDVI <https://en.wikipedia.org/wiki/Normalized_Difference_Vegetation_Index>`_  exploiting
 `GDAL <http://www.gdal.org/>`_  library.
 
 
 Ichnosat *processor* is multithreaded, extendible
 via C++ plugins and customizable.
+
+
 
 
 |
@@ -67,16 +69,16 @@ via C++ plugins and customizable.
 
 - Downloader
     - Get Sentinel-2 data from  `Sentinel-2 on AWS <http://sentinel-pds.s3-website.eu-central-1.amazonaws.com/>`_
-    - Customizable properties:
-        - Tiles to download
-        - Files to download for each tile
-        - Date interval (Sensing time)
-        - Number of parallel downloads in the same time
+    - Customizable features:
+        - Tiles to download (UTM-MGRS Tile-ID)
+        - Files to download for each tile (Image files and/or metadata)
+        - Dates interval (Sensing time)
+        - Number of parallel downloads at the same time
 
 - Processor
     - Plugin based: the processors are extendible C++ Shared Libraries
-    - Customizable properties:
-        - Number of parallel processing in the same time
+    - Customizable features:
+        - Number of parallel processings at the same time
 
 - Ichnosat Platform
    - Automatic plugin compilation

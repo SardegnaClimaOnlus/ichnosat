@@ -25,7 +25,7 @@ Launch Ichnosat
 
 **IMPORTANT NOTE**: In this version (0.1) the port 5000 must be free.
 
-If you are running Ichnosat for the first time, you have to create the database, following these steps:
+If it is the first time you run Ichnosat, you have to create the database, following these steps:
 
 2.1. **Wait when Postgres server is ready to receive queries:**
 
@@ -148,12 +148,12 @@ Run Downloader
 Monitor activities via gui and console
 --------------------------------------
 
-To monitor progress activities check the lists of products on Graphica User Interface, logs and file system,
+To monitor progress activities check the lists of products on Graphical User Interface, logs and file system,
 as shown in the following steps:
 
 1. **Check pending products in the GUI**
 
-The pending products are the products that Ichnosat are available to download, but are waiting to download
+The pending products are the products that Ichnosat is going to download, but are waiting to be downloaded
 by the *Downloader*. To see the list of pending products, click on 'Pending' item of 'Products' void in the side bar:
 
 |

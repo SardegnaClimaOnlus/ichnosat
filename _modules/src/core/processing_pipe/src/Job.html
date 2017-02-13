@@ -135,6 +135,9 @@
 
 
 <div class="viewcode-block" id="Job"><a class="viewcode-back" href="../../../../../src.core.processing_pipe.src.html#src.core.processing_pipe.src.Job.Job">[docs]</a><span class="k">class</span> <span class="nc">Job</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; This class is the thread to launch *Processors* plugin. This class retrieves the processable products from</span>
+<span class="sd">        database (products with state *donwloaded*) and it runs the plugins.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outbox_path</span><span class="p">,</span> <span class="n">plugins_path</span><span class="p">,</span> <span class="n">lock</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">i</span> <span class="o">=</span> <span class="n">i</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;(Job __init__) [&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;]&quot;</span><span class="p">)</span>
@@ -148,12 +151,27 @@
         <span class="k">return</span>
 
 <div class="viewcode-block" id="Job.fibonacci"><a class="viewcode-back" href="../../../../../src.core.processing_pipe.src.html#src.core.processing_pipe.src.Job.Job.fibonacci">[docs]</a>    <span class="k">def</span> <span class="nf">fibonacci</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Fibonacci sequence algorithm implementation.</span>
+
+<span class="sd">            :param max_value: The max value to reach using the fibonacci algorithm</span>
+<span class="sd">            :type max_value: int</span>
+
+<span class="sd">            :returns: the n fibonacci number</span>
+<span class="sd">            :rtype: int</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>
         <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">max_value</span><span class="p">:</span>
             <span class="k">yield</span> <span class="n">i</span>
             <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="n">j</span></div>
 
     <span class="k">def</span> <span class="nf">_process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">product</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Private method to run *Processor* plugin.</span>
+
+<span class="sd">            :param product: The product to process</span>
+<span class="sd">            :type product: Product</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;(Job _process) [&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;] process the product with name: &quot;</span> <span class="o">+</span> <span class="n">product</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
         <span class="n">original_name</span> <span class="o">=</span> <span class="n">product</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">)</span>
         <span class="n">source</span> <span class="o">=</span> <span class="s2">&quot;/usr/ichnosat/data_local/inbox/&quot;</span> <span class="o">+</span> <span class="n">original_name</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span>
@@ -166,6 +184,9 @@
         <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Job.run"><a class="viewcode-back" href="../../../../../src.core.processing_pipe.src.html#src.core.processing_pipe.src.Job.Job.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Thread run method implementation.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">WAIT_MULTIPLICATOR</span> <span class="o">=</span> <span class="mf">0.5</span>
         <span class="n">SECONDS_PER_MINUTE</span> <span class="o">=</span> <span class="mi">60</span>
         <span class="n">FIBONACCI_ITERATIONS</span> <span class="o">=</span> <span class="mi">1000</span>

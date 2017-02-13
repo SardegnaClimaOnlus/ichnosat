@@ -68,15 +68,7 @@
             </a></p>
 <h3><a href="index.html">Table Of Contents</a></h3>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="documentation.html">Documentation</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="documentation.html#tutorial">Tutorial</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="documentation.html#id1">Documentation</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="software_architecture.html">Software architecture</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="modules.html">APIs</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">APIs</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="src.html">src package</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="src.html#subpackages">Subpackages</a></li>
@@ -119,15 +111,31 @@
 <dt id="src.core.processing_pipe.src.Job.Job">
 <em class="property">class </em><code class="descclassname">src.core.processing_pipe.src.Job.</code><code class="descname">Job</code><span class="sig-paren">(</span><em>outbox_path</em>, <em>plugins_path</em>, <em>lock</em>, <em>i</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/processing_pipe/src/Job.html#Job"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.processing_pipe.src.Job.Job" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/threading.html#threading.Thread" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">threading.Thread</span></code></a></p>
+<p>This class is the thread to launch <em>Processors</em> plugin. This class retrieves the processable products from
+database (products with state <em>donwloaded</em>) and it runs the plugins.</p>
 <dl class="method">
 <dt id="src.core.processing_pipe.src.Job.Job.fibonacci">
 <code class="descname">fibonacci</code><span class="sig-paren">(</span><em>max_value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/processing_pipe/src/Job.html#Job.fibonacci"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.processing_pipe.src.Job.Job.fibonacci" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Fibonacci sequence algorithm implementation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>max_value</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; The max value to reach using the fibonacci algorithm</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the n fibonacci number</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)">int</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="src.core.processing_pipe.src.Job.Job.run">
 <code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/processing_pipe/src/Job.html#Job.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.processing_pipe.src.Job.Job.run" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Thread run method implementation.</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -138,10 +146,13 @@
 <dt id="src.core.processing_pipe.src.JobDispatcher.JobDispatcher">
 <em class="property">class </em><code class="descclassname">src.core.processing_pipe.src.JobDispatcher.</code><code class="descname">JobDispatcher</code><span class="sig-paren">(</span><em>outbox_path</em>, <em>plugins_path</em>, <em>delegate</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/processing_pipe/src/JobDispatcher.html#JobDispatcher"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.processing_pipe.src.JobDispatcher.JobDispatcher" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/threading.html#threading.Thread" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">threading.Thread</span></code></a></p>
+<p>This class dispatches processing jobs.</p>
 <dl class="method">
 <dt id="src.core.processing_pipe.src.JobDispatcher.JobDispatcher.run">
 <code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/processing_pipe/src/JobDispatcher.html#JobDispatcher.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.processing_pipe.src.JobDispatcher.JobDispatcher.run" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Thread run method implementation.
+It launches the <em>Job</em> objects to process products via <em>Processor</em> plugins.</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -152,20 +163,44 @@
 <dt id="src.core.processing_pipe.src.Plugin.Plugin">
 <em class="property">class </em><code class="descclassname">src.core.processing_pipe.src.Plugin.</code><code class="descname">Plugin</code><span class="sig-paren">(</span><em>plugin_name</em>, <em>plugin_path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/processing_pipe/src/Plugin.html#Plugin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.processing_pipe.src.Plugin.Plugin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>It is a wrapper of C++ plugin. This class generates the folder of new product and runs the
+dynamic shared libraries (c++ plugins).</p>
 <dl class="method">
 <dt id="src.core.processing_pipe.src.Plugin.Plugin.more_data">
 <code class="descname">more_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/processing_pipe/src/Plugin.html#Plugin.more_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.processing_pipe.src.Plugin.Plugin.more_data" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Utility method to manage out stream of dynamic shared libraries.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="src.core.processing_pipe.src.Plugin.Plugin.read_pipe">
 <code class="descname">read_pipe</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/processing_pipe/src/Plugin.html#Plugin.read_pipe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.processing_pipe.src.Plugin.Plugin.read_pipe" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Utility method to manage out stream of dynamic shared libraries.
+Reading the out stream pipe.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="src.core.processing_pipe.src.Plugin.Plugin.run">
 <code class="descname">run</code><span class="sig-paren">(</span><em>source</em>, <em>outbox_path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/processing_pipe/src/Plugin.html#Plugin.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.processing_pipe.src.Plugin.Plugin.run" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>This method runs the <em>process</em> method of dynamic shared library containing the plugin.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>source</strong> (<em>String</em>) &#8211; The path in file system where is located the downloaded file.</li>
+<li><strong>outbox_path</strong> &#8211; The path of the processed products folder</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">None</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)">None</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </dd></dl>
 
@@ -176,15 +211,30 @@
 <dt id="src.core.processing_pipe.src.PluginManager.PluginManager">
 <em class="property">class </em><code class="descclassname">src.core.processing_pipe.src.PluginManager.</code><code class="descname">PluginManager</code><span class="sig-paren">(</span><em>plugins_path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/processing_pipe/src/PluginManager.html#PluginManager"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.processing_pipe.src.PluginManager.PluginManager" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>This is the manager of plugins, it compiles C++ plugins and retrieve the list of available plugins,
+in ichnosat platform</p>
 <dl class="method">
 <dt id="src.core.processing_pipe.src.PluginManager.PluginManager.compile_plugins">
 <code class="descname">compile_plugins</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/processing_pipe/src/PluginManager.html#PluginManager.compile_plugins"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.processing_pipe.src.PluginManager.PluginManager.compile_plugins" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>This method compiles  every c++ plugin present in the <em>plugins</em> folder of <em>Processor</em> module</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="src.core.processing_pipe.src.PluginManager.PluginManager.get_plugins">
 <code class="descname">get_plugins</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/processing_pipe/src/PluginManager.html#PluginManager.get_plugins"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.processing_pipe.src.PluginManager.PluginManager.get_plugins" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>This method retrieve the list of plugins available to process product, via file system
+inspection.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of available plugins in ichnosat platform</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">List</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </dd></dl>
 
@@ -195,20 +245,41 @@
 <dt id="src.core.processing_pipe.src.ProcessingPipeManager.ProcessingPipeManager">
 <em class="property">class </em><code class="descclassname">src.core.processing_pipe.src.ProcessingPipeManager.</code><code class="descname">ProcessingPipeManager</code><a class="reference internal" href="_modules/src/core/processing_pipe/src/ProcessingPipeManager.html#ProcessingPipeManager"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.processing_pipe.src.ProcessingPipeManager.ProcessingPipeManager" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>It is the entry point of the <em>Processor</em>, handling the processing requests triggered by the <em>Downloader</em></p>
 <dl class="method">
 <dt id="src.core.processing_pipe.src.ProcessingPipeManager.ProcessingPipeManager.notify_to_scientific_processor">
 <code class="descname">notify_to_scientific_processor</code><span class="sig-paren">(</span><em>file_path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/processing_pipe/src/ProcessingPipeManager.html#ProcessingPipeManager.notify_to_scientific_processor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.processing_pipe.src.ProcessingPipeManager.ProcessingPipeManager.notify_to_scientific_processor" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>This method launches the http request to trigger a new processing process.
+It represent the networking interface to the scientific processor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>file_path</strong> (<em>String</em>) &#8211; The path where is located the product to process</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="src.core.processing_pipe.src.ProcessingPipeManager.ProcessingPipeManager.process_product">
 <code class="descname">process_product</code><span class="sig-paren">(</span><em>product_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/processing_pipe/src/ProcessingPipeManager.html#ProcessingPipeManager.process_product"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.processing_pipe.src.ProcessingPipeManager.ProcessingPipeManager.process_product" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>This method is the wrapper of the web request to trigger a new processing task.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>product_name</strong> (<em>String</em>) &#8211; The name of the product to process</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="src.core.processing_pipe.src.ProcessingPipeManager.ProcessingPipeManager.start_processing">
 <code class="descname">start_processing</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/processing_pipe/src/ProcessingPipeManager.html#ProcessingPipeManager.start_processing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.processing_pipe.src.ProcessingPipeManager.ProcessingPipeManager.start_processing" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The entry point of the <em>ProcessingPipeManager</em> class.</p>
+</dd></dl>
 
 </dd></dl>
 

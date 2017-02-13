@@ -131,17 +131,32 @@
 
 
 <div class="viewcode-block" id="ProcessingPipeManager"><a class="viewcode-back" href="../../../../../src.core.processing_pipe.src.html#src.core.processing_pipe.src.ProcessingPipeManager.ProcessingPipeManager">[docs]</a><span class="k">class</span> <span class="nc">ProcessingPipeManager</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot; It is the entry point of the *Processor*, handling the processing requests triggered by the *Downloader*</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;(ProcessingPipeManager __init__) &quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">configparser</span><span class="o">.</span><span class="n">ConfigParser</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s2">&quot;/usr/ichnosat/src/core/processing_pipe/config/config.cfg&quot;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="ProcessingPipeManager.process_product"><a class="viewcode-back" href="../../../../../src.core.processing_pipe.src.html#src.core.processing_pipe.src.ProcessingPipeManager.ProcessingPipeManager.process_product">[docs]</a>    <span class="k">def</span> <span class="nf">process_product</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">product_name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; This method is the wrapper of the web request to trigger a new processing task.</span>
+
+<span class="sd">            :param product_name: The name of the product to process</span>
+<span class="sd">            :type product_name: String</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;(ProcessingPipeManager process_product) &quot;</span><span class="p">)</span>
         <span class="n">product_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;FOLDERS&#39;</span><span class="p">][</span><span class="s1">&#39;inbox_path&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">product_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">notify_to_scientific_processor</span><span class="p">(</span><span class="n">product_path</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="ProcessingPipeManager.notify_to_scientific_processor"><a class="viewcode-back" href="../../../../../src.core.processing_pipe.src.html#src.core.processing_pipe.src.ProcessingPipeManager.ProcessingPipeManager.notify_to_scientific_processor">[docs]</a>    <span class="k">def</span> <span class="nf">notify_to_scientific_processor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; This method launches the http request to trigger a new processing process.</span>
+<span class="sd">            It represent the networking interface to the scientific processor.</span>
+
+<span class="sd">            :param file_path: The path where is located the product to process</span>
+<span class="sd">            :type file_path: String</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;(ProcessingPipeManager notify_to_scientific_processor) &quot;</span><span class="p">)</span>
         <span class="n">body</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="n">file_path</span><span class="p">}</span>
         <span class="n">params</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">body</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span>
@@ -151,6 +166,8 @@
         <span class="n">response</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">req</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="ProcessingPipeManager.start_processing"><a class="viewcode-back" href="../../../../../src.core.processing_pipe.src.html#src.core.processing_pipe.src.ProcessingPipeManager.ProcessingPipeManager.start_processing">[docs]</a>    <span class="k">def</span> <span class="nf">start_processing</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; The entry point of the *ProcessingPipeManager* class.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;(ProcessingPipeManager start_processing) &quot;</span><span class="p">)</span>
         <span class="n">ps</span> <span class="o">=</span> <span class="n">ProductsService</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">product</span> <span class="ow">in</span> <span class="n">ps</span><span class="o">.</span><span class="n">get_products_to_process</span><span class="p">():</span>

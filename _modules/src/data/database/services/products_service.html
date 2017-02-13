@@ -133,12 +133,22 @@
 <span class="n">__status__</span> <span class="o">=</span> <span class="s2">&quot;Development&quot;</span>
 
 <div class="viewcode-block" id="ProductsService"><a class="viewcode-back" href="../../../../../src.data.database.services.html#src.data.database.services.products_service.ProductsService">[docs]</a><span class="k">class</span> <span class="nc">ProductsService</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot; This class is the service to manage products inside the database. It is a wrapper to manage products,</span>
+<span class="sd">        exploiting SqlAlchemy ORM.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">config</span> <span class="o">=</span> <span class="n">configparser</span><span class="o">.</span><span class="n">ConfigParser</span><span class="p">()</span>
         <span class="n">config</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s2">&quot;src/data/database/config/db.cfg&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;database&#39;</span><span class="p">][</span><span class="s1">&#39;connection_string&#39;</span><span class="p">],</span>  <span class="n">pool_recycle</span><span class="o">=</span><span class="mi">3600</span><span class="p">)</span>
 
 <div class="viewcode-block" id="ProductsService.add_new_product"><a class="viewcode-back" href="../../../../../src.data.database.services.html#src.data.database.services.products_service.ProductsService.add_new_product">[docs]</a>    <span class="k">def</span> <span class="nf">add_new_product</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">product</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Add a new product in the database</span>
+
+<span class="sd">            :param product: Product entity to add in the database</span>
+<span class="sd">            :type product: Product</span>
+
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">result</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="n">Session</span> <span class="o">=</span> <span class="n">sessionmaker</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
         <span class="n">session</span> <span class="o">=</span> <span class="n">Session</span><span class="p">()</span>

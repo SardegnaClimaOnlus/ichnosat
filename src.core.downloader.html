@@ -67,15 +67,7 @@
             </a></p>
 <h3><a href="index.html">Table Of Contents</a></h3>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="documentation.html">Documentation</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="documentation.html#tutorial">Tutorial</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="documentation.html#id1">Documentation</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="software_architecture.html">Software architecture</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="modules.html">APIs</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">APIs</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="src.html">src package</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="src.html#subpackages">Subpackages</a></li>
@@ -118,25 +110,137 @@
 <dt id="src.core.downloader.AmazonBucketManager.AmazonBucketManager">
 <em class="property">class </em><code class="descclassname">src.core.downloader.AmazonBucketManager.</code><code class="descname">AmazonBucketManager</code><span class="sig-paren">(</span><em>configurations</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/AmazonBucketManager.html#AmazonBucketManager"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.AmazonBucketManager.AmazonBucketManager" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>This class is an Adapter of Amazon AWS services.
+Main goal of this class is <strong>Retrieve the list of products from aws via tile list, and time interval</strong></p>
 <dl class="method">
 <dt id="src.core.downloader.AmazonBucketManager.AmazonBucketManager.extract_date">
 <code class="descname">extract_date</code><span class="sig-paren">(</span><em>item</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/AmazonBucketManager.html#AmazonBucketManager.extract_date"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.AmazonBucketManager.AmazonBucketManager.extract_date" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>This method extracts the date from the tile name string (complete with the date).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>item</strong> &#8211; The tile name complete string. e.g.</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>tiles/32/T/MK/YYYY/MM/DD/
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>where</dt>
+<dd><ul class="first last simple">
+<li><strong>YYYY</strong> is the year</li>
+<li><strong>MM</strong> is the month</li>
+<li><strong>DD</strong> is the day</li>
+</ul>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The extracted date form the tile name string</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Datetime</td>
+</tr>
+</tbody>
+</table>
+<p>The method apply the regex:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>tiles/<span class="o">[</span><span class="m">0</span>-9<span class="o">]</span><span class="m">2</span>/<span class="o">[</span>A-Z<span class="o">]</span>/<span class="o">[</span>A-Z<span class="o">]{</span><span class="m">2</span><span class="o">}</span>/<span class="o">([</span><span class="m">0</span>-9<span class="o">]{</span><span class="m">4</span><span class="o">})</span>/<span class="o">([</span><span class="m">0</span>-9<span class="o">]</span>*<span class="o">)</span>/<span class="o">([</span><span class="m">0</span>-9<span class="o">]</span>*<span class="o">)</span>/
+</pre></div>
+</div>
+<p>to the <em>item</em> parameter</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="src.core.downloader.AmazonBucketManager.AmazonBucketManager.generate_url">
 <code class="descname">generate_url</code><span class="sig-paren">(</span><em>tile</em>, <em>year</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/AmazonBucketManager.html#AmazonBucketManager.generate_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.AmazonBucketManager.AmazonBucketManager.generate_url" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>This method generates the aws url from the tile name string and the start year of filter interval.
+AWS service has the <em>prefix</em> parameter, to filter the list of available files in the bucket.
+This method generates the proper <em>prefix</em> parameter value, to give the list of files
+available in the year of <em>year</em> argument passed in the method.</p>
+<p>The generated parameter is like:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nv">prefix</span><span class="o">=</span>tiles/<span class="o">{</span>tile<span class="o">}</span>/<span class="o">{</span>year<span class="o">}</span>/
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tile</strong> &#8211; The tile name string with a pattern like</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="m">32</span>/T/MK
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>year</strong> &#8211; The year</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">request url</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">String</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="src.core.downloader.AmazonBucketManager.AmazonBucketManager.get_products_list">
 <code class="descname">get_products_list</code><span class="sig-paren">(</span><em>searchFilter</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/AmazonBucketManager.html#AmazonBucketManager.get_products_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.AmazonBucketManager.AmazonBucketManager.get_products_list" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>This method manages the retrieval of aws products.
+This method contains the <em>AWS</em> APIs semantic it is the core of Adapter.
+It manages also pagination.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>searchFilter</strong> (<a class="reference internal" href="#module-src.core.downloader.SearchFilter" title="src.core.downloader.SearchFilter"><em>SearchFilter</em></a>) &#8211; Search parameters to filter the available files in the bucket</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The pending products available in the Amazon bucket.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)">None</a></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">Optimize list retrieval using set end date year instead <em>NOW</em> year.</p>
+</div>
+</dd></dl>
 
 <dl class="method">
 <dt id="src.core.downloader.AmazonBucketManager.AmazonBucketManager.load_products">
 <code class="descname">load_products</code><span class="sig-paren">(</span><em>tile</em>, <em>year</em>, <em>paginated=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/AmazonBucketManager.html#AmazonBucketManager.load_products"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.AmazonBucketManager.AmazonBucketManager.load_products" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p><em>load_products</em> load list products form the Amazon <em>AWS</em> Bucket of Sinergise <em>Sentinel-2 on AWS</em>.
+This method contains the <em>AWS</em> APIs semantic it is the core of Adapter.
+It manages also pagination.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>tile</strong> (<em>String</em>) &#8211; Tile name</li>
+<li><strong>year</strong> (<em>Boolean</em>) &#8211; Year of interest, the method extract the whole list of products for this year</li>
+<li><strong>paginated</strong> &#8211; if this parameter is <em>True</em> that means that the list provided from AWS is
+paginated and the next page starts after the <em>last_item</em></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">None</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)">None</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>This method stores the list of products in the classes property <em>product_list</em>.</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -147,6 +251,7 @@
 <dt id="src.core.downloader.Configuration.Configuration">
 <em class="property">class </em><code class="descclassname">src.core.downloader.Configuration.</code><code class="descname">Configuration</code><a class="reference internal" href="_modules/src/core/downloader/Configuration.html#Configuration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.Configuration.Configuration" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>This class is the container of <em>Downloader</em> configurations.</p>
 </dd></dl>
 
 </div>
@@ -225,15 +330,43 @@
 <dt id="src.core.downloader.Datasource.Datasource">
 <em class="property">class </em><code class="descclassname">src.core.downloader.Datasource.</code><code class="descname">Datasource</code><span class="sig-paren">(</span><em>configurations</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/Datasource.html#Datasource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.Datasource.Datasource" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>This class is the datasource of all data used by the <em>Downloader</em>.</p>
 <dl class="method">
 <dt id="src.core.downloader.Datasource.Datasource.download_product">
 <code class="descname">download_product</code><span class="sig-paren">(</span><em>product</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/Datasource.html#Datasource.download_product"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.Datasource.Datasource.download_product" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>This method donwloads  the product passed as method paramenter.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>product</strong> (<a class="reference internal" href="src.data.database.entities.html#src.data.database.entities.product.Product" title="src.data.database.entities.product.Product"><em>Product</em></a>) &#8211; The product to download</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)">None</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="src.core.downloader.Datasource.Datasource.get_products_list">
 <code class="descname">get_products_list</code><span class="sig-paren">(</span><em>searchFilter</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/Datasource.html#Datasource.get_products_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.Datasource.Datasource.get_products_list" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>This method generates the product list from query filters defined in the config file
+by the user.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>searchFilter</strong> (<a class="reference internal" href="#module-src.core.downloader.SearchFilter" title="src.core.downloader.SearchFilter"><em>SearchFilter</em></a>) &#8211; Search parameters to filter the available files in the bucket</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The list of available products.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">List</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </dd></dl>
 
@@ -244,15 +377,32 @@
 <dt id="src.core.downloader.Downloader.Downloader">
 <em class="property">class </em><code class="descclassname">src.core.downloader.Downloader.</code><code class="descname">Downloader</code><a class="reference internal" href="_modules/src/core/downloader/Downloader.html#Downloader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.Downloader.Downloader" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>The main class of <em>Downloader</em> module, it is the entry point that receives the trigger of
+download events.</p>
 <dl class="method">
 <dt id="src.core.downloader.Downloader.Downloader.create_search_filter">
 <code class="descname">create_search_filter</code><span class="sig-paren">(</span><em>tile</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/Downloader.html#Downloader.create_search_filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.Downloader.Downloader.create_search_filter" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>This method generates the <em>SearchFilter</em> object from the tile name and configurations set
+by user.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tile</strong> (<em>String</em>) &#8211; Tile name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Search filter object to retrieve data from datasource</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#module-src.core.downloader.SearchFilter" title="src.core.downloader.SearchFilter">SearchFilter</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="src.core.downloader.Downloader.Downloader.start">
 <code class="descname">start</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/Downloader.html#Downloader.start"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.Downloader.Downloader.start" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Download event handler. The entry point of the <em>Downloader</em> module.</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -263,15 +413,19 @@
 <dt id="src.core.downloader.DownloaderJob.DownloaderJob">
 <em class="property">class </em><code class="descclassname">src.core.downloader.DownloaderJob.</code><code class="descname">DownloaderJob</code><span class="sig-paren">(</span><em>queue</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/DownloaderJob.html#DownloaderJob"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.DownloaderJob.DownloaderJob" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/threading.html#threading.Thread" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">threading.Thread</span></code></a></p>
+<p>This class manages the <em>ProductDownloader</em> classes. This is an async method, launched by the Downloader.</p>
 <dl class="method">
 <dt id="src.core.downloader.DownloaderJob.DownloaderJob.refresh_configurations">
 <code class="descname">refresh_configurations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/DownloaderJob.html#DownloaderJob.refresh_configurations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.DownloaderJob.DownloaderJob.refresh_configurations" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>This method reload the configurations from the <em>Downloader</em> config file.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="src.core.downloader.DownloaderJob.DownloaderJob.run">
 <code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/DownloaderJob.html#DownloaderJob.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.DownloaderJob.DownloaderJob.run" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The <em>run</em> method of the thread, this method calls the datasource method to download the
+products available to download from the database  (the products with the status <em>pending</em>.</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -282,10 +436,24 @@
 <dt id="src.core.downloader.ProductDownloader.ProductDownloader">
 <em class="property">class </em><code class="descclassname">src.core.downloader.ProductDownloader.</code><code class="descname">ProductDownloader</code><span class="sig-paren">(</span><em>inbox_path</em>, <em>files_to_download</em>, <em>domain</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/ProductDownloader.html#ProductDownloader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.ProductDownloader.ProductDownloader" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>This class is the interface with the internet to retrieve data from remote datasource.</p>
 <dl class="method">
 <dt id="src.core.downloader.ProductDownloader.ProductDownloader.download_product">
 <code class="descname">download_product</code><span class="sig-paren">(</span><em>product_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/ProductDownloader.html#ProductDownloader.download_product"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.ProductDownloader.ProductDownloader.download_product" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>This method launches the http request to download the product via product name.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>product_name</strong> (<em>String</em>) &#8211; The name of product to download</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)">None</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </dd></dl>
 
@@ -296,6 +464,7 @@
 <dt id="src.core.downloader.SearchFilter.SearchFilter">
 <em class="property">class </em><code class="descclassname">src.core.downloader.SearchFilter.</code><code class="descname">SearchFilter</code><span class="sig-paren">(</span><em>tile</em>, <em>start_date</em>, <em>end_date</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/downloader/SearchFilter.html#SearchFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.core.downloader.SearchFilter.SearchFilter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>This class is the container of filtering parameters to retrieve data from <em>Downloader</em> datasource.</p>
 </dd></dl>
 
 </div>

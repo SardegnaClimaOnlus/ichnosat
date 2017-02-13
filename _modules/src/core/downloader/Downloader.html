@@ -138,6 +138,9 @@
 
 
 <div class="viewcode-block" id="Downloader"><a class="viewcode-back" href="../../../../src.core.downloader.html#src.core.downloader.Downloader.Downloader">[docs]</a><span class="k">class</span> <span class="nc">Downloader</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot; The main class of *Downloader* module, it is the entry point that receives the trigger of</span>
+<span class="sd">        download events.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;(Downloader __init__)&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">productService</span> <span class="o">=</span> <span class="n">ProductsService</span><span class="p">()</span>
@@ -149,10 +152,23 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">datasource</span> <span class="o">=</span> <span class="n">Datasource</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configuration</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Downloader.create_search_filter"><a class="viewcode-back" href="../../../../src.core.downloader.html#src.core.downloader.Downloader.Downloader.create_search_filter">[docs]</a>    <span class="k">def</span> <span class="nf">create_search_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tile</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; This method generates the *SearchFilter* object from the tile name and configurations set</span>
+<span class="sd">            by user.</span>
+
+<span class="sd">            :param tile: Tile name</span>
+<span class="sd">            :type tile: String</span>
+
+<span class="sd">            :returns: Search filter object to retrieve data from datasource</span>
+<span class="sd">            :rtype: SearchFilter</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">SearchFilter</span><span class="p">(</span><span class="n">tile</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">start_date</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">end_date</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Downloader.start"><a class="viewcode-back" href="../../../../src.core.downloader.html#src.core.downloader.Downloader.Downloader.start">[docs]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;(Downloader start) ----------------------------------------------&quot;</span><span class="p">)</span>
+        <span class="sd">&quot;&quot;&quot; Download event handler. The entry point of the *Downloader* module.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;(Downloader start) &quot;</span><span class="p">)</span>
         <span class="n">processing_pipe_manager</span> <span class="o">=</span> <span class="n">ProcessingPipeManager</span><span class="p">()</span>
         <span class="n">processing_pipe_manager</span><span class="o">.</span><span class="n">start_processing</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pending_tasks</span> <span class="o">+=</span> <span class="mi">1</span>

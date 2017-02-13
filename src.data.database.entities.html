@@ -68,15 +68,7 @@
             </a></p>
 <h3><a href="index.html">Table Of Contents</a></h3>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="documentation.html">Documentation</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="documentation.html#tutorial">Tutorial</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="documentation.html#id1">Documentation</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="software_architecture.html">Software architecture</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="modules.html">APIs</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">APIs</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="src.html">src package</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="src.html#subpackages">Subpackages</a></li>
@@ -119,6 +111,7 @@
 <dt id="src.data.database.entities.product.Product">
 <em class="property">class </em><code class="descclassname">src.data.database.entities.product.</code><code class="descname">Product</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/data/database/entities/product.html#Product"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.data.database.entities.product.Product" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sqlalchemy.ext.declarative.api.Base</span></code></p>
+<p>SqlAlchemy product entity.</p>
 <dl class="attribute">
 <dt id="src.data.database.entities.product.Product.id">
 <code class="descname">id</code><a class="headerlink" href="#src.data.database.entities.product.Product.id" title="Permalink to this definition">¶</a></dt>
@@ -145,6 +138,7 @@
 <dt id="src.data.database.entities.product.ProductStatus">
 <em class="property">class </em><code class="descclassname">src.data.database.entities.product.</code><code class="descname">ProductStatus</code><a class="reference internal" href="_modules/src/data/database/entities/product.html#ProductStatus"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.data.database.entities.product.ProductStatus" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">enum.Enum</span></code></p>
+<p>Possible product statuses in the database.</p>
 <dl class="attribute">
 <dt id="src.data.database.entities.product.ProductStatus.downloaded">
 <code class="descname">downloaded</code><em class="property"> = 'downloaded'</em><a class="headerlink" href="#src.data.database.entities.product.ProductStatus.downloaded" title="Permalink to this definition">¶</a></dt>
