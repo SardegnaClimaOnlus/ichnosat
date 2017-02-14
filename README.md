@@ -24,6 +24,25 @@ the [MIT](https://opensource.org/licenses/MIT) license and it is available on [G
 ![](https://raw.githubusercontent.com/SardegnaClimaOnlus/ichnosat/master/auto-docs/source/_static/ichnosat-intro.png)
 
 
+## Official Documentation
+
+- [Home](https://sardegnaclimaonlus.github.io//ichnosat/index.html)
+- [Documentation](https://sardegnaclimaonlus.github.io//ichnosat/documentation.html)
+    - [Tutorial](https://sardegnaclimaonlus.github.io//ichnosat/documentation.html#tutorial)
+        - [Installation and Requirements](https://sardegnaclimaonlus.github.io//ichnosat/installation_and_requirements.html)
+        - [How to run](https://sardegnaclimaonlus.github.io//ichnosat/how_to_run.html)
+        - [How to stop](https://sardegnaclimaonlus.github.io//ichnosat/how_to_stop.html)
+        - [How to configure](https://sardegnaclimaonlus.github.io//ichnosat/how_to_configure.html)
+        - [How to create a new plugin](https://sardegnaclimaonlus.github.io//ichnosat/how_to_create_a_new_plugin.html)
+    - [Documentation](https://sardegnaclimaonlus.github.io//ichnosat/documentation.html#id1)
+        - [Software architecture](https://sardegnaclimaonlus.github.io//ichnosat/software_architecture.html)
+        - [APIs](https://sardegnaclimaonlus.github.io//ichnosat/modules.html)
+- [Downloads](https://sardegnaclimaonlus.github.io//ichnosat/downloads.html)
+- [Source Code](https://sardegnaclimaonlus.github.io//ichnosat/downloads.html#source-code)
+- [Credits](https://sardegnaclimaonlus.github.io//ichnosat/credits.html)
+- [Contacts](https://sardegnaclimaonlus.github.io//ichnosat/contacts.html)
+
+## Overview
 
 
 The *downloader* gets automatically products from
@@ -230,23 +249,7 @@ The description of the main folders in the source code follows:
 - **pip**
 - **C++11**
 
-## Official Documentation
 
-- [Home](https://sardegnaclimaonlus.github.io//ichnosat/index.html)
-- [Documentation](https://sardegnaclimaonlus.github.io//ichnosat/documentation.html)
-    - [Tutorial](https://sardegnaclimaonlus.github.io//ichnosat/documentation.html#tutorial)
-        - [Installation and Requirements](https://sardegnaclimaonlus.github.io//ichnosat/installation_and_requirements.html)
-        - [How to run](https://sardegnaclimaonlus.github.io//ichnosat/how_to_run.html)
-        - [How to stop](https://sardegnaclimaonlus.github.io//ichnosat/how_to_stop.html)
-        - [How to configure](https://sardegnaclimaonlus.github.io//ichnosat/how_to_configure.html)
-        - [How to create a new plugin](https://sardegnaclimaonlus.github.io//ichnosat/how_to_create_a_new_plugin.html)
-    - [Documentation](https://sardegnaclimaonlus.github.io//ichnosat/documentation.html#id1)
-        - [Software architecture](https://sardegnaclimaonlus.github.io//ichnosat/software_architecture.html)
-        - [APIs](https://sardegnaclimaonlus.github.io//ichnosat/modules.html)
-- [Downloads](https://sardegnaclimaonlus.github.io//ichnosat/downloads.html)
-- [Source Code](https://sardegnaclimaonlus.github.io//ichnosat/downloads.html#source-code)
-- [Credits](https://sardegnaclimaonlus.github.io//ichnosat/credits.html)
-- [Contacts](https://sardegnaclimaonlus.github.io//ichnosat/contacts.html)
 
 ## Download
 
