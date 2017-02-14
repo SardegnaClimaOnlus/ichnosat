@@ -4,7 +4,7 @@ Welcome to Ichnosat
 =============================
 
 <img src="https://raw.githubusercontent.com/SardegnaClimaOnlus/ichnosat/master/auto-docs/source/_static/logo.png" alt="alt text" width="300" height="300">
-<img src="https://raw.githubusercontent.com/SardegnaClimaOnlus/ichnosat/master/auto-docs/source/_static/sardegna-clima-logo.png" alt="alt text" width="300" height="300">
+<img src="https://raw.githubusercontent.com/SardegnaClimaOnlus/ichnosat/master/auto-docs/source/_static/sardegna-clima-logo.png" alt="alt text" width="300" >
 
 Ichnosat is an [Open Source](https://opensource.org/)plugin based platform able to
 download and process EO satellite data. It is written in
@@ -42,9 +42,9 @@ via C++ plugins and customizable.
 
 
 
-[](https://raw.githubusercontent.com/SardegnaClimaOnlus/ichnosat/master/auto-docs/source/_static/sardegna-clima-logo.png)
+![](https://raw.githubusercontent.com/SardegnaClimaOnlus/ichnosat/master/auto-docs/source/_static/sardegna-clima-logo.png)
 
-[](https://raw.githubusercontent.com/SardegnaClimaOnlus/ichnosat/master/auto-docs/source/_static/ichnosat-workflow.png)
+![](https://raw.githubusercontent.com/SardegnaClimaOnlus/ichnosat/master/auto-docs/source/_static/ichnosat-workflow.png)
 
 
 
