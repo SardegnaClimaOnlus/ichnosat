@@ -42,7 +42,7 @@ via C++ plugins and customizable.
 
 
 
-![](https://raw.githubusercontent.com/SardegnaClimaOnlus/ichnosat/master/auto-docs/source/_static/sardegna-clima-logo.png)
+![](https://raw.githubusercontent.com/SardegnaClimaOnlus/ichnosat/master/auto-docs/source/_static/overview.png)
 
 ![](https://raw.githubusercontent.com/SardegnaClimaOnlus/ichnosat/master/auto-docs/source/_static/ichnosat-workflow.png)
 
