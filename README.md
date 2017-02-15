@@ -6,7 +6,7 @@ Welcome to Ichnosat
 <img src="https://raw.githubusercontent.com/SardegnaClimaOnlus/ichnosat/master/auto-docs/source/_static/logo.png" alt="alt text" width="300" height="300">
 <img src="https://raw.githubusercontent.com/SardegnaClimaOnlus/ichnosat/master/auto-docs/source/_static/sardegna-clima-logo.png" alt="alt text" height="300" >
 
-Ichnosat is an [Open Source](https://opensource.org/)plugin based platform able to
+Ichnosat is an [Open Source](https://opensource.org/) plugin based platform able to
 download and process EO satellite data. It is written in
 [Python](https://www.python.org/) and C++, has been designed and developed by [Raffaele Bua](https://buele.github.io) for [Sardegna Clima Onlus NPO](http://www.sardegna-clima.it). Downloads and Processes are multithreaded and schedulable.
 The Platform is configurable and the *processor* is extendible via C++ plugins.
